@@ -4,5 +4,9 @@
     "Magang": true,
     "Mahasiswa": true,
     "Dosen": true,
-    "Kaprodi": true
+    "Kaprodi": true,
+    "Seminar": true,
+    "Controller": true,
+    "PengajuanSeminar": true,
+    "Judulskripsi": true
 }
