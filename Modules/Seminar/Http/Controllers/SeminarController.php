@@ -22,7 +22,7 @@ class SeminarController extends Controller
     public function index()
     {
         $user_id=Auth::user()->id;
-        $mahasiswa=Mahasiswa::where('id',$user_id)->get()->first();
+        $mahasiswa=Mahasiswa::where('user_id',$user_id)->get()->first();
         $judul= JudulSkripsi::select()->where('mahasiswa_npm', $mahasiswa->npm)->whereIn('status', ['Disetujui Kaprodi'])->latest()->first();
         $seminar= Seminar::select()->where('mahasiswa_npm', $mahasiswa->npm)->latest()->first();
         if($seminar==null){
@@ -46,7 +46,7 @@ class SeminarController extends Controller
      */
     public function create()
     {
-       
+
     }
 
     /**

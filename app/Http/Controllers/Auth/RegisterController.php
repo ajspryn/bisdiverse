@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Http\Controllers\Controller;
-use App\Providers\RouteServiceProvider;
 use App\Models\User;
-use Illuminate\Foundation\Auth\RegistersUsers;
+use Laravolt\Avatar\Facade as Avatar;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
+use App\Providers\RouteServiceProvider;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Foundation\Auth\RegistersUsers;
 
 class RegisterController extends Controller
 {
@@ -53,7 +54,6 @@ class RegisterController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
-            'foto' => ['required'],
         ]);
     }
 
@@ -65,14 +65,19 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        if (isset($data['foto'])) {
-            $foto = $data['foto']->store('foto-profile');
+        // return $data;
+        $avatar = 'avatar/avatar-' . $data['name'] . '.png';
+        if (isset($data['avatar'])) {
+            $avatar = $data['avatar']->store('avatar');
+        } else {
+            Avatar::create($data['name'])->save(storage_path(path: 'app/public/avatar/avatar-' . $data['name'] . '.png'));
         }
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
-            'foto' => $foto,
+            'foto' => $avatar,
+            'avatar' => $avatar,
         ]);
     }
 }

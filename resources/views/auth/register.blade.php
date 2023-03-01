@@ -7,7 +7,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <title>Register</title>
         <link rel="apple-touch-icon" href="../../../app-assets/images/ico/apple-icon-120.png">
-        <link rel="shortcut icon" type="image/x-icon" href="../../../faviconBTB.png">
+        <link rel="shortcut icon" type="image/x-icon" href="../../../favicon.png">
         <link
             href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500;1,600"
             rel="stylesheet">
@@ -57,7 +57,7 @@
                             <div class="card mb-0">
                                 <div class="card-body">
                                     <a href="#" class="brand-logo">
-                                        <img src="Logo_BPRS_BTB.png" height="150" alt="logo">
+                                        <img src="Logo2.png" height="150" alt="logo">
                                     </a>
 
                                     <h4 class="card-title mb-1">Selamat Datang! 👋</h4>
@@ -123,11 +123,11 @@
                                                         data-feather="eye"></i></span>
                                             </div>
                                         </div>
-                                        <div class="mb-1">
+                                        {{-- <div class="mb-1">
                                             <label for="foto" class="form-label">{{ __('Foto') }}</label>
                                             <input id="foto" type="file" class="form-control" name="foto"
                                                 required autocomplete="foto">
-                                        </div>
+                                        </div> --}}
 
                                         <div class="mt-2">
                                             <div class="col-md-6 offset-md-4">

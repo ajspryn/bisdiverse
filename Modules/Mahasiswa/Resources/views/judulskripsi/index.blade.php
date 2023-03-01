@@ -105,10 +105,10 @@
                                     <div class="text-center">
                                         @if ($judul->status == 'Ditolak TU')
                                             <button href="" class="btn btn-warning" data-bs-toggle="modal"
-                                                data-bs-target="#pengajuanseminar">Buat Ulang Pengajuan</button>
+                                                data-bs-target="#pengajuanjudulskripsi">Buat Ulang Pengajuan</button>
                                         @elseif ($judul->status == 'Ditolak Kaprodi')
                                            <button href="" class="btn btn -warning" data-bs-toggle="modal"
-                                                data-bs-target="#pengajuanseminar">Buat Ulang Pengajuan</button>
+                                                data-bs-target="#pengajuanjudulskripsi">Buat Ulang Pengajuan</button>
                                         @elseif ($judul->status == 'Disetujui Kaprodi')
                                             <a href="/seminar"
                                                 class="btn btn-primary">Buat Pengajuan Seminar</a>
@@ -126,7 +126,7 @@
                                 <div class="card-header">
                                     <div class="d-flex align-items-center">
                                         <i data-feather="list" class="user-timeline-title-icon"></i>
-                                        <h4 class="card-title">History Pengajuan Seminar</h4>
+                                        <h4 class="card-title">History Pengajuan Judul</h4>
                                     </div>
                                     <i data-feather="more-vertical" class="font-medium-3 cursor-pointer"></i>
                                 </div>

@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
 use Modules\Admin\Entities\Mahasiswa;
+use Modules\Judulskripsi\Entities\DosenPembimbingSkripsi;
 use Modules\Judulskripsi\Entities\HistoryPengajuanJudul;
 use Modules\Judulskripsi\Entities\JudulSkripsi;
 use Modules\Magang\Entities\DosenPembimbingMagang;
@@ -20,7 +21,8 @@ class JudulskripsiController extends Controller
     public function index()
     {
         $user_id=Auth::user()->id;
-        $mahasiswa=Mahasiswa::where('id',$user_id)->get()->first();
+        $mahasiswa=Mahasiswa::where('user_id',$user_id)->get()->first();
+        // return $mahasiswa->npm;
         $judul= JudulSkripsi::select()->where('mahasiswa_npm', $mahasiswa->npm)->latest()->first();
         if($judul==null){
             $history=null;
@@ -30,7 +32,7 @@ class JudulskripsiController extends Controller
         // return $judul;
         return view('mahasiswa::judulskripsi.index',[
             'judul'=>$judul,
-            'dosenpembimbings'=>DosenPembimbingMagang::all(),
+            'dosenpembimbings'=>DosenPembimbingSkripsi::all(),
             'mahasiswa'=>$mahasiswa,
             'historys'=>$history,
         ]);
