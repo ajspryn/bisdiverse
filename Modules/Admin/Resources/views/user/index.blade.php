@@ -71,6 +71,8 @@
                                                             Dosen
                                                         @elseif ($role->jabatan_id == '3')
                                                             Mahasiswa
+                                                        @elseif ($role->jabatan_id == '4')
+                                                            User Prodi
                                                         @else
                                                             Tidak Terdeteksi
                                                         @endif
@@ -105,8 +107,19 @@
                                                                     <span>Jadikan Kaprodi</span>
                                                                 </button>
                                                             </form>
-                                                            <form action="">
-                                                                <input type="hidden" name='user' value="{{ $user->id }}">
+                                                            <form action="/admin/user-admin" method="POST">
+                                                                @csrf
+                                                                <input type="hidden" name="jabatan_id" value="4">
+                                                                <input type="hidden" name='user_id' value="{{ $user->id }}">
+                                                                <button type="submit" class="dropdown-item">
+                                                                    <i data-feather="edit" class="me-50"></i>
+                                                                    <span>Jadikan User Prodi</span>
+                                                                </button>
+                                                            </form>
+                                                            <form action="/admin/user-admin" method="POST">
+                                                                @csrf
+                                                                <input type="hidden" name="jabatan_id" value="0">
+                                                                <input type="hidden" name='user_id' value="{{ $user->id }}">
                                                                 <button type="submit" class="dropdown-item">
                                                                     <i data-feather="edit" class="me-50"></i>
                                                                     <span>Jadikan Admin</span>

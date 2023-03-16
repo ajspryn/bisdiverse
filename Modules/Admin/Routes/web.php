@@ -18,6 +18,7 @@ use Modules\Admin\Http\Controllers\MatkulController;
 use Modules\Admin\Http\Controllers\RuanganController;
 use Modules\Admin\Http\Controllers\AkademikController;
 use Modules\Admin\Http\Controllers\MahasiswaController;
+use Modules\Admin\Http\Controllers\UserAdminController;
 use Modules\Admin\Http\Controllers\UserDosenController;
 use Modules\Admin\Http\Controllers\UserKaprodiController;
 use Modules\Admin\Http\Controllers\LihatPresensiController;
@@ -42,6 +43,7 @@ Route::prefix('admin')->middleware(['auth:sanctum', 'verified', 'role:0', 'divis
     Route::resource('/user-mahasiswa', UserMahasiswaController::class);
     Route::resource('/user-dosen', UserDosenController::class);
     Route::resource('/user-kaprodi', UserKaprodiController::class);
+    Route::resource('/user-admin', UserAdminController::class);
     Route::resource('/akademik', AkademikController::class);
     Route::post('/akademik/enable/{AkademikName}', 'AkademikController@enable');
     Route::post('/akademik/disable/{AkademikName}', 'AkademikController@disable');
