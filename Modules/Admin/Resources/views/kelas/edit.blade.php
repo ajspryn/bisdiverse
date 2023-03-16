@@ -1,4 +1,10 @@
-@extends('admin::layouts.main')
+@extends('layouts.main')
+
+@section('title', 'Dahsboard Admin')
+
+@section('menu')
+    @include('admin::layouts.menu')
+@endsection
 
 @section('content')
     <!-- BEGIN: Content-->
@@ -40,17 +46,13 @@
                                             <div class="col-md-6 col-12">
                                                 <div class="mb-1">
                                                     <label class="form-label" for="first-name-column">Kelas</label>
-                                                    <input type="text" id="first-name-column" class="form-control"
-                                                        placeholder="Nama Kelas" value="{{ $kelas->kelas }}" name="kelas"
-                                                        required />
+                                                    <input type="text" id="first-name-column" class="form-control" placeholder="Nama Kelas" value="{{ $kelas->kelas }}" name="kelas" required />
                                                 </div>
                                             </div>
                                             <div class="col-md-6 col-12">
                                                 <div class="mb-1">
                                                     <label class="form-label" for="tahun">Kelas</label>
-                                                    <input type="text" id="tahun" class="form-control"
-                                                        placeholder="Tahun" value="{{ $kelas->tahun }}" name="tahun"
-                                                        required />
+                                                    <input type="text" id="tahun" class="form-control" placeholder="Tahun" value="{{ $kelas->tahun }}" name="tahun" required />
                                                 </div>
                                             </div>
                                             <div class="col-12">

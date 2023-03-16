@@ -34,8 +34,7 @@
                         <div class="col-lg-4 col-md-6 col-12">
                             <div class="card card-developer-meetup">
                                 <div class="meetup-img-wrapper rounded-top text-center">
-                                    <img src="../../../app-assets/images/illustration/email.svg" alt="Meeting Pic"
-                                        height="170" />
+                                    <img src="../../../app-assets/images/illustration/email.svg" alt="Meeting Pic" height="170" />
                                 </div>
                                 <div class="card-body">
                                     <div class="meetup-header d-flex align-items-center">
@@ -83,11 +82,11 @@
                                             <small>
                                                 @if ($magang->status == 'Diajukan Mahasiswa')
                                                     <span class="badge bg-primary">{{ $magang->status }}</span>
-                                                @elseif ($magang->status == 'Ditinjau TU')
+                                                @elseif ($magang->status == 'Ditinjau Admin Prodi')
                                                     <span class="badge bg-info">{{ $magang->status }}</span>
-                                                @elseif ($magang->status == 'Diverifikasi TU')
+                                                @elseif ($magang->status == 'Diverifikasi Admin Prodi')
                                                     <span class="badge bg-success">{{ $magang->status }}</span>
-                                                @elseif ($magang->status == 'Ditolak TU')
+                                                @elseif ($magang->status == 'Ditolak Admin Prodi')
                                                     <span class="badge bg-danger">{{ $magang->status }}</span>
                                                 @elseif ($magang->status == 'Ditinjau Kaprodi')
                                                     <span class="badge bg-info">{{ $magang->status }}</span>
@@ -101,18 +100,15 @@
                                     </div>
                                     <hr>
                                     <div class="text-center mb-1">
-                                        <button class="btn btn-primary" data-bs-toggle="modal"
-                                            data-bs-target="#suratpermohonan">lihat Surat Permohonan</button>
+                                        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#suratpermohonan">lihat Surat Permohonan</button>
                                     </div>
+                                    @if ($magang->status == 'Ditinjau Kaprodi')
+                                        <div class="text-center mb-1">
+                                            <button class="btn btn-outline-danger me-1" data-bs-toggle="modal" data-bs-target="#tolak">Tolak</button>
+                                            <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#setujui">Setujui</button>
+                                        </div>
+                                    @endif
                                 </div>
-                                @if ($magang->status == 'Ditinjau Kaprodi')
-                                    <div class="text-center mb-1">
-                                        <button class="btn btn-outline-danger me-1" data-bs-toggle="modal"
-                                            data-bs-target="#tolak">Tolak</button>
-                                        <button class="btn btn-success" data-bs-toggle="modal"
-                                            data-bs-target="#setujui">Setujui</button>
-                                    </div>
-                                @endif
                             </div>
                         </div>
                         <!--/ Developer Meetup Card -->
@@ -153,35 +149,28 @@
                                                     </span>
                                                 @endif
                                                 <div class="timeline-event">
-                                                    <div
-                                                        class="d-flex justify-content-between flex-sm-row flex-column mb-sm-0 mb-1">
+                                                    <div class="d-flex justify-content-between flex-sm-row flex-column mb-sm-0 mb-1">
                                                         <h6 class="mb-50">
                                                             @if ($history->status == 'Diajukan')
-                                                                <span
-                                                                    class="badge bg-primary">{{ $history->status }}</span>
+                                                                <span class="badge bg-primary">{{ $history->status }}</span>
                                                             @elseif ($history->status == 'Ditinjau')
                                                                 <span class="badge bg-info">{{ $history->status }}</span>
                                                             @elseif ($history->status == 'Diverifikasi')
-                                                                <span
-                                                                    class="badge bg-success">{{ $history->status }}</span>
+                                                                <span class="badge bg-success">{{ $history->status }}</span>
                                                             @elseif ($history->status == 'Ditolak')
-                                                                <span
-                                                                    class="badge bg-danger">{{ $history->status }}</span>
+                                                                <span class="badge bg-danger">{{ $history->status }}</span>
                                                             @elseif ($history->status == 'Disetujui')
-                                                                <span
-                                                                    class="badge bg-success">{{ $history->status }}</span>
+                                                                <span class="badge bg-success">{{ $history->status }}</span>
                                                             @endif
                                                             {{ $history->jabatan }}
                                                         </h6>
-                                                        <span
-                                                            class="timeline-event-time">{{ $history->created_at->diffforhumans() }}</span>
+                                                        <span class="timeline-event-time">{{ $history->created_at->diffforhumans() }}</span>
                                                     </div>
                                                     @if (isset($history->catatan))
                                                         <p>Catatan : {{ $history->catatan }}</p>
                                                     @endif
                                                     <hr />
-                                                    <div
-                                                        class="d-flex justify-content-between flex-sm-row flex-column mb-sm-0 mb-1">
+                                                    <div class="d-flex justify-content-between flex-sm-row flex-column mb-sm-0 mb-1">
                                                         <div class="d-flex flex-row align-items-center">
                                                             <span>
                                                                 <p class="mb-0">
@@ -218,8 +207,7 @@
     <!-- END: Content-->
 
     <!-- Modal -->
-    <div class="modal fade text-start" id="suratpermohonan" tabindex="-1" aria-labelledby="myModalLabel16"
-        aria-hidden="true">
+    <div class="modal fade text-start" id="suratpermohonan" tabindex="-1" aria-labelledby="myModalLabel16" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-xl">
             <div class="modal-content">
                 <div class="modal-header">
@@ -227,8 +215,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <iframe src="{{ asset('storage/' . $magang->surat_permohonan) }}" width="100%" height="500"
-                        style="border:0px"></iframe>
+                    <iframe src="{{ asset('storage/' . $magang->surat_permohonan) }}" width="100%" height="500" style="border:0px"></iframe>
                 </div>
                 {{-- <div class="modal-footer">
                     <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Accept</button>
@@ -238,8 +225,7 @@
     </div>
 
     <!-- Modal -->
-    <div class="modal fade text-start" id="tolak" tabindex="-1" aria-labelledby="myModalLabel33"
-        aria-hidden="true">
+    <div class="modal fade text-start" id="tolak" tabindex="-1" aria-labelledby="myModalLabel33" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
@@ -267,8 +253,7 @@
     </div>
 
     <!-- Modal -->
-    <div class="modal fade text-start" id="setujui" tabindex="-1" aria-labelledby="myModalLabel33"
-        aria-hidden="true">
+    <div class="modal fade text-start" id="setujui" tabindex="-1" aria-labelledby="myModalLabel33" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">

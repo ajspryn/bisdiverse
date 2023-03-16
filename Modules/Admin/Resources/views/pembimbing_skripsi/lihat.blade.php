@@ -1,4 +1,10 @@
-@extends('admin::layouts.main')
+@extends('layouts.main')
+
+@section('title', 'Dahsboard Admin')
+
+@section('menu')
+    @include('admin::layouts.menu')
+@endsection
 
 @section('content')
     <!-- BEGIN: Content-->
@@ -27,8 +33,7 @@
                 <div class="content-header-right text-md-end col-md-3 col-12 d-md-block d-none">
                     <div class="mb-1 breadcrumb-right">
                         <div class="dropdown">
-                            <a href="/judulskripsi/pembimbing/create" class="btn-icon btn btn-primary btn-round btn-lg"
-                                type="button"><span>Tambah Data</span></a>
+                            <a href="/judulskripsi/pembimbing/create" class="btn btn-primary" type="button"><i data-feather="plus"></i>Tambah Data</a>
                         </div>
                     </div>
                 </div>
@@ -59,7 +64,8 @@
                                                 <td style="text-align: center">{{ $mahasiswa->mahasiswa->npm }}</td>
                                                 <td style="text-align: center">{{ $mahasiswa->konsentrasi }}</td>
                                                 <td style="text-align: center">{{ $mahasiswa->judul_penelitian }}</td>
-                                                <td style="text-align: center"><form action=""></form>
+                                                <td style="text-align: center">
+                                                    <form action=""></form>
                                             </tr>
                                         @endforeach
                                     </tbody>

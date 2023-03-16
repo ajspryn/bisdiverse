@@ -1,4 +1,10 @@
-@extends('admin::layouts.main')
+@extends('layouts.main')
+
+@section('title', 'Dahsboard Admin')
+
+@section('menu')
+    @include('admin::layouts.menu')
+@endsection
 
 @section('content')
     <!-- BEGIN: Content-->
@@ -40,25 +46,19 @@
                                             <div class="col-md-6 col-12">
                                                 <div class="mb-1">
                                                     <label class="form-label" for="first-name-column">Nama Dosen</label>
-                                                    <input type="text" id="first-name-column" class="form-control"
-                                                        placeholder="Nama Dosen" value="{{ $dosen->nama }}" name="nama"
-                                                        required />
+                                                    <input type="text" id="first-name-column" class="form-control" placeholder="Nama Dosen" value="{{ $dosen->nama }}" name="nama" required />
                                                 </div>
                                             </div>
                                             <div class="col-md-6 col-12">
                                                 <div class="mb-1">
                                                     <label class="form-label" for="first-name-column">Kode Dosen</label>
-                                                    <input type="number" id="first-name-column" class="form-control"
-                                                        placeholder="Kode Dosen" value="{{ $dosen->kds }}" name="kds"
-                                                        required />
+                                                    <input type="number" id="first-name-column" class="form-control" placeholder="Kode Dosen" value="{{ $dosen->kds }}" name="kds" required />
                                                 </div>
                                             </div>
                                             <div class="col-md-6 col-12">
                                                 <div class="mb-1">
                                                     <label class="form-label" for="first-name-column">NIDN / NIDK</label>
-                                                    <input type="text" id="first-name-column" class="form-control"
-                                                        placeholder="NIDN / NIDK" value="{{ $dosen->nidn_nidk }}"
-                                                        name="nidn_nidk" />
+                                                    <input type="text" id="first-name-column" class="form-control" placeholder="NIDN / NIDK" value="{{ $dosen->nidn_nidk }}" name="nidn_nidk" />
                                                 </div>
                                             </div>
                                             <div class="col-12">

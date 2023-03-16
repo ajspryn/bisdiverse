@@ -1,4 +1,10 @@
-@extends('admin::layouts.main')
+@extends('layouts.main')
+
+@section('title', 'Dahsboard Admin')
+
+@section('menu')
+    @include('admin::layouts.menu')
+@endsection
 
 @section('content')
     <!-- BEGIN: Content-->

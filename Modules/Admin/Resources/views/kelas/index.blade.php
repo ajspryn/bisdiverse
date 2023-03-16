@@ -1,4 +1,10 @@
-@extends('admin::layouts.main')
+@extends('layouts.main')
+
+@section('title', 'Dahsboard Admin')
+
+@section('menu')
+    @include('admin::layouts.menu')
+@endsection
 
 @section('content')
     <!-- BEGIN: Content-->
@@ -39,15 +45,13 @@
                                             <div class="col-md-6 col-12">
                                                 <div class="mb-1">
                                                     <label class="form-label" for="first-name-column">Kelas</label>
-                                                    <input type="text" id="first-name-column" class="form-control"
-                                                        placeholder="Nama Kelas" name="kelas" />
+                                                    <input type="text" id="first-name-column" class="form-control" placeholder="Nama Kelas" name="kelas" />
                                                 </div>
                                             </div>
                                             <div class="col-md-6 col-12">
                                                 <div class="mb-1">
                                                     <label class="form-label" for="tahun">Tahun</label>
-                                                    <input type="number" id="tahun" class="form-control"
-                                                        placeholder="Tahun" name="tahun" />
+                                                    <input type="number" id="tahun" class="form-control" placeholder="Tahun" name="tahun" />
                                                 </div>
                                             </div>
                                             <div class="col-12">
@@ -84,23 +88,18 @@
                                                 <td style="text-align: center">{{ $kelas->tahun }}</td>
                                                 <td style="text-align: center">
                                                     <div class="dropdown">
-                                                        <button type="button"
-                                                            class="btn btn-sm dropdown-toggle hide-arrow py-0"
-                                                            data-bs-toggle="dropdown">
-                                                            <span class="badge rounded-pill badge-light-primary me-1"><i
-                                                                    data-feather="more-vertical"></i>Action</span>
+                                                        <button type="button" class="btn btn-sm dropdown-toggle hide-arrow py-0" data-bs-toggle="dropdown">
+                                                            <span class="badge rounded-pill badge-light-primary me-1"><i data-feather="more-vertical"></i>Action</span>
                                                         </button>
                                                         <div class="dropdown-menu dropdown-menu-end">
                                                             <a class="dropdown-item" href="/admin/kelas/{{ $kelas->id }}/edit">
                                                                 <i data-feather="edit-2" class="me-50"></i>
                                                                 <span>Edit</span>
                                                             </a>
-                                                            <form action="/admin/kelas/{{ $kelas->id }}" method="post"
-                                                                class="d-inline">
+                                                            <form action="/admin/kelas/{{ $kelas->id }}" method="post" class="d-inline">
                                                                 @method('delete')
                                                                 @csrf
-                                                                <a class="dropdown-item" href="#"
-                                                                    onclick="event.preventDefault(); this.closest('form').submit();">
+                                                                <a class="dropdown-item" href="#" onclick="event.preventDefault(); this.closest('form').submit();">
                                                                     <i data-feather="trash" class="me-50"></i>
                                                                     <span>Delete</span>
                                                                 </a>

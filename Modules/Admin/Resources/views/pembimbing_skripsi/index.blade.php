@@ -1,4 +1,10 @@
-@extends('admin::layouts.main')
+@extends('layouts.main')
+
+@section('title', 'Dahsboard Admin')
+
+@section('menu')
+    @include('admin::layouts.menu')
+@endsection
 
 @section('content')
     <!-- BEGIN: Content-->
@@ -25,8 +31,7 @@
                 <div class="content-header-right text-md-end col-md-3 col-12 d-md-block d-none">
                     <div class="mb-1 breadcrumb-right">
                         <div class="dropdown">
-                            <a href="/judulskripsi/pembimbing/create" class="btn-icon btn btn-primary btn-round btn-lg"
-                                type="button"><span>Tambah Data</span></a>
+                            <a href="/judulskripsi/pembimbing/create" class="btn-icon btn btn-primary" type="button"><i data-feather="plus"></i>Tambah Data</a>
                         </div>
                     </div>
                 </div>
@@ -50,10 +55,10 @@
                                     </thead>
                                     <tbody>
                                         @foreach ($dosens as $dosen)
-                                        @php
-                                            $kds_dosen=Modules\Judulskripsi\Entities\Judulskripsi::where('kds_dosen',$dosen->dosen->kds)->count();
-                                            $anggota_dosen=Modules\Judulskripsi\Entities\Judulskripsi::where('anggota_dosen',$dosen->dosen->kds)->count();
-                                        @endphp
+                                            @php
+                                                $kds_dosen = Modules\Judulskripsi\Entities\Judulskripsi::where('kds_dosen', $dosen->dosen->kds)->count();
+                                                $anggota_dosen = Modules\Judulskripsi\Entities\Judulskripsi::where('anggota_dosen', $dosen->dosen->kds)->count();
+                                            @endphp
                                             <tr>
                                                 <td></td>
                                                 <td style="text-align: center">{{ $loop->iteration }}</td>

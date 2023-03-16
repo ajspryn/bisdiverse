@@ -1,4 +1,10 @@
-@extends('dosen::layouts.main')
+@extends('layouts.main')
+
+@section('title', 'Dahsboard Admin')
+
+@section('menu')
+    @include('dosen::layouts.menu')
+@endsection
 
 @section('content')
     <!-- BEGIN: Content-->

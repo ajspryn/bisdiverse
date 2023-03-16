@@ -18,7 +18,7 @@ class SetujuiMagangController extends Controller
     public function index()
     {
         return view('kaprodi::magang.pengajuan', [
-            'mahasiswas' => Magang::select()->whereIn('status', ['Diverifikasi TU', 'Ditinjau Kaprodi'])->get(),
+            'mahasiswas' => Magang::select()->whereIn('status', ['Diverifikasi Admin Prodi', 'Ditinjau Kaprodi', 'Disetujui Kaprodi', 'Ditolak Kaprodi', 'Ditolak Admin Prodi'])->get(),
         ]);
     }
 
@@ -62,9 +62,14 @@ class SetujuiMagangController extends Controller
         $magang = Magang::where('id', $id)->get()->first();
         $mahasiswa = Mahasiswa::select()->where('npm', $magang->mahasiswa_npm)->get()->first();
 
-        $cekstatus = Magang::select()->where('id', $id)->where('status', 'Disetujui Kaprodi')->get();
-        if (isset($cekstatus)) {
-        } else {
+        // $cekstatus = Magang::select()->where('id', $id)->where('status', 'Disetujui Kaprodi')->get();
+        // if (isset($cekstatus)) {
+        // } else {
+        //     Magang::where('id', $id)->update([
+        //         'status' => 'Ditinjau Kaprodi',
+        //     ]);
+        // }
+        if (Magang::where('id', $id)->where('status', 'Diverifikasi Admin Prodi')->get()->first()) {
             Magang::where('id', $id)->update([
                 'status' => 'Ditinjau Kaprodi',
             ]);
@@ -79,8 +84,8 @@ class SetujuiMagangController extends Controller
             ]);
         }
         return view('kaprodi::magang.lihat', [
-            'magang' => $magang,
-            'mahasiswa' => $mahasiswa,
+            'magang' => Magang::where('id', $id)->get()->first(),
+            'mahasiswa' => Mahasiswa::select()->where('npm', $magang->mahasiswa_npm)->get()->first(),
             'historys' => HistoryPengajuanMagang::select()->where('magang_id', $magang->id)->get(),
         ]);
     }

@@ -1,4 +1,10 @@
-@extends('admin::layouts.main')
+@extends('layouts.main')
+
+@section('title', 'Dahsboard Admin')
+
+@section('menu')
+    @include('admin::layouts.menu')
+@endsection
 
 @section('content')
     <!-- BEGIN: Content-->
@@ -74,11 +80,8 @@
                                                 </td>
                                                 <td style="text-align: center">
                                                     <div class="dropdown">
-                                                        <button type="button"
-                                                            class="btn btn-sm dropdown-toggle hide-arrow py-0"
-                                                            data-bs-toggle="dropdown">
-                                                            <span class="badge rounded-pill badge-light-primary me-1"><i
-                                                                    data-feather="more-vertical"></i>Action</span>
+                                                        <button type="button" class="btn btn-sm dropdown-toggle hide-arrow py-0" data-bs-toggle="dropdown">
+                                                            <span class="badge rounded-pill badge-light-primary me-1"><i data-feather="more-vertical"></i>Action</span>
                                                         </button>
                                                         <div class="dropdown-menu dropdown-menu-end">
                                                             <form action="/admin/user-mahasiswa/create">
@@ -102,19 +105,18 @@
                                                                     <span>Jadikan Kaprodi</span>
                                                                 </button>
                                                             </form>
-                                                            <form action=" ">
+                                                            <form action="">
                                                                 <input type="hidden" name='user' value="{{ $user->id }}">
                                                                 <button type="submit" class="dropdown-item">
                                                                     <i data-feather="edit" class="me-50"></i>
                                                                     <span>Jadikan Admin</span>
                                                                 </button>
                                                             </form>
-                                                            <form action="/admin/user-mahasiswa/{{ $user->id }}"
-                                                                method="post" class="d-inline">
+                                                            <form action="/admin/user-mahasiswa/{{ $user->id }}" method="post" class="d-inline">
                                                                 @method('delete')
                                                                 @csrf
-                                                                <a class="dropdown-item" href="#"
-                                                                    onclick="event.preventDefault(); this.closest('form').submit();">
+                                                                <input type="hidden" name="jabatan_id" value="{{ $role->jabatan_id ?? null }}">
+                                                                <a class="dropdown-item" href="#" onclick="return Swal.fire({title:'Apakah Anda yakin ingin menghapus data ini?',icon:'warning',showCancelButton:true,confirmButtonText:'Ya',cancelButtonText:'Tidak',reverseButtons:true}).then((result) => {if (result.isConfirmed) {this.closest('form').submit();} else {return false;}});">
                                                                     <i data-feather="trash" class="me-50"></i>
                                                                     <span>Delete</span>
                                                                 </a>

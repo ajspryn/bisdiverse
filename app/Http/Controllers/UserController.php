@@ -5,16 +5,17 @@ namespace App\Http\Controllers;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Modules\Admin\Entities\Dosen;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Storage;
-use Modules\Admin\Entities\Dosen;
 use Modules\Admin\Entities\Mahasiswa;
-use Modules\Form\Entities\FormPprPembiayaan;
+use Illuminate\Support\Facades\Storage;
+use RealRashid\SweetAlert\Facades\Alert;
 use Modules\Form\Entities\SkpdPembiayaan;
-use Modules\Pasar\Entities\PasarPembiayaan;
 use Modules\Umkm\Entities\UmkmPembiayaan;
+use Modules\Pasar\Entities\PasarPembiayaan;
+use Modules\Form\Entities\FormPprPembiayaan;
 
 class UserController extends Controller
 {
@@ -107,30 +108,45 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
+        // return $request;
         if ($request->code == 1) {
-            User::where('id', $id)
-                ->update([
-                    'name' => $request->name,
-                    'email' => $request->email,
-                ]);
-            return redirect()->back()->with('success', 'Data Diri Berhasil Diubah');
-        } elseif ($request->code == 2) {
-            User::where('id', $id)
-                ->update([
-                    'password' => Hash::make($request->password_baru)
-                ]);
-            return redirect()->back()->with('success', 'Password Berhasil Diubah');
-        } elseif ($request->code == 3) {
-            // ddd($request->file('foto'));
-            // return $request;
-            if ($request->file('foto')) {
-                if ($request->foto_lama) {
-                    Storage::delete($request->foto_lama);
-                }
-                $input = $request->file('foto')->store('foto-profile');
+            // $cek = Hash::check($request->password, Auth::user()->password);
+            // dd(Hash::check($request->password, Auth::user()->password));
+            if (Hash::check($request->password, Auth::user()->password)) {
                 User::where('id', $id)
                     ->update([
-                        'foto' => $input,
+                        'name' => $request->name,
+                        'username' => $request->username,
+                        'email' => $request->email,
+                    ]);
+                return redirect()->back()->with('success', 'Data Diri Berhasil Diubah');
+            } else {
+                Alert::error('Error', 'Password Yang Anda Masukan Salah.');
+                return redirect()->back();
+                // return back()->with('errors', 'Password Yang Anda Masukan Salah');
+            }
+        } elseif ($request->code == 2) {
+            // $cek = Hash::check($request->password_lama, Auth::user()->password);
+            // return $cek;
+            if (Hash::check($request->password_lama, Auth::user()->password)) {
+                User::where('id', $id)
+                    ->update([
+                        'password' => Hash::make($request->password_baru)
+                    ]);
+                return redirect()->back()->with('success', 'Password Berhasil Diubah');
+            } else {
+                Alert::error('Error', 'Password Yang Anda Masukan Salah.');
+                return redirect()->back();
+            }
+        } elseif ($request->code == 3) {
+            if ($request->file('avatar')) {
+                if ($request->avatar_lama) {
+                    Storage::delete($request->avatar_lama);
+                }
+                $input = $request->file('avatar')->store('avatar');
+                User::where('id', $id)
+                    ->update([
+                        'avatar' => $input,
                     ]);
             }
             return redirect()->back()->with('success', 'Foto Berhasil Diubah');

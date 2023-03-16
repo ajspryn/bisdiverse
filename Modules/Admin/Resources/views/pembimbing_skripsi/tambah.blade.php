@@ -1,4 +1,10 @@
-@extends('admin::layouts.main')
+@extends('layouts.main')
+
+@section('title', 'Dahsboard Admin')
+
+@section('menu')
+    @include('admin::layouts.menu')
+@endsection
 
 @section('content')
     <!-- BEGIN: Content-->
@@ -56,8 +62,8 @@
                                                         $cek = Modules\judulskripsi\Entities\DosenPembimbingSkripsi::where('dosen_kds', $dosen->kds)
                                                             ->get()
                                                             ->first();
-
-                                                            @endphp
+                                                        
+                                                    @endphp
                                                     <tr>
                                                         <td></td>
                                                         <td style="text-align: center">{{ $loop->iteration }}</td>
@@ -65,24 +71,15 @@
                                                         <td>{{ $dosen->nama }}</td>
                                                         <td style="text-align: center">
                                                             <div>
-                                                                <input type="number" class="form-control"
-                                                                    name="pembimbing[{{ $loop->iteration }}][batas_mahasiswa]"
-                                                                    placeholder="Masukan Jumlah Total Mahasiswa"
-                                                                    value=@if ($cek) {{ $cek->batas_mahasiswa }}
+                                                                <input type="number" class="form-control" name="pembimbing[{{ $loop->iteration }}][batas_mahasiswa]" placeholder="Masukan Jumlah Total Mahasiswa" value=@if ($cek) {{ $cek->batas_mahasiswa }}
                                                                     @else
                                                                     {{ '20' }} @endif />
-                                                                <input type="hidden" class="form-control"
-                                                                    name="pembimbing[{{ $loop->iteration }}][dosen_kds]"
-                                                                    placeholder="Masukan Jumlah Total Mahasiswa"
-                                                                    value="{{ $dosen->kds }}" />
+                                                                <input type="hidden" class="form-control" name="pembimbing[{{ $loop->iteration }}][dosen_kds]" placeholder="Masukan Jumlah Total Mahasiswa" value="{{ $dosen->kds }}" />
                                                             </div>
                                                         </td>
                                                         <td style="text-align: center">
                                                             <div class="form-check">
-                                                                <input type="checkbox" class="form-check-input"
-                                                                    id="customCheck2"
-                                                                    name='pembimbing[{{ $loop->iteration }}][jadikan_pembimbing]'
-                                                                    @if (isset($cek)) @checked(true) @endif />
+                                                                <input type="checkbox" class="form-check-input" id="customCheck2" name='pembimbing[{{ $loop->iteration }}][jadikan_pembimbing]' @if (isset($cek)) @checked(true) @endif />
                                                                 <label class="form-check-label" for="customCheck2">Jadikan
                                                                     Pembimbing</label>
                                                             </div>

@@ -26,6 +26,16 @@ class UserKaprodiController extends Controller
      */
     public function create()
     {
+        // return request('user');
+        $cek = Dosen::select()->where('user_id', request('user'))->get()->first();
+        // return $cek->count();
+        if ($cek->count() > 0) {
+            Role::where('user_id', request('user'))->update([
+                'role_id' => 1,
+                'jabatan_id' => 1,
+            ]);
+            return back()->with('success', $cek->nama . ' ' . 'Sekarang Menjadi Kaprodi');
+        }
         $user_id = request('user');
         return view('admin::user.kaprodi', [
             'user' => User::select()->where('id', $user_id)->get()->first(),
@@ -46,15 +56,15 @@ class UserKaprodiController extends Controller
         ];
 
         $input = $request->validate($rules);
-        $nama=Dosen::select()->where('id',$request->dosen_id)->get()->first();
+        $nama = Dosen::select()->where('id', $request->dosen_id)->get()->first();
         Dosen::where('id', $request->dosen_id)
-        ->update($input);
+            ->update($input);
         Role::create([
             'user_id' => $request->user_id,
             'role_id' => 1,
             'jabatan_id' => 1,
         ]);
-        return redirect('/admin/user-mahasiswa')->with('success', $nama->nama.' '.'Sekarang Menjadi Kaprodi');
+        return redirect('/admin/user-mahasiswa')->with('success', $nama->nama . ' ' . 'Sekarang Menjadi Kaprodi');
     }
 
     /**

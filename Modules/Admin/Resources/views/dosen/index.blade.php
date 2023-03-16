@@ -1,4 +1,10 @@
-@extends('admin::layouts.main')
+@extends('layouts.main')
+
+@section('title', 'Dahsboard Admin')
+
+@section('menu')
+    @include('admin::layouts.menu')
+@endsection
 
 @section('content')
     <!-- BEGIN: Content-->
@@ -22,33 +28,6 @@
                         </div>
                     </div>
                 </div>
-                <div class="content-header-right text-md-end col-md-3 col-12 d-md-block d-none">
-                    <div class="mb-1 breadcrumb-right">
-                        <div class="dropdown">
-                            <button class="btn-icon btn btn-primary btn-round btn-sm dropdown-toggle" type="button"
-                                data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i data-feather="grid"></i></button>
-                            <div class="dropdown-menu dropdown-menu-end">
-                                <a class="dropdown-item" href="app-todo.html">
-                                    <i class="me-1" data-feather="check-square">
-                                    </i><span class="align-middle">Todo</span>
-                                </a>
-                                <a class="dropdown-item" href="app-chat.html">
-                                    <i class="me-1" data-feather="message-square"></i>
-                                    <span class="align-middle">Chat</span>
-                                </a>
-                                <a class="dropdown-item" href="app-email.html">
-                                    <i class="me-1" data-feather="mail"></i>
-                                    <span class="align-middle">Email</span>
-                                </a>
-                                <a class="dropdown-item" href="app-calendar.html">
-                                    <i class="me-1" data-feather="calendar"></i>
-                                    <span class="align-middle">Calendar</span>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
             <div class="content-body">
                 <!-- Basic multiple Column Form section start -->
@@ -62,40 +41,62 @@
                                             <h4 class="card-title">Dosen</h4>
                                         </div>
                                         <div class="card-body">
-                                            <form class="form" method="POST" action="/admin/dosen">
+                                            <form class="needs-validation" novalidate method="POST" action="/admin/dosen">
                                                 @csrf
                                                 <div class="row">
                                                     <div class="col-md-6 col-12">
                                                         <div class="mb-1">
                                                             <label class="form-label" for="first-name-column">Nama
                                                                 Dosen</label>
-                                                            <input type="text" id="first-name-column"
-                                                                class="form-control" placeholder="Nama Dosen" name="nama"
-                                                                required />
+                                                            <input type="text" id="first-name-column" class="form-control @error('nama') is-invalid @enderror" placeholder="Nama Dosen" name="nama" required />
+                                                            @error('nama')
+                                                                <span class="invalid-feedback" role="alert">
+                                                                    <strong>{{ $message }}</strong>
+                                                                </span>
+                                                            @enderror
+                                                            <div class="invalid-feedback">Wajib Diisi</div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6 col-12">
+                                                        <div class="mb-1">
+                                                            <label class="form-label" for="first-name-column">Email</label>
+                                                            <input type="email" id="first-name-column" class="form-control @error('email') is-invalid @enderror" placeholder="Email Dosen" name="email" required />
+                                                            @error('email')
+                                                                <span class="invalid-feedback" role="alert">
+                                                                    <strong>{{ $message }}</strong>
+                                                                </span>
+                                                            @enderror
+                                                            <div class="invalid-feedback">Wajib Diisi</div>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-6 col-12">
                                                         <div class="mb-1">
                                                             <label class="form-label" for="first-name-column">Kode
                                                                 Dosen</label>
-                                                            <input type="number" id="first-name-column"
-                                                                class="form-control" placeholder="Kode Dosen" name="kds"
-                                                                required />
+                                                            <input type="number" id="first-name-column" class="form-control @error('kds') is-invalid @enderror" placeholder="Kode Dosen" name="kds" required />
+                                                            @error('kds')
+                                                                <span class="invalid-feedback" role="alert">
+                                                                    <strong>{{ $message }}</strong>
+                                                                </span>
+                                                            @enderror
+                                                            <div class="invalid-feedback">Wajib Diisi</div>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-6 col-12">
                                                         <div class="mb-1">
                                                             <label class="form-label" for="first-name-column">NIDN /
                                                                 NIDK</label>
-                                                            <input type="text" id="first-name-column"
-                                                                class="form-control" placeholder="NIDN / NIDK"
-                                                                name="nidn_nidk" />
+                                                            <input type="text" id="first-name-column" class="form-control @error('nidn_nidk') is-invalid @enderror" placeholder="NIDN / NIDK" name="nidn_nidk" />
+                                                            @error('nidn_nidk')
+                                                                <span class="invalid-feedback" role="alert">
+                                                                    <strong>{{ $message }}</strong>
+                                                                </span>
+                                                            @enderror
                                                         </div>
                                                     </div>
                                                     <div class="col-12">
                                                         <button type="submit" class="btn btn-primary me-1">Submit</button>
-                                                        <button type="reset"
-                                                            class="btn btn-outline-secondary">Reset</button>
+                                                        <button type="reset" class="btn btn-outline-secondary">Reset</button>
                                                     </div>
                                                 </div>
                                             </form>
@@ -114,25 +115,28 @@
                                             <h4 class="card-title">Tambahkan Sekaligus Dosen</h4>
                                         </div>
                                         <div class="card-body">
-                                            <form class="form" method="POST" action="/admin/dosen"
-                                                enctype="multipart/form-data">
+                                            <form id="myForm" class="form" method="POST" action="/admin/dosen" enctype="multipart/form-data">
                                                 @csrf
                                                 <div class="row">
                                                     <div class="col-md-12 col-12">
                                                         <div class="mb-1">
                                                             <label class="form-label" for="first-name-column">Silahkan
                                                                 Upload file
-                                                                Exel</label>
-                                                            <input type="file" id="first-name-column"
-                                                                class="form-control" accept=".xlsx,.csv" name="dosen"
-                                                                required />
+                                                                Exel (<a href="{{ url('/') }}/import/dosen.xlsx">Download Template Upload</a>)</label>
+                                                            <input type="file" id="first-name-column" class="form-control" accept=".xlsx,.csv" name="dosen" required />
+                                                        </div>
+                                                        <div class="alert alert-danger" role="alert">
+                                                            <h4 class="alert-heading"><i data-feather="alert-circle" class="me-50"></i> Perhatian</h4>
+                                                            <div class="alert-body">
+                                                                <p>- Pastikan Data Yang Diinput Sesuai Template</p>
+                                                                <p>- Kode Dosen/KDS Akan Menjadi Username Dan Password Default Adalah "dosenunpak"</p>
+                                                                <p>- Jika Ada Error Saat Upload Maka Rubah Format Upload Menjadi CSV</p>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                     <div class="col-12">
-                                                        <button type="submit"
-                                                            class="btn btn-primary me-1">Submit</button>
-                                                        <button type="reset"
-                                                            class="btn btn-outline-secondary">Reset</button>
+                                                        <button type="submit" class="btn btn-primary me-1" onclick="document.getElementById('myForm').submit()">Submit</button>
+                                                        <button type="reset" class="btn btn-outline-secondary">Reset</button>
                                                     </div>
                                                 </div>
                                             </form>
@@ -168,24 +172,18 @@
                                                 <td style="text-align: center">{{ $dosen->kds }}</td>
                                                 <td style="text-align: center">
                                                     <div class="dropdown">
-                                                        <button type="button"
-                                                            class="btn btn-sm dropdown-toggle hide-arrow py-0"
-                                                            data-bs-toggle="dropdown">
-                                                            <span class="badge rounded-pill badge-light-primary me-1"><i
-                                                                    data-feather="more-vertical"></i>Action</span>
+                                                        <button type="button" class="btn btn-sm dropdown-toggle hide-arrow py-0" data-bs-toggle="dropdown">
+                                                            <span class="badge rounded-pill badge-light-primary me-1"><i data-feather="more-vertical"></i>Action</span>
                                                         </button>
                                                         <div class="dropdown-menu dropdown-menu-end">
-                                                            <a class="dropdown-item"
-                                                                href="/admin/dosen/{{ $dosen->id }}/edit">
+                                                            <a class="dropdown-item" href="/admin/dosen/{{ $dosen->id }}/edit">
                                                                 <i data-feather="edit-2" class="me-50"></i>
                                                                 <span>Edit</span>
                                                             </a>
-                                                            <form action="/admin/dosen/{{ $dosen->id }}" method="post"
-                                                                class="d-inline">
+                                                            <form action="/admin/dosen/{{ $dosen->id }}" method="post" class="d-inline">
                                                                 @method('delete')
                                                                 @csrf
-                                                                <a class="dropdown-item" href="#"
-                                                                    onclick="event.preventDefault(); this.closest('form').submit();">
+                                                                <a class="dropdown-item" href="#" onclick="return Swal.fire({title:'Apakah Anda yakin ingin menghapus data ini?',icon:'warning',showCancelButton:true,confirmButtonText:'Ya',cancelButtonText:'Tidak',reverseButtons:true}).then((result) => {if (result.isConfirmed) {this.closest('form').submit();} else {return false;}});">
                                                                     <i data-feather="trash" class="me-50"></i>
                                                                     <span>Delete</span>
                                                                 </a>

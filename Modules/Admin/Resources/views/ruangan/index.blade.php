@@ -1,4 +1,10 @@
-@extends('admin::layouts.main')
+@extends('layouts.main')
+
+@section('title', 'Dahsboard Admin')
+
+@section('menu')
+    @include('admin::layouts.menu')
+@endsection
 
 @section('content')
     <!-- BEGIN: Content-->
@@ -39,22 +45,19 @@
                                             <div class="col-md-4 col-12">
                                                 <div class="mb-1">
                                                     <label class="form-label" for="first-name-column">Nama Ruangan</label>
-                                                    <input type="text" id="first-name-column" class="form-control"
-                                                        placeholder="Nama Ruangan" name="ruangan" />
+                                                    <input type="text" id="first-name-column" class="form-control" placeholder="Nama Ruangan" name="ruangan" />
                                                 </div>
                                             </div>
                                             <div class="col-md-4 col-12">
                                                 <div class="mb-1">
                                                     <label class="form-label" for="first-name-column">Nama Gedung</label>
-                                                    <input type="text" id="first-name-column" class="form-control"
-                                                        placeholder="Nama Gedung" name="gedung" />
+                                                    <input type="text" id="first-name-column" class="form-control" placeholder="Nama Gedung" name="gedung" />
                                                 </div>
                                             </div>
                                             <div class="col-md-4 col-12">
                                                 <div class="mb-1">
                                                     <label class="form-label" for="first-name-column">Lantai</label>
-                                                    <input type="text" id="first-name-column" class="form-control"
-                                                        placeholder="Lantai" name="lantai" />
+                                                    <input type="text" id="first-name-column" class="form-control" placeholder="Lantai" name="lantai" />
                                                 </div>
                                             </div>
                                             <div class="col-12">
@@ -93,24 +96,18 @@
                                                 <td style="text-align: center">{{ $ruangan->lantai }}</td>
                                                 <td style="text-align: center">
                                                     <div class="dropdown">
-                                                        <button type="button"
-                                                            class="btn btn-sm dropdown-toggle hide-arrow py-0"
-                                                            data-bs-toggle="dropdown">
-                                                            <span class="badge rounded-pill badge-light-primary me-1"><i
-                                                                    data-feather="more-vertical"></i>Action</span>
+                                                        <button type="button" class="btn btn-sm dropdown-toggle hide-arrow py-0" data-bs-toggle="dropdown">
+                                                            <span class="badge rounded-pill badge-light-primary me-1"><i data-feather="more-vertical"></i>Action</span>
                                                         </button>
                                                         <div class="dropdown-menu dropdown-menu-end">
-                                                            <a class="dropdown-item"
-                                                                href="/admin/ruangan/{{ $ruangan->id }}/edit">
+                                                            <a class="dropdown-item" href="/admin/ruangan/{{ $ruangan->id }}/edit">
                                                                 <i data-feather="edit-2" class="me-50"></i>
                                                                 <span>Edit</span>
                                                             </a>
-                                                            <form action="/admin/ruangan/{{ $ruangan->id }}" method="post"
-                                                                class="d-inline">
+                                                            <form action="/admin/ruangan/{{ $ruangan->id }}" method="post" class="d-inline">
                                                                 @method('delete')
                                                                 @csrf
-                                                                <a class="dropdown-item" href="#"
-                                                                    onclick="event.preventDefault(); this.closest('form').submit();">
+                                                                <a class="dropdown-item" href="#" onclick="event.preventDefault(); this.closest('form').submit();">
                                                                     <i data-feather="trash" class="me-50"></i>
                                                                     <span>Delete</span>
                                                                 </a>

@@ -25,8 +25,9 @@ class HomeController extends Controller
      */
     public function index()
     {
+        // return Auth::user()->role;
         if (Auth::user()) {
-            $role = Role::select()->where('user_id', Auth::user()->id)->get()->first();
+            $role = Auth::user()->role;
         } else {
             $role = false;
         }
@@ -42,8 +43,10 @@ class HomeController extends Controller
                 $url = '/dosen';
             } elseif ($role->jabatan_id == 3) {
                 $url = '/mahasiswa';
+            } elseif ($role->jabatan_id == 4) {
+                $url = '/bisdiboard';
             } else {
-                $url = '/';
+                return view('errors.kamusiapa');
             }
         } else {
             return view('index');

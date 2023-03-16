@@ -19,19 +19,20 @@ class MagangController extends Controller
      */
     public function index()
     {
-        $user_id=Auth::user()->id;
-        $mahasiswa=Mahasiswa::where('id',$user_id)->get()->first();
-        $magang= Magang::select()->where('mahasiswa_npm', $mahasiswa->npm)->latest()->first();
-        if($magang==null){
-            $history=null;
-        }else{
-        $history= HistoryPengajuanMagang::select()->where('magang_id', $magang->id)->get();
+        $user_id = Auth::user()->id;
+        $mahasiswa = Mahasiswa::where('user_id', $user_id)->get()->first();
+        // return $mahasiswa;
+        $magang = Magang::select()->where('mahasiswa_npm', $mahasiswa->npm)->latest()->first();
+        if ($magang == null) {
+            $history = null;
+        } else {
+            $history = HistoryPengajuanMagang::select()->where('magang_id', $magang->id)->get();
         }
-        return view('mahasiswa::magang.index',[
-            'magang'=>$magang,
-            'dosenpembimbings'=>DosenPembimbingMagang::all(),
-            'mahasiswa'=>$mahasiswa,
-            'historys'=>$history,
+        return view('mahasiswa::magang.index', [
+            'magang' => $magang,
+            'dosenpembimbings' => DosenPembimbingMagang::all(),
+            'mahasiswa' => $mahasiswa,
+            'historys' => $history,
         ]);
     }
 
@@ -41,9 +42,7 @@ class MagangController extends Controller
      */
     public function create()
     {
-        return view('mahasiswa::magang.pengajuan_magang',[
-
-        ]);
+        return view('mahasiswa::magang.pengajuan_magang', []);
     }
 
     /**
@@ -56,34 +55,39 @@ class MagangController extends Controller
         // dd($request);
         // return $request->file('surat_permohonan');
         $hitung = Magang::select()->orderBy('id', 'desc')->get()->first();
-        if(isset($hitung)){
+        if (isset($hitung)) {
             $id = $hitung->id + 1;
-        }else{
-            $id=1;
+        } else {
+            $id = 1;
         }
 
         if ($request->file('surat_permohonan')) {
             $surat_permohonan = $request->file('surat_permohonan')->store('surat-permohonan-magang');
         }
 
-        Magang::create([
-            'id'=>$id,
-            'dosen_kds'=>$request->dosen_kds,
-            'mahasiswa_npm'=>$request->mahasiswa_npm,
-            'instansi'=>$request->instansi,
-            'departemen'=>$request->departemen,
-            'posisi'=>$request->posisi,
-            'no_telp'=>$request->no_telp,
-            'alamat_instansi'=>$request->alamat_instansi,
-            'surat_permohonan'=>$surat_permohonan,
-            'status'=>'Diajukan Mahasiswa',
+        $request->validate([
+            'dosen_kds' => 'required',
+            'mahasiswa_npm' => 'required',
+            'instansi' => 'required',
+            'departemen' => 'required',
+            'posisi' => 'required',
+            'no_telp' => 'required',
+            'tgl_mulai' => 'required',
+            'tgl_berakhir' => 'required',
+            'alamat_instansi' => 'required',
+            'surat_permohonan' => 'nullable',
         ]);
 
+        $input = $request->all();
+        $input['id'] = $id;
+        $input['status'] = 'Diajukan Mahasiswa';
+        Magang::create($input);
+
         HistoryPengajuanMagang::create([
-            'magang_id'=>$id,
-            'status'=>'Diajukan',
-            'jabatan'=>'Mahasiswa',
-            'catatan'=>$request->catatan,
+            'magang_id' => $id,
+            'status' => 'Diajukan',
+            'jabatan' => 'Mahasiswa',
+            'catatan' => $request->catatan,
         ]);
 
         return redirect('/magang')->with('success', 'Pengajuan Magang Anda Sedang Diproses');

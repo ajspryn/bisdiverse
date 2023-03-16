@@ -1,4 +1,10 @@
-@extends('mahasiswa::layouts.main')
+@extends('layouts.main')
+
+@section('title', 'Dahsboard Admin')
+
+@section('menu')
+    @include('mahasiswa::layouts.menu')
+@endsection
 
 @section('content')
     <!-- BEGIN: Content-->
@@ -6,7 +12,7 @@
         <div class="content-overlay"></div>
         <div class="header-navbar-shadow"></div>
         <div class="content-wrapper container-xxl p-0">
-            <div class="content-header row">
+            {{-- <div class="content-header row">
                 <div class="content-header-left col-md-9 col-12 mb-2">
                     <div class="row breadcrumbs-top">
                         <div class="col-12">
@@ -22,20 +28,17 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> --}}
 
             <div class="content-body">
                 <!-- Card Advance -->
-
-
                 @if ($magang)
                     <div class="row match-height">
                         <!-- Developer Meetup Card -->
                         <div class="col-lg-4 col-md-6 col-12">
                             <div class="card card-developer-meetup">
                                 <div class="meetup-img-wrapper rounded-top text-center">
-                                    <img src="../../../app-assets/images/illustration/email.svg" alt="Meeting Pic"
-                                        height="170" />
+                                    <img src="../../../app-assets/images/illustration/email.svg" alt="Meeting Pic" height="170" />
                                 </div>
                                 <div class="card-body">
                                     <div class="meetup-header d-flex align-items-center">
@@ -83,11 +86,11 @@
                                             <small>
                                                 @if ($magang->status == 'Diajukan Mahasiswa')
                                                     <span class="badge bg-primary">{{ $magang->status }}</span>
-                                                @elseif ($magang->status == 'Ditinjau TU')
+                                                @elseif ($magang->status == 'Ditinjau Admin Prodi')
                                                     <span class="badge bg-info">{{ $magang->status }}</span>
-                                                @elseif ($magang->status == 'Diverifikasi TU')
+                                                @elseif ($magang->status == 'Diverifikasi Admin Prodi')
                                                     <span class="badge bg-success">{{ $magang->status }}</span>
-                                                @elseif ($magang->status == 'Ditolak TU')
+                                                @elseif ($magang->status == 'Ditolak Admin Prodi')
                                                     <span class="badge bg-danger">{{ $magang->status }}</span>
                                                 @elseif ($magang->status == 'Ditinjau Kaprodi')
                                                     <span class="badge bg-info">{{ $magang->status }}</span>
@@ -101,17 +104,14 @@
                                     </div>
                                     <hr>
                                     <div class="text-center mb-1">
-                                        <button class="btn btn-primary" data-bs-toggle="modal"
-                                            data-bs-target="#suratpermohonan">lihat Surat Permohonan</button>
+                                        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#suratpermohonan">lihat Surat Permohonan</button>
                                     </div>
                                     <hr>
                                     <div class="text-center">
-                                        @if ($magang->status == 'Ditolak TU')
-                                            <button href="" class="btn btn-warning" data-bs-toggle="modal"
-                                                data-bs-target="#pengajuanmagang">Buat Ulang Pengajuan</button>
+                                        @if ($magang->status == 'Ditolak Admin Prodi')
+                                            <button href="" class="btn btn-warning" data-bs-toggle="offcanvas" data-bs-target="#offcanvasEnd" aria-controls="offcanvasEnd">Buat Ulang Pengajuan</button>
                                         @elseif ($magang->status == 'Ditolak Kaprodi')
-                                            <button href="" class="btn btn-warning" data-bs-toggle="modal"
-                                                data-bs-target="#pengajuanmagang">Buat Ulang Pengajuan</button>
+                                            <button href="" class="btn btn-warning" data-bs-toggle="offcanvas" data-bs-target="#offcanvasEnd" aria-controls="offcanvasEnd">Buat Ulang Pengajuan</button>
                                         @elseif ($magang->status == 'Disetujui Kaprodi')
                                             <a href="/magang/printsuratrekomendasi/{{ $magang->id }}" class="btn btn-primary">Cetak Surat Rekomendasi</a>
                                         @else
@@ -120,18 +120,15 @@
                                 </div>
                             </div>
                             <!-- Modal -->
-                            <div class="modal fade text-start" id="suratpermohonan" tabindex="-1"
-                                aria-labelledby="myModalLabel16" aria-hidden="true">
+                            <div class="modal fade text-start" id="suratpermohonan" tabindex="-1" aria-labelledby="myModalLabel16" aria-hidden="true">
                                 <div class="modal-dialog modal-dialog-centered modal-xl">
                                     <div class="modal-content">
                                         <div class="modal-header">
                                             <h4 class="modal-title" id="myModalLabel16">Surat Permohonan Magang</h4>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                aria-label="Close"></button>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                         </div>
                                         <div class="modal-body">
-                                            <iframe src="{{ asset('storage/' . $magang->surat_permohonan) }}"
-                                                width="100%" height="500" style="border:0px"></iframe>
+                                            <iframe src="{{ asset('storage/' . $magang->surat_permohonan) }}" width="100%" height="500" style="border:0px"></iframe>
                                         </div>
                                         {{-- <div class="modal-footer">
                                             <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Accept</button>
@@ -178,35 +175,28 @@
                                                     </span>
                                                 @endif
                                                 <div class="timeline-event">
-                                                    <div
-                                                        class="d-flex justify-content-between flex-sm-row flex-column mb-sm-0 mb-1">
+                                                    <div class="d-flex justify-content-between flex-sm-row flex-column mb-sm-0 mb-1">
                                                         <h6 class="mb-50">
                                                             @if ($history->status == 'Diajukan')
-                                                                <span
-                                                                    class="badge bg-primary">{{ $history->status }}</span>
+                                                                <span class="badge bg-primary">{{ $history->status }}</span>
                                                             @elseif ($history->status == 'Ditinjau')
                                                                 <span class="badge bg-info">{{ $history->status }}</span>
                                                             @elseif ($history->status == 'Diverifikasi')
-                                                                <span
-                                                                    class="badge bg-success">{{ $history->status }}</span>
+                                                                <span class="badge bg-success">{{ $history->status }}</span>
                                                             @elseif ($history->status == 'Ditolak')
-                                                                <span
-                                                                    class="badge bg-danger">{{ $history->status }}</span>
+                                                                <span class="badge bg-danger">{{ $history->status }}</span>
                                                             @elseif ($history->status == 'Disetujui')
-                                                                <span
-                                                                    class="badge bg-success">{{ $history->status }}</span>
+                                                                <span class="badge bg-success">{{ $history->status }}</span>
                                                             @endif
                                                             {{ $history->jabatan }}
                                                         </h6>
-                                                        <span
-                                                            class="timeline-event-time">{{ $history->created_at->diffforhumans() }}</span>
+                                                        <span class="timeline-event-time">{{ $history->created_at->diffforhumans() }}</span>
                                                     </div>
                                                     @if (isset($history->catatan))
                                                         <p>Catatan : {{ $history->catatan }}</p>
                                                     @endif
                                                     <hr />
-                                                    <div
-                                                        class="d-flex justify-content-between flex-sm-row flex-column mb-sm-0 mb-1">
+                                                    <div class="d-flex justify-content-between flex-sm-row flex-column mb-sm-0 mb-1">
                                                         <div class="d-flex flex-row align-items-center">
                                                             <span>
                                                                 <p class="mb-0">
@@ -233,7 +223,7 @@
                         <!--/ User Timeline Card -->
                     </div>
                 @else
-                    <div class="row match-height">
+                    <section id="pricing-plan">
                         <!-- pricing free trial -->
                         <div class="pricing-free-trial">
                             <div class="row">
@@ -244,30 +234,100 @@
                                                 Pengajuan Magang
                                             </h3>
                                             <h5>Silahkan Klik Tombol Dibawah ini Untuk Mengajukan Magang.</h5>
-                                            <button type="button" class="btn btn-primary mt-2 mt-lg-3"
-                                                data-bs-toggle="modal" data-bs-target="#pengajuanmagang">Ajukan
+                                            <button class="btn btn-primary mt-2 mt-lg-3" data-bs-toggle="offcanvas" data-bs-target="#offcanvasEnd" aria-controls="offcanvasEnd">Ajukan
                                                 Magang</button>
                                         </div>
                                         <!-- image -->
-                                        <img src="../../../app-assets/images/illustration/pricing-Illustration.svg"
-                                            class="pricing-trial-img img-fluid" alt="svg img" />
+                                        <img src="../../../app-assets/images/illustration/pricing-Illustration.svg" class="pricing-trial-img img-fluid" alt="svg img" />
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <!--/ pricing free trial -->
-                    </div>
+                    </section>
                 @endif
-
-
                 <!--/ Card Advance -->
-
             </div>
         </div>
     </div>
     <!-- END: Content-->
 
-    <!-- add new card modal  -->
+    <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasEnd" aria-labelledby="offcanvasEndLabel">
+        <div class="offcanvas-header">
+            <h5 id="offcanvasEndLabel" class="offcanvas-title">Form Pengajuan Magang</h5>
+            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body my-auto mx-0 flex-grow-0">
+            <form class="needs-validation" novalidate action="/magang" method="POST" enctype="multipart/form-data">
+                @csrf
+                <div class="col-12">
+                    <label class="form-label" for="select2-basic">Pilih Dosen Pembimbing</label>
+                    <select class="select2 form-select" id="select2-basic" name="dosen_kds" required>
+                        <option label=""></option>
+                        @foreach ($dosenpembimbings as $dosen)
+                            <option value="{{ $dosen->dosen_kds }}">{{ $dosen->dosen->nama }}</option>
+                        @endforeach
+                    </select>
+                </div>
+
+                <div class="col-md-12 mt-1">
+                    <label class="form-label" for="modalAddCardName">Nama Instansi</label>
+                    <input type="text" id="modalAddCardName" class="form-control" name='instansi' placeholder="Nama Instansi" required />
+                </div>
+
+                <div class="col-md-12 mt-1">
+                    <label class="form-label" for="modalAddCardName">Departemen</label>
+                    <input type="text" id="modalAddCardName" class="form-control" name='departemen' placeholder="Departemen" required />
+                </div>
+
+                <div class="col-md-12 mt-1">
+                    <label class="form-label" for="modalAddCardName">Posisi</label>
+                    <input type="text" id="modalAddCardName" class="form-control" name='posisi' placeholder="Posisi" required />
+                </div>
+
+                <div class="col-md-12 mt-1">
+                    <label class="form-label" for="modalAddCardName">No Telp Instansi</label>
+                    <input type="number" id="modalAddCardName" class="form-control" name='no_telp' placeholder="No Telp Instansi" required />
+                </div>
+
+                <div class="col-md-12 mt-1">
+                    <label class="form-label" for="exampleFormControlTextarea1">Alamat Instansi</label>
+                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Alamat" name="alamat_instansi" required></textarea>
+                </div>
+
+                <div class="col-md-12 mt-1">
+                    <label class="form-label" for="modalAddCardName">Tangal Mulai</label>
+                    <input type="date" id="modalAddCardName" class="form-control" name='tgl_mulai' required />
+                </div>
+
+                <div class="col-md-12 mt-1">
+                    <label class="form-label" for="modalAddCardName">Tanggal Berakhir</label>
+                    <input type="date" id="modalAddCardName" class="form-control" name='tgl_berakhir' required />
+                </div>
+
+                {{-- <div class="col-md-12 mt-1">
+                            <label class="form-label" for="modalAddCardName">Upload Surat Permohonan</label>
+                            <input type="file" id="modalAddCardName" class="form-control" name='surat_permohonan' accept=".pdf" required />
+                        </div> --}}
+
+                <div class="col-md-12 mt-1">
+                    <label class="form-label" for="exampleFormControlTextarea1">Catatan</label>
+                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Catatan Anda" name="catatan"></textarea>
+                </div>
+
+                <input type="hidden" value="{{ $mahasiswa->npm }}" name='mahasiswa_npm'>
+
+                <div class="col-12 text-center">
+                    <button type="submit" class="btn btn-primary me-1 mt-1">Submit</button>
+                    <button type="reset" class="btn btn-outline-secondary mt-1" data-bs-dismiss="offcanvas">
+                        Cancel
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    {{-- <!-- add new card modal  -->
     <div class="modal fade" id="pengajuanmagang" tabindex="-1" aria-labelledby="addNewCardTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
@@ -279,7 +339,7 @@
                     <p class="text-center">Silahkan isi Form Pengajuan Berikut</p>
 
                     <!-- form -->
-                    <form class="row gy-1 gx-2 mt-75" action="/magang" method="POST" enctype="multipart/form-data">
+                    <form class="needs-validation" novalidate action="/magang" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="col-12">
                             <label class="form-label" for="select2-basic">Pilih Dosen Pembimbing</label>
@@ -291,54 +351,56 @@
                             </select>
                         </div>
 
-                        <div class="col-md-12">
+                        <div class="col-md-12 mt-1">
                             <label class="form-label" for="modalAddCardName">Nama Instansi</label>
-                            <input type="text" id="modalAddCardName" class="form-control" name='instansi'
-                                placeholder="Nama Instansi" required />
+                            <input type="text" id="modalAddCardName" class="form-control" name='instansi' placeholder="Nama Instansi" required />
                         </div>
 
-                        <div class="col-md-12">
+                        <div class="col-md-12 mt-1">
                             <label class="form-label" for="modalAddCardName">Departemen</label>
-                            <input type="text" id="modalAddCardName" class="form-control" name='departemen'
-                                placeholder="Departemen" required />
+                            <input type="text" id="modalAddCardName" class="form-control" name='departemen' placeholder="Departemen" required />
                         </div>
 
-                        <div class="col-md-12">
+                        <div class="col-md-12 mt-1">
                             <label class="form-label" for="modalAddCardName">Posisi</label>
-                            <input type="text" id="modalAddCardName" class="form-control" name='posisi'
-                                placeholder="Posisi" required />
+                            <input type="text" id="modalAddCardName" class="form-control" name='posisi' placeholder="Posisi" required />
                         </div>
 
-                        <div class="col-md-12">
+                        <div class="col-md-12 mt-1">
                             <label class="form-label" for="modalAddCardName">No Telp Instansi</label>
-                            <input type="number" id="modalAddCardName" class="form-control" name='no_telp'
-                                placeholder="No Telp Instansi" required />
+                            <input type="number" id="modalAddCardName" class="form-control" name='no_telp' placeholder="No Telp Instansi" required />
                         </div>
 
-                        <div class="col-md-12">
+                        <div class="col-md-12 mt-1">
                             <label class="form-label" for="exampleFormControlTextarea1">Alamat Instansi</label>
-                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Alamat"
-                                name="alamat_instansi" required></textarea>
+                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Alamat" name="alamat_instansi" required></textarea>
                         </div>
 
-                        <div class="col-md-12">
+                        <div class="col-md-12 mt-1">
+                            <label class="form-label" for="modalAddCardName">Tangal Mulai</label>
+                            <input type="date" id="modalAddCardName" class="form-control" name='tgl_mulai' required />
+                        </div>
+
+                        <div class="col-md-12 mt-1">
+                            <label class="form-label" for="modalAddCardName">Tanggal Berakhir</label>
+                            <input type="date" id="modalAddCardName" class="form-control" name='tgl_berakhir' required />
+                        </div>
+
+                        <div class="col-md-12 mt-1">
                             <label class="form-label" for="modalAddCardName">Upload Surat Permohonan</label>
-                            <input type="file" id="modalAddCardName" class="form-control" name='surat_permohonan'
-                                accept=".pdf" required />
+                            <input type="file" id="modalAddCardName" class="form-control" name='surat_permohonan' accept=".pdf" required />
                         </div>
 
-                        <div class="col-md-12">
+                        <div class="col-md-12 mt-1">
                             <label class="form-label" for="exampleFormControlTextarea1">Catatan</label>
-                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Catatan Anda"
-                                name="catatan"></textarea>
+                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Catatan Anda" name="catatan"></textarea>
                         </div>
 
                         <input type="hidden" value="{{ $mahasiswa->npm }}" name='mahasiswa_npm'>
 
                         <div class="col-12 text-center">
                             <button type="submit" class="btn btn-primary me-1 mt-1">Submit</button>
-                            <button type="reset" class="btn btn-outline-secondary mt-1" data-bs-dismiss="modal"
-                                aria-label="Close">
+                            <button type="reset" class="btn btn-outline-secondary mt-1" data-bs-dismiss="modal" aria-label="Close">
                                 Cancel
                             </button>
                         </div>
@@ -347,5 +409,5 @@
             </div>
         </div>
     </div>
-    <!--/ add new card modal  -->
+    <!--/ add new card modal  --> --}}
 @endsection

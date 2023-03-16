@@ -1,4 +1,10 @@
-@extends('admin::layouts.main')
+@extends('layouts.main')
+
+@section('title', 'Dahsboard Admin')
+
+@section('menu')
+    @include('admin::layouts.menu')
+@endsection
 
 @section('content')
     <!-- BEGIN: Content-->
@@ -22,24 +28,6 @@
                         </div>
                     </div>
                 </div>
-                <div class="content-header-right text-md-end col-md-3 col-12 d-md-block d-none">
-                    <div class="mb-1 breadcrumb-right">
-                        <div class="dropdown">
-                            <button class="btn-icon btn btn-primary btn-round btn-sm dropdown-toggle" type="button"
-                                data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i
-                                    data-feather="grid"></i></button>
-                            <div class="dropdown-menu dropdown-menu-end"><a class="dropdown-item" href="app-todo.html"><i
-                                        class="me-1" data-feather="check-square"></i><span
-                                        class="align-middle">Todo</span></a><a class="dropdown-item" href="app-chat.html"><i
-                                        class="me-1" data-feather="message-square"></i><span
-                                        class="align-middle">Chat</span></a><a class="dropdown-item"
-                                    href="app-email.html"><i class="me-1" data-feather="mail"></i><span
-                                        class="align-middle">Email</span></a><a class="dropdown-item"
-                                    href="app-calendar.html"><i class="me-1" data-feather="calendar"></i><span
-                                        class="align-middle">Calendar</span></a></div>
-                        </div>
-                    </div>
-                </div>
             </div>
             <div class="content-body">
                 <div class="row">
@@ -57,8 +45,7 @@
                                                     <!-- Basic -->
                                                     <div class="col-md-4 mb-1">
                                                         <label class="form-label" for="matkul">Mata Kuliah</label>
-                                                        <select class="select2 form-select" id="matkul" name="matkul"
-                                                            required>
+                                                        <select class="select2 form-select" id="matkul" name="matkul" required>
                                                             <option>Silahkan Pilih Matakuliah</option>
                                                             @foreach ($matkuls as $matkul)
                                                                 <option value="{{ $matkul->kode }}">{{ $matkul->nama }}
@@ -81,15 +68,12 @@
                                                     <div class="col-md-4 col-12">
                                                         <div class="mb-1">
                                                             <label class="form-label" for="last-name-column">Tangal</label>
-                                                            <input type="date" id="last-name-column" class="form-control"
-                                                                placeholder="Last Name" name="tanggal"
-                                                                value="{{ request('tanggal') }}" />
+                                                            <input type="date" id="last-name-column" class="form-control" placeholder="Last Name" name="tanggal" value="{{ request('tanggal') }}" />
                                                         </div>
                                                     </div>
                                                     <div class="col-12">
                                                         <button type="submit" class="btn btn-primary me-1">Submit</button>
-                                                        <button type="reset"
-                                                            class="btn btn-outline-secondary">Reset</button>
+                                                        <button type="reset" class="btn btn-outline-secondary">Reset</button>
                                                     </div>
                                                 </div>
                                             </form>
@@ -108,8 +92,7 @@
                                             <h4 class="card-title">Tambahkan Presensi</h4>
                                         </div>
                                         <div class="card-body">
-                                            <form class="form" method="POST" action="/presensiujian"
-                                                enctype="multipart/form-data">
+                                            <form class="form" method="POST" action="/presensiujian" enctype="multipart/form-data">
                                                 @csrf
                                                 <div class="row">
                                                     <div class="col-md-12 col-12">
@@ -117,16 +100,12 @@
                                                             <label class="form-label" for="first-name-column">Silahkan
                                                                 Upload file
                                                                 Exel</label>
-                                                            <input type="file" id="first-name-column"
-                                                                class="form-control" accept=".xlsx,.csv" name="presensi"
-                                                                required />
+                                                            <input type="file" id="first-name-column" class="form-control" accept=".xlsx,.csv" name="presensi" required />
                                                         </div>
                                                     </div>
                                                     <div class="col-12">
-                                                        <button type="submit"
-                                                            class="btn btn-primary me-1">Submit</button>
-                                                        <button type="reset"
-                                                            class="btn btn-outline-secondary">Reset</button>
+                                                        <button type="submit" class="btn btn-primary me-1">Submit</button>
+                                                        <button type="reset" class="btn btn-outline-secondary">Reset</button>
                                                     </div>
                                                 </div>
                                             </form>
@@ -186,8 +165,7 @@
                                             <input type="hidden" name="matkul" value="{{ request('matkul') }}">
                                             <input type="hidden" name="kelas" value="{{ request('kelas') }}">
                                             <input type="hidden" name="tanggal" value="{{ request('tanggal') }}">
-                                            <button type="submit"
-                                                class="btn btn-outline-secondary w-100 mb-75">Cetak</button>
+                                            <button type="submit" class="btn btn-outline-secondary w-100 mb-75">Cetak</button>
                                         </form>
                                         {{-- <a class="btn btn-outline-secondary w-100 mb-75" href="./app-invoice-print.html" target="_blank"> Print </a> --}}
                                         {{-- <a class="btn btn-outline-secondary w-100 mb-75" href="./app-invoice-edit.html"> Edit </a> --}}

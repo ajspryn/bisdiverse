@@ -1,4 +1,10 @@
-@extends('admin::layouts.main')
+@extends('layouts.main')
+
+@section('title', 'Dahsboard Admin')
+
+@section('menu')
+    @include('admin::layouts.menu')
+@endsection
 
 @section('content')
     <!-- BEGIN: Content-->
@@ -27,8 +33,7 @@
                 <div class="content-header-right text-md-end col-md-3 col-12 d-md-block d-none">
                     <div class="mb-1 breadcrumb-right">
                         <div class="dropdown">
-                            <a href="/admin/mahasiswa/create" class="btn-icon btn btn-primary btn-round btn-lg"
-                                type="button"><span>Tambah Data</span></a>
+                            <a href="/admin/mahasiswa/create" class="btn btn-primary" type="button"><i data-feather="plus"></i>Tambah Data</a>
                         </div>
                     </div>
                 </div>
@@ -74,24 +79,18 @@
                                                 <td style="text-align: center">{{ $mahasiswa->ibu_kandung }}</td>
                                                 <td style="text-align: center">
                                                     <div class="dropdown">
-                                                        <button type="button"
-                                                            class="btn btn-sm dropdown-toggle hide-arrow py-0"
-                                                            data-bs-toggle="dropdown">
-                                                            <span class="badge rounded-pill badge-light-primary me-1"><i
-                                                                    data-feather="more-vertical"></i>Action</span>
+                                                        <button type="button" class="btn btn-sm dropdown-toggle hide-arrow py-0" data-bs-toggle="dropdown">
+                                                            <span class="badge rounded-pill badge-light-primary me-1"><i data-feather="more-vertical"></i>Action</span>
                                                         </button>
                                                         <div class="dropdown-menu dropdown-menu-end">
-                                                            <a class="dropdown-item"
-                                                                href="/admin/mahasiswa/{{ $mahasiswa->id }}/edit">
+                                                            <a class="dropdown-item" href="/admin/mahasiswa/{{ $mahasiswa->id }}/edit">
                                                                 <i data-feather="edit-2" class="me-50"></i>
                                                                 <span>Edit</span>
                                                             </a>
-                                                            <form action="/admin/mahasiswa/{{ $mahasiswa->id }}"
-                                                                method="post" class="d-inline">
+                                                            <form action="/admin/mahasiswa/{{ $mahasiswa->id }}" method="post" class="d-inline">
                                                                 @method('delete')
                                                                 @csrf
-                                                                <a class="dropdown-item" href="#"
-                                                                    onclick="event.preventDefault(); this.closest('form').submit();">
+                                                                <a class="dropdown-item" href="#" onclick="return Swal.fire({title:'Apakah Anda yakin ingin menghapus data ini?',icon:'warning',showCancelButton:true,confirmButtonText:'Ya',cancelButtonText:'Tidak',reverseButtons:true}).then((result) => {if (result.isConfirmed) {this.closest('form').submit();} else {return false;}});">
                                                                     <i data-feather="trash" class="me-50"></i>
                                                                     <span>Delete</span>
                                                                 </a>

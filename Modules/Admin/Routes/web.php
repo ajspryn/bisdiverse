@@ -16,6 +16,7 @@ use Modules\Admin\Http\Controllers\DosenController;
 use Modules\Admin\Http\Controllers\KelasController;
 use Modules\Admin\Http\Controllers\MatkulController;
 use Modules\Admin\Http\Controllers\RuanganController;
+use Modules\Admin\Http\Controllers\AkademikController;
 use Modules\Admin\Http\Controllers\MahasiswaController;
 use Modules\Admin\Http\Controllers\UserDosenController;
 use Modules\Admin\Http\Controllers\UserKaprodiController;
@@ -25,7 +26,7 @@ use Modules\Admin\Http\Controllers\RekapPresensiController;
 use Modules\Admin\Http\Controllers\RfidMahasiswaController;
 use Modules\Admin\Http\Controllers\UserMahasiswaController;
 
-Route::prefix('admin')->middleware(['auth:sanctum','verified', 'role:0', 'divisi:0', 'jabatan:0'])->group(function() {
+Route::prefix('admin')->middleware(['auth:sanctum', 'verified', 'role:0', 'divisi:0', 'jabatan:0'])->group(function () {
     Route::resource('/', AdminController::class);
     Route::resource('/jadwal', AdminController::class);
     Route::view('/lihat', 'admin::lihat');
@@ -41,4 +42,8 @@ Route::prefix('admin')->middleware(['auth:sanctum','verified', 'role:0', 'divisi
     Route::resource('/user-mahasiswa', UserMahasiswaController::class);
     Route::resource('/user-dosen', UserDosenController::class);
     Route::resource('/user-kaprodi', UserKaprodiController::class);
+    Route::resource('/akademik', AkademikController::class);
+    Route::post('/akademik/enable/{AkademikName}', 'AkademikController@enable');
+    Route::post('/akademik/disable/{AkademikName}', 'AkademikController@disable');
+    // Route::post('/modules/{id}/toggle', [ModulesController::class, 'toggle']);
 });

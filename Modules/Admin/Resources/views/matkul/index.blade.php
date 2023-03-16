@@ -1,4 +1,10 @@
-@extends('admin::layouts.main')
+@extends('layouts.main')
+
+@section('title', 'Dahsboard Admin')
+
+@section('menu')
+    @include('admin::layouts.menu')
+@endsection
 
 @section('content')
     <!-- BEGIN: Content-->
@@ -42,15 +48,13 @@
                                                         <div class="mb-1">
                                                             <label class="form-label" for="first-name-column">Kode
                                                                 Matakuliah</label>
-                                                            <input type="text" id="first-name-column"
-                                                                class="form-control" placeholder="Kode" name="kode" />
+                                                            <input type="text" id="first-name-column" class="form-control" placeholder="Kode" name="kode" />
                                                         </div>
                                                     </div>
                                                     <div class="col-md-6 col-12">
                                                         <div class="mb-1">
                                                             <label class="form-label" for="semester">Semester</label>
-                                                            <select class="select2 w-100" name="semester" id="semester"
-                                                                required>
+                                                            <select class="select2 w-100" name="semester" id="semester" required>
                                                                 <option label="semester"></option>
                                                                 <option value="1">1</option>
                                                                 <option value="2">2</option>
@@ -67,22 +71,19 @@
                                                         <div class="mb-1">
                                                             <label class="form-label" for="last-name-column">Nama
                                                                 Matakuliah</label>
-                                                            <input type="text" id="last-name-column" class="form-control"
-                                                                placeholder="Nama" name="nama" />
+                                                            <input type="text" id="last-name-column" class="form-control" placeholder="Nama" name="nama" />
                                                         </div>
                                                     </div>
                                                     <div class="col-md-6 col-12">
                                                         <div class="mb-1">
                                                             <label class="form-label" for="last-name-column">SKS</label>
-                                                            <input type="text" id="last-name-column" class="form-control"
-                                                                placeholder="SKS" name="sks" />
+                                                            <input type="text" id="last-name-column" class="form-control" placeholder="SKS" name="sks" />
                                                         </div>
                                                     </div>
                                                     <div class="col-md-6 col-12">
                                                         <div class="mb-1">
                                                             <label class="form-label" for="dosen">Dosen</label>
-                                                            <select class="select2 w-100" name="dosen_kds" id="dosen"
-                                                                required>
+                                                            <select class="select2 w-100" name="dosen_kds" id="dosen" required>
                                                                 <option label="dosen"></option>
                                                                 @foreach ($dosens as $dosen)
                                                                     <option value="{{ $dosen->kds }}">{{ $dosen->nama }}
@@ -93,8 +94,7 @@
                                                     </div>
                                                     <div class="col-12">
                                                         <button type="submit" class="btn btn-primary me-1">Submit</button>
-                                                        <button type="reset"
-                                                            class="btn btn-outline-secondary">Reset</button>
+                                                        <button type="reset" class="btn btn-outline-secondary">Reset</button>
                                                     </div>
                                                 </div>
                                             </form>
@@ -113,8 +113,7 @@
                                             <h4 class="card-title">Tambahkan Sekaligus Matkul</h4>
                                         </div>
                                         <div class="card-body">
-                                            <form class="form" method="POST" action="/admin/matkul"
-                                                enctype="multipart/form-data">
+                                            <form class="form" method="POST" action="/admin/matkul" enctype="multipart/form-data">
                                                 @csrf
                                                 <div class="row">
                                                     <div class="col-md-12 col-12">
@@ -122,16 +121,12 @@
                                                             <label class="form-label" for="first-name-column">Silahkan
                                                                 Upload file
                                                                 Exel</label>
-                                                            <input type="file" id="first-name-column"
-                                                                class="form-control" accept=".xlsx,.csv" name="matkul"
-                                                                required />
+                                                            <input type="file" id="first-name-column" class="form-control" accept=".xlsx,.csv" name="matkul" required />
                                                         </div>
                                                     </div>
                                                     <div class="col-12">
-                                                        <button type="submit"
-                                                            class="btn btn-primary me-1">Submit</button>
-                                                        <button type="reset"
-                                                            class="btn btn-outline-secondary">Reset</button>
+                                                        <button type="submit" class="btn btn-primary me-1">Submit</button>
+                                                        <button type="reset" class="btn btn-outline-secondary">Reset</button>
                                                     </div>
                                                 </div>
                                             </form>
@@ -170,29 +165,23 @@
                                                 <td style="text-align: center">{{ $matkul->sks }}</td>
                                                 @if (isset($matkul->dosen->nama))
                                                     <td>{{ $matkul->dosen->nama }}</td>
-                                                    @else
+                                                @else
                                                     <td>Kode Dosen tidak terdaftar</td>
                                                 @endif
                                                 <td style="text-align: center">
                                                     <div class="dropdown">
-                                                        <button type="button"
-                                                            class="btn btn-sm dropdown-toggle hide-arrow py-0"
-                                                            data-bs-toggle="dropdown">
-                                                            <span class="badge rounded-pill badge-light-primary me-1"><i
-                                                                    data-feather="more-vertical"></i>Action</span>
+                                                        <button type="button" class="btn btn-sm dropdown-toggle hide-arrow py-0" data-bs-toggle="dropdown">
+                                                            <span class="badge rounded-pill badge-light-primary me-1"><i data-feather="more-vertical"></i>Action</span>
                                                         </button>
                                                         <div class="dropdown-menu dropdown-menu-end">
-                                                            <a class="dropdown-item"
-                                                                href="/admin/matkul/{{ $matkul->id }}/edit">
+                                                            <a class="dropdown-item" href="/admin/matkul/{{ $matkul->id }}/edit">
                                                                 <i data-feather="edit-2" class="me-50"></i>
                                                                 <span>Edit</span>
                                                             </a>
-                                                            <form action="/admin/matkul/{{ $matkul->id }}"
-                                                                method="post" class="d-inline">
+                                                            <form action="/admin/matkul/{{ $matkul->id }}" method="post" class="d-inline">
                                                                 @method('delete')
                                                                 @csrf
-                                                                <a class="dropdown-item" href="#"
-                                                                    onclick="event.preventDefault(); this.closest('form').submit();">
+                                                                <a class="dropdown-item" href="#" onclick="event.preventDefault(); this.closest('form').submit();">
                                                                     <i data-feather="trash" class="me-50"></i>
                                                                     <span>Delete</span>
                                                                 </a>
@@ -211,42 +200,34 @@
                     <div class="modal modal-slide-in fade" id="modals-slide-in">
                         <div class="modal-dialog sidebar-sm">
                             <form class="add-new-record modal-content pt-0">
-                                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                    aria-label="Close">×</button>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">×</button>
                                 <div class="modal-header mb-1">
                                     <h5 class="modal-title" id="exampleModalLabel">New Record</h5>
                                 </div>
                                 <div class="modal-body flex-grow-1">
                                     <div class="mb-1">
                                         <label class="form-label" for="basic-icon-default-fullname">Full Name</label>
-                                        <input type="text" class="form-control dt-full-name"
-                                            id="basic-icon-default-fullname" placeholder="John Doe"
-                                            aria-label="John Doe" />
+                                        <input type="text" class="form-control dt-full-name" id="basic-icon-default-fullname" placeholder="John Doe" aria-label="John Doe" />
                                     </div>
                                     <div class="mb-1">
                                         <label class="form-label" for="basic-icon-default-post">Post</label>
-                                        <input type="text" id="basic-icon-default-post" class="form-control dt-post"
-                                            placeholder="Web Developer" aria-label="Web Developer" />
+                                        <input type="text" id="basic-icon-default-post" class="form-control dt-post" placeholder="Web Developer" aria-label="Web Developer" />
                                     </div>
                                     <div class="mb-1">
                                         <label class="form-label" for="basic-icon-default-email">Email</label>
-                                        <input type="text" id="basic-icon-default-email" class="form-control dt-email"
-                                            placeholder="john.doe@example.com" aria-label="john.doe@example.com" />
+                                        <input type="text" id="basic-icon-default-email" class="form-control dt-email" placeholder="john.doe@example.com" aria-label="john.doe@example.com" />
                                         <small class="form-text"> You can use letters, numbers & periods </small>
                                     </div>
                                     <div class="mb-1">
                                         <label class="form-label" for="basic-icon-default-date">Joining Date</label>
-                                        <input type="text" class="form-control dt-date" id="basic-icon-default-date"
-                                            placeholder="MM/DD/YYYY" aria-label="MM/DD/YYYY" />
+                                        <input type="text" class="form-control dt-date" id="basic-icon-default-date" placeholder="MM/DD/YYYY" aria-label="MM/DD/YYYY" />
                                     </div>
                                     <div class="mb-4">
                                         <label class="form-label" for="basic-icon-default-salary">Salary</label>
-                                        <input type="text" id="basic-icon-default-salary"
-                                            class="form-control dt-salary" placeholder="$12000" aria-label="$12000" />
+                                        <input type="text" id="basic-icon-default-salary" class="form-control dt-salary" placeholder="$12000" aria-label="$12000" />
                                     </div>
                                     <button type="button" class="btn btn-primary data-submit me-1">Submit</button>
-                                    <button type="reset" class="btn btn-outline-secondary"
-                                        data-bs-dismiss="modal">Cancel</button>
+                                    <button type="reset" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
                                 </div>
                             </form>
                         </div>

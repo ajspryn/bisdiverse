@@ -8,9 +8,7 @@
         <title>Register</title>
         <link rel="apple-touch-icon" href="../../../app-assets/images/ico/apple-icon-120.png">
         <link rel="shortcut icon" type="image/x-icon" href="../../../favicon.png">
-        <link
-            href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500;1,600"
-            rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500;1,600" rel="stylesheet">
 
         <!-- BEGIN: Vendor CSS-->
         <link rel="stylesheet" type="text/css" href="../../../app-assets/vendors/css/vendors.min.css">
@@ -26,8 +24,7 @@
         <link rel="stylesheet" type="text/css" href="../../../app-assets/css/themes/semi-dark-layout.min.css">
 
         <!-- BEGIN: Page CSS-->
-        <link rel="stylesheet" type="text/css"
-            href="../../../app-assets/css/core/menu/menu-types/vertical-menu.min.css">
+        <link rel="stylesheet" type="text/css" href="../../../app-assets/css/core/menu/menu-types/vertical-menu.min.css">
         <link rel="stylesheet" type="text/css" href="../../../app-assets/css/plugins/forms/form-validation.css">
         <link rel="stylesheet" type="text/css" href="../../../app-assets/css/pages/authentication.css">
         <!-- END: Page CSS-->
@@ -41,8 +38,7 @@
 
     <!-- BEGIN: Body-->
 
-    <body class="vertical-layout vertical-menu-modern blank-page navbar-floating footer-static" data-open="click"
-        data-menu="vertical-menu-modern" data-col="blank-page">
+    <body class="vertical-layout vertical-menu-modern blank-page navbar-floating footer-static" data-open="click" data-menu="vertical-menu-modern" data-col="blank-page">
         <!-- BEGIN: Content-->
         <div class="app-content content ">
             <div class="content-overlay"></div>
@@ -62,15 +58,12 @@
 
                                     <h4 class="card-title mb-1">Selamat Datang! 👋</h4>
                                     <p class="card-text mb-2">Silakan Isi Data-Data Berikut Untuk Membuat Akun</p>
-                                    <form class="auth-register-form mt-2" method="POST"
-                                        action="{{ route('register') }}" enctype="multipart/form-data">
+                                    <form class="auth-register-form mt-2" method="POST" action="{{ route('register') }}" enctype="multipart/form-data">
                                         @csrf
 
                                         <div class="mb-1">
                                             <label for="name" class="form-label">Nama Lengkap</label>
-                                            <input id="name" type="text" placeholder="Nama Lengkap"
-                                                class="form-control @error('name') is-invalid @enderror" name="name"
-                                                value="{{ old('name') }}" required autocomplete="name" autofocus>
+                                            <input id="name" type="text" placeholder="Nama Lengkap" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
                                             @error('name')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
@@ -80,10 +73,17 @@
 
                                         <div class="mb-1">
                                             <label for="email" class="form-label">E-mail</label>
-                                            <input id="email" type="email" placeholder="nama@domain.com"
-                                                class="form-control @error('email') is-invalid @enderror" name="email"
-                                                value="{{ old('email') }}" required autocomplete="email">
+                                            <input id="email" type="email" placeholder="nama@domain.com" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
                                             @error('email')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
+                                        </div>
+                                        <div class="mb-1">
+                                            <label for="username" class="form-label">Username</label>
+                                            <input id="username" type="username" placeholder="username" class="form-control @error('username') is-invalid @enderror" name="username" value="{{ old('username') }}" required autocomplete="username">
+                                            @error('username')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
                                                 </span>
@@ -100,12 +100,8 @@
                                                 @enderror
                                             </div>
                                             <div class="input-group input-group-merge form-password-toggle">
-                                                <input id="password" type="password"
-                                                    placeholder="Minimal 8 Karakter"
-                                                    class="form-control @error('password') is-invalid @enderror form-control-merge"
-                                                    name="password" required autocomplete="new-password">
-                                                <span class="input-group-text cursor-pointer"><i
-                                                        data-feather="eye"></i></span>
+                                                <input id="password" type="password" placeholder="Minimal 8 Karakter" class="form-control @error('password') is-invalid @enderror form-control-merge" name="password" required autocomplete="new-password">
+                                                <span class="input-group-text cursor-pointer"><i data-feather="eye"></i></span>
                                             </div>
                                         </div>
 
@@ -115,12 +111,8 @@
                                                     Password</label>
                                             </div>
                                             <div class="input-group input-group-merge form-password-toggle">
-                                                <input id="password-confirm" type="password"
-                                                    placeholder="Konfirmasi Password"
-                                                    class="form-control form-control-merge"
-                                                    name="password_confirmation" required autocomplete="new-password">
-                                                <span class="input-group-text cursor-pointer"><i
-                                                        data-feather="eye"></i></span>
+                                                <input id="password-confirm" type="password" placeholder="Konfirmasi Password" class="form-control form-control-merge" name="password_confirmation" required autocomplete="new-password">
+                                                <span class="input-group-text cursor-pointer"><i data-feather="eye"></i></span>
                                             </div>
                                         </div>
                                         {{-- <div class="mb-1">

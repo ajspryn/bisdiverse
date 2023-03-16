@@ -52,6 +52,7 @@ class RegisterController extends Controller
     {
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
+            'username' => ['required', 'string', 'max:255', 'unique:users'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
@@ -65,18 +66,19 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        // return $data;
-        $avatar = 'avatar/avatar-' . $data['name'] . '.png';
+        // $data['avatar'] = Avatar::create($data['name'])->toBase64();
+        // return $data['avatar'];
+        $avatar = 'avatar/avatar-' . $data['username'] . '.png';
         if (isset($data['avatar'])) {
             $avatar = $data['avatar']->store('avatar');
         } else {
-            Avatar::create($data['name'])->save(storage_path(path: 'app/public/avatar/avatar-' . $data['name'] . '.png'));
+            Avatar::create($data['name'])->save(storage_path(path: 'app/public/avatar/avatar-' . $data['username'] . '.png'));
         }
         return User::create([
             'name' => $data['name'],
+            'username' => $data['username'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
-            'foto' => $avatar,
             'avatar' => $avatar,
         ]);
     }

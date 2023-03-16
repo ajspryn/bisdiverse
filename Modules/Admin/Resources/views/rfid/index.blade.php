@@ -1,4 +1,10 @@
-@extends('admin::layouts.main')
+@extends('layouts.main')
+
+@section('title', 'Dahsboard Admin')
+
+@section('menu')
+    @include('admin::layouts.menu')
+@endsection
 
 @section('content')
     <!-- BEGIN: Content-->
@@ -27,8 +33,7 @@
                 <div class="content-header-right text-md-end col-md-3 col-12 d-md-block d-none">
                     <div class="mb-1 breadcrumb-right">
                         <div class="dropdown">
-                            <a href="/admin/rfid/create" class="btn-icon btn btn-primary btn-round btn-lg"
-                                type="button">Tambah
+                            <a href="/admin/rfid/create" class="btn-icon btn btn-primary btn-round btn-lg" type="button">Tambah
                                 Data</a>
                         </div>
                     </div>
@@ -78,8 +83,7 @@
                                                     <form action="/admin/rfid/{{ $rfid->id }}" method="post">
                                                         @method('delete')
                                                         @csrf
-                                                        <a class="dropdown-item" href="#"
-                                                            onclick="event.preventDefault(); this.closest('form').submit();">
+                                                        <a class="dropdown-item" href="#" onclick="event.preventDefault(); this.closest('form').submit();">
                                                             <i data-feather="trash" class="me-50"></i>
                                                             <span>Delete</span>
                                                         </a>

@@ -1,4 +1,10 @@
-@extends('dosen::layouts.main')
+@extends('layouts.main')
+
+@section('title', 'Dahsboard Admin')
+
+@section('menu')
+    @include('dosen::layouts.menu')
+@endsection
 
 @section('content')
     <!-- BEGIN: Content-->
@@ -34,8 +40,7 @@
                         <div class="col-lg-4 col-md-6 col-12">
                             <div class="card card-developer-meetup">
                                 <div class="meetup-img-wrapper rounded-top text-center">
-                                    <img src="../../../app-assets/images/illustration/email.svg" alt="Meeting Pic"
-                                        height="170" />
+                                    <img src="../../../app-assets/images/illustration/email.svg" alt="Meeting Pic" height="170" />
                                 </div>
                                 <div class="card-body">
                                     <div class="meetup-header d-flex align-items-center">
@@ -102,7 +107,7 @@
                                             </small>
                                         </div>
                                     </div>
-            <hr>
+                                    <hr>
                                 </div>
                             </div>
                         </div>
@@ -144,34 +149,28 @@
                                                     </span>
                                                 @endif
                                                 <div class="timeline-event">
-                                                    <div
-                                                        class="d-flex justify-content-between flex-sm-row flex-column mb-sm-0 mb-1">
+                                                    <div class="d-flex justify-content-between flex-sm-row flex-column mb-sm-0 mb-1">
                                                         <h6 class="mb-50">
                                                             @if ($history->status == 'Diajukan')
-                                                                <span
-                                                                    class="badge bg-primary">{{ $history->status }}</span>
+                                                                <span class="badge bg-primary">{{ $history->status }}</span>
                                                             @elseif ($history->status == 'Ditinjau')
                                                                 <span class="badge bg-info">{{ $history->status }}</span>
                                                             @elseif ($history->status == 'Diverifikasi')
-                                                                <span
-                                                                    class="badge bg-success">{{ $history->status }}</span>
+                                                                <span class="badge bg-success">{{ $history->status }}</span>
                                                             @elseif ($history->status == 'Ditolak')
                                                                 <span class="badge bg-danger">{{ $history->status }}</span>
                                                             @elseif ($history->status == 'Disetujui')
-                                                                <span
-                                                                    class="badge bg-success">{{ $history->status }}</span>
+                                                                <span class="badge bg-success">{{ $history->status }}</span>
                                                             @endif
                                                             {{ $history->jabatan }}
                                                         </h6>
-                                                        <span
-                                                            class="timeline-event-time">{{ $history->created_at->diffforhumans() }}</span>
+                                                        <span class="timeline-event-time">{{ $history->created_at->diffforhumans() }}</span>
                                                     </div>
                                                     @if (isset($history->catatan))
                                                         <p>Catatan : {{ $history->catatan }}</p>
                                                     @endif
                                                     <hr />
-                                                    <div
-                                                        class="d-flex justify-content-between flex-sm-row flex-column mb-sm-0 mb-1">
+                                                    <div class="d-flex justify-content-between flex-sm-row flex-column mb-sm-0 mb-1">
                                                         <div class="d-flex flex-row align-items-center">
                                                             <span>
                                                                 <p class="mb-0">

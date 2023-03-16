@@ -18,7 +18,7 @@ class VerifikasiMagangController extends Controller
     public function index()
     {
         return view('admin::pengajuan_magang.index', [
-            'mahasiswas' => Magang::select()->whereIn('status', ['Diajukan Mahasiswa', 'Ditinjau TU'])->get(),
+            'mahasiswas' => Magang::select()->whereIn('status', ['Diajukan Mahasiswa', 'Ditinjau Admin Prodi', 'Diverifikasi Admin Prodi', 'Diverifikasi Admin Prodi', 'Ditinjau Kaprodi', 'Disetujui Kaprodi', 'Ditolak Kaprodi', 'Ditolak Admin Prodi'])->get(),
         ]);
     }
 
@@ -41,7 +41,7 @@ class VerifikasiMagangController extends Controller
         // return $request;
         $id = $request->magang_id;
         Magang::where('id', $id)->update([
-            'status' => $request->status.' '.'TU',
+            'status' => $request->status . ' ' . 'Admin Prodi',
         ]);
 
         HistoryPengajuanMagang::create([
@@ -63,21 +63,23 @@ class VerifikasiMagangController extends Controller
         $magang = Magang::where('id', $id)->get()->first();
         $mahasiswa = Mahasiswa::select()->where('npm', $magang->mahasiswa_npm)->get()->first();
 
-        Magang::where('id', $id)->update([
-            'status' => 'Ditinjau TU',
-        ]);
-
-        $cekhistory = HistoryPengajuanMagang::select()->where('magang_id', $id)->where('status', 'Ditinjau')->where('Jabatan', 'TU')->get();
+        if (Magang::where('id', $id)->where('status', 'Diajukan Mahasiswa')->get()->first()) {
+            Magang::where('id', $id)->update([
+                'status' => 'Ditinjau Admin Prodi',
+            ]);
+        }
+        $cekhistory = HistoryPengajuanMagang::select()->where('magang_id', $id)->where('status', 'Ditinjau')->where('Jabatan', 'Admin Prodi')->get();
         if ($cekhistory->count() == 0) {
             HistoryPengajuanMagang::create([
                 'magang_id' => $id,
                 'status' => 'Ditinjau',
-                'jabatan' => 'TU',
+                'jabatan' => 'Admin Prodi',
             ]);
         }
+
         return view('admin::pengajuan_magang.lihat', [
-            'magang' => $magang,
-            'mahasiswa' => $mahasiswa,
+            'magang' => Magang::where('id', $id)->get()->first(),
+            'mahasiswa' => Mahasiswa::select()->where('npm', $magang->mahasiswa_npm)->get()->first(),
             'historys' => HistoryPengajuanMagang::select()->where('magang_id', $magang->id)->get(),
         ]);
     }

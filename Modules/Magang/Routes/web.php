@@ -3,6 +3,7 @@
 use App\Models\Role;
 use Modules\Magang\Http\Controllers\MagangController;
 use Modules\Magang\Http\Controllers\SetujuiMagangController;
+use Modules\Magang\Http\Controllers\BimbinganMagangController;
 use Modules\Magang\Http\Controllers\PembimbingMagangController;
 use Modules\Magang\Http\Controllers\VerifikasiMagangController;
 
@@ -27,6 +28,12 @@ Route::prefix('magang')->middleware(['auth:sanctum', 'verified', 'role:1', 'jaba
     // Route::resource('/', MagangController::class);
     // Route::resource('/pembimbing', PembimbingMagangController::class);
     Route::resource('/pengajuan-magang', SetujuiMagangController::class);
+});
+
+Route::prefix('magang')->middleware(['auth:sanctum', 'verified', 'role:1', 'jabatan:2'])->group(function () {
+    // Route::resource('/', MagangController::class);
+    // Route::resource('/pembimbing', PembimbingMagangController::class);
+    Route::resource('/bimbingan', BimbinganMagangController::class);
 });
 
 // role mahasiswa

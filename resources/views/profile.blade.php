@@ -1,5 +1,7 @@
-@extends($extend . 'layouts.main')
-
+@extends('layouts.main')
+@section('menu')
+    @include('layouts.menu')
+@endsection
 @section('content')
     <!-- BEGIN: Content-->
     <div class="app-content content ">
@@ -19,9 +21,7 @@
                                     <div class="user-avatar-section">
                                         <div class="d-flex align-items-center flex-column">
                                             <a href="javascript:;" data-bs-target="#editPhoto" data-bs-toggle="modal">
-                                                <img class="img-fluid rounded mt-3 mb-2"
-                                                    src="{{ asset('storage/' . Auth::user()->foto) }}" height="110"
-                                                    width="110" alt="User avatar" />
+                                                <img class="img-fluid rounded mt-3 mb-2" src="{{ asset('storage/' . Auth::user()->avatar) }}" height="110" width="110" alt="User avatar" />
                                             </a>
                                             <div class="user-info text-center">
                                                 <h4>{{ $user->name }}</h4>
@@ -47,6 +47,10 @@
                                             <li class="mb-75">
                                                 <span class="fw-bolder me-25">Nama : </span>
                                                 <span>{{ Auth::user()->name }}</span>
+                                            </li>
+                                            <li class="mb-75">
+                                                <span class="fw-bolder me-25">Username:</span>
+                                                <span>{{ Auth::user()->username }}</span>
                                             </li>
                                             <li class="mb-75">
                                                 <span class="fw-bolder me-25">Email:</span>
@@ -82,12 +86,10 @@
                                             </li>
                                         </ul>
                                         <div class="d-flex justify-content-center pt-2">
-                                            <a href="javascript:;" class="btn btn-primary me-1" data-bs-target="#editUser"
-                                                data-bs-toggle="modal">
-                                                Ubah Email
+                                            <a href="javascript:;" class="btn btn-primary me-1" data-bs-target="#editUser" data-bs-toggle="modal">
+                                                Ubah Username/Email
                                             </a>
-                                            <a href="javascript:;" class="btn btn-outline-danger suspend-user"
-                                                data-bs-target="#editPassword" data-bs-toggle="modal">Reset Password</a>
+                                            <a href="javascript:;" class="btn btn-outline-danger suspend-user" data-bs-target="#editPassword" data-bs-toggle="modal">Reset Password</a>
                                         </div>
                                     </div>
                                 </div>
@@ -108,183 +110,160 @@
                                             <h4 class="card-title">Data Profile Anda</h4>
                                         </div>
                                         <div class="card-body">
-                                            <form action="/mahasiswa/profile/{{ $data->id }}" method="POST">
+                                            <form class="needs-validation" novalidate action="/mahasiswa/profile/{{ $data->id }}" method="POST">
                                                 @method('put')
                                                 @csrf
                                                 <div class="row">
                                                     <div class="col-md-6 col-12">
                                                         <div class="mb-1">
                                                             <label class="form-label" for="nama">Nama</label>
-                                                            <input type="text" id="nama" class="form-control"
-                                                                placeholder="Nama" name="nama"
-                                                                value="{{ $data->nama }}" required />
+                                                            <input type="text" id="nama" class="form-control" placeholder="Nama" name="nama" value="{{ $data->nama }}" required />
+                                                            <div class="invalid-feedback">Wajib Diisi</div>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-6 col-12">
                                                         <div class="mb-1">
                                                             <label class="form-label" for="npm">NPM</label>
-                                                            <input type="number" id="npm" class="form-control"
-                                                                placeholder="Nomor Pokok Mahasiswa" name="npm"
-                                                                value="{{ $data->npm }}" required />
+                                                            <input type="number" id="npm" class="form-control" placeholder="Nomor Pokok Mahasiswa" name="npm" value="{{ $data->npm }}" required />
+                                                            <div class="invalid-feedback">Wajib Diisi</div>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-3 col-12">
                                                         <div class="mb-1">
                                                             <label class="form-label" for="tahun_masuk">Tahun Masuk</label>
-                                                            <input type="text" id="tahun_masuk" class="form-control"
-                                                                placeholder="Tahun Masuk" name="tahun_masuk"
-                                                                value="{{ $data->tahun_masuk }}" disabled />
+                                                            <input type="text" id="tahun_masuk" class="form-control" placeholder="Tahun Masuk" name="tahun_masuk" value="{{ $data->tahun_masuk }}" readonly />
                                                         </div>
                                                     </div>
                                                     <div class="col-md-3 col-12">
                                                         <div class="mb-1">
                                                             <label class="form-label" for="kelas">Kelas</label>
-                                                            <input type="text" id="kelas" class="form-control"
-                                                                name="kelas" placeholder="Kelas"
-                                                                value="{{ $data->kelas }}" disabled />
+                                                            <input type="text" id="kelas" class="form-control" name="kelas" placeholder="Kelas" value="{{ $data->kelas }}" readonly />
                                                         </div>
                                                     </div>
                                                     <div class="col-md-3 col-12">
                                                         <div class="mb-1">
                                                             <label class="form-label" for="konsentrasi">Konsentrasi</label>
-                                                            <select class="select2 form-select" id="konsentrasi"
-                                                                name="konsentrasi" required>
+                                                            <select class="select2 form-select" id="konsentrasi" name="konsentrasi" required>
                                                                 @if ($data->konsentrasi)
                                                                     <option value="{{ $data->konsentrasi }}" selected>
                                                                         {{ $data->konsentrasi }}
                                                                     </option>
                                                                 @else
-                                                                    <option label=""></option>
+                                                                    <option value="">Pilih Konsentrasi</option>
                                                                     <option>Entrepreneur</option>
                                                                     <option>Digital Marketing</option>
                                                                     <option>Data Analyst</option>
                                                                 @endif
                                                             </select>
+                                                            <div class="invalid-feedback">Wajib Diisi</div>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-3 col-12">
                                                         <div class="mb-1">
                                                             <label class="form-label" for="ipk">IPK</label>
-                                                            <input type="number" id="ipk" class="form-control"
-                                                                name="ipk" placeholder="IPK"
-                                                                value="{{ $data->ipk }}" required />
+                                                            <input type="text" id="ipk" class="form-control" name="ipk" placeholder="IPK" value="{{ $data->ipk }}" required />
+                                                            <div class="invalid-feedback">Wajib Diisi</div>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-12 col-12">
                                                         <div class="mb-1">
                                                             <label class="form-label" for="no_ktp">Nomor KTP</label>
-                                                            <input type="number" id="no_ktp" class="form-control"
-                                                                name="no_ktp" placeholder="Nomor KTP"
-                                                                value="{{ $data->no_ktp }}" />
+                                                            <input type="number" id="no_ktp" class="form-control" name="no_ktp" placeholder="Nomor KTP" value="{{ $data->no_ktp }}" required />
+                                                            <div class="invalid-feedback">Wajib Diisi</div>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-12 col-12">
                                                         <div class="mb-1">
                                                             <label class="form-label" for="alamat">Alamat</label>
-                                                            <input type="text" id="alamat" class="form-control"
-                                                                name="alamat" placeholder="Alamat"
-                                                                value="{{ $data->alamat }}" />
+                                                            <input type="text" id="alamat" class="form-control" name="alamat" placeholder="Alamat" value="{{ $data->alamat }}" required />
+                                                            <div class="invalid-feedback">Wajib Diisi</div>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-6 col-12">
                                                         <div class="mb-1">
                                                             <label class="form-label" for="provinsi">Provinsi</label>
-                                                            <input type="text" id="provinsi" class="form-control"
-                                                                name="provinsi" placeholder="Provinsi"
-                                                                value="{{ $data->provinsi }}" />
+                                                            <input type="text" id="provinsi" class="form-control" name="provinsi" placeholder="Provinsi" value="{{ $data->provinsi }}" required />
+                                                            <div class="invalid-feedback">Wajib Diisi</div>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-6 col-12">
                                                         <div class="mb-1">
-                                                            <label class="form-label"
-                                                                for="kabkota">Kabupaten/Kota</label>
-                                                            <input type="text" id="kabkota" class="form-control"
-                                                                name="kabkota" placeholder="Kabupaten/Kota"
-                                                                value="{{ $data->kabkota }}" />
+                                                            <label class="form-label" for="kabkota">Kabupaten/Kota</label>
+                                                            <input type="text" id="kabkota" class="form-control" name="kabkota" placeholder="Kabupaten/Kota" value="{{ $data->kabkota }}" required />
+                                                            <div class="invalid-feedback">Wajib Diisi</div>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-6 col-12">
                                                         <div class="mb-1">
                                                             <label class="form-label" for="kecamatan">Kecamatan</label>
-                                                            <input type="text" id="kecamatan" class="form-control"
-                                                                name="kecamatan" placeholder="Kecamatan"
-                                                                value="{{ $data->kecamatan }}" />
+                                                            <input type="text" id="kecamatan" class="form-control" name="kecamatan" placeholder="Kecamatan" value="{{ $data->kecamatan }}" required />
+                                                            <div class="invalid-feedback">Wajib Diisi</div>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-6 col-12">
                                                         <div class="mb-1">
                                                             <label class="form-label" for="desa">Desa</label>
-                                                            <input type="text" id="desa" class="form-control"
-                                                                name="desa" placeholder="Desa"
-                                                                value="{{ $data->desa }}" />
+                                                            <input type="text" id="desa" class="form-control" name="desa" placeholder="Desa" value="{{ $data->desa }}" required />
+                                                            <div class="invalid-feedback">Wajib Diisi</div>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-4 col-12">
                                                         <div class="mb-1">
                                                             <label class="form-label" for="rt">RT</label>
-                                                            <input type="number" id="rt" class="form-control"
-                                                                name="rt" placeholder="RT"
-                                                                value="{{ $data->rt }}" />
+                                                            <input type="number" id="rt" class="form-control" name="rt" placeholder="RT" value="{{ $data->rt }}" required />
+                                                            <div class="invalid-feedback">Wajib Diisi</div>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-4 col-12">
                                                         <div class="mb-1">
                                                             <label class="form-label" for="rw">RW</label>
-                                                            <input type="number" id="rw" class="form-control"
-                                                                name="rw" placeholder="RW"
-                                                                value="{{ $data->rw }}" />
+                                                            <input type="number" id="rw" class="form-control" name="rw" placeholder="RW" value="{{ $data->rw }}" required />
+                                                            <div class="invalid-feedback">Wajib Diisi</div>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-4 col-12">
                                                         <div class="mb-1">
                                                             <label class="form-label" for="kode_pos">Kode Pos</label>
-                                                            <input type="number" id="kode_pos" class="form-control"
-                                                                name="kode_pos" placeholder="Kode Pos"
-                                                                value="{{ $data->kode_pos }}" />
+                                                            <input type="number" id="kode_pos" class="form-control" name="kode_pos" placeholder="Kode Pos" value="{{ $data->kode_pos }}" required />
+                                                            <div class="invalid-feedback">Wajib Diisi</div>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-4 col-12">
                                                         <div class="mb-1">
                                                             <label class="form-label" for="no_telp">No Telp</label>
-                                                            <input type="number" id="no_telp" class="form-control"
-                                                                name="no_telp" placeholder="No Telp" minlength="10"
-                                                                maxlength="12" value="{{ $data->kabkota }}" />
+                                                            <input type="number" id="no_telp" class="form-control" name="no_telp" placeholder="No Telp" minlength="10" maxlength="12" value="{{ $data->no_telp }}" required />
+                                                            <div class="invalid-feedback">Wajib Diisi</div>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-4 col-12">
                                                         <div class="mb-1">
                                                             <label class="form-label" for="tempat_lahir">Tempat
                                                                 Lahir</label>
-                                                            <input type="text" id="tempat_lahir" class="form-control"
-                                                                name="tempat_lahir" placeholder="Tempat Lahir"
-                                                                value="{{ $data->tempat_lahir }}" />
+                                                            <input type="text" id="tempat_lahir" class="form-control" name="tempat_lahir" placeholder="Tempat Lahir" value="{{ $data->tempat_lahir }}" required />
+                                                            <div class="invalid-feedback">Wajib Diisi</div>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-4 col-12">
                                                         <div class="mb-1">
                                                             <label class="form-label" for="tgl_lahir">Tanggal
                                                                 Lahir</label>
-                                                            <input type="date" id="tgl_lahir" class="form-control"
-                                                                name="tgl_lahir" placeholder="Tanggal Lahir"
-                                                                value="{{ $data->tgl_lahir }}" />
+                                                            <input type="date" id="tgl_lahir" class="form-control" name="tgl_lahir" placeholder="Tanggal Lahir" value="{{ $data->tgl_lahir }}" required />
+                                                            <div class="invalid-feedback">Wajib Diisi</div>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-4 col-12">
                                                         <div class="mb-1">
                                                             <label class="form-label" for="ibu_kandung">Nama Ibu
                                                                 Kandung</label>
-                                                            <input type="text" id="ibu_kandung" class="form-control"
-                                                                name="ibu_kandung" placeholder="Nama Ibu Kandung"
-                                                                value="{{ $data->ibu_kandung }}" />
+                                                            <input type="text" id="ibu_kandung" class="form-control" name="ibu_kandung" placeholder="Nama Ibu Kandung" value="{{ $data->ibu_kandung }}" required />
+                                                            <div class="invalid-feedback">Wajib Diisi</div>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-4 col-12">
                                                         <div class="mb-1">
                                                             <label class="form-label" for="nama_ot">Nama Orang
                                                                 Terdekat</label>
-                                                            <input type="text" id="nama_ot" class="form-control"
-                                                                name="nama_ot" placeholder="Nama Orang Terdekat"
-                                                                value="{{ $data->nama_ot }}" />
+                                                            <input type="text" id="nama_ot" class="form-control" name="nama_ot" placeholder="Nama Orang Terdekat" value="{{ $data->nama_ot }}" />
                                                         </div>
                                                     </div>
                                                     <div class="col-md-4 col-12">
@@ -292,36 +271,28 @@
                                                             <label class="form-label" for="hubungan_ot">Hubungan Dengan
                                                                 Orang
                                                                 Terdekat</label>
-                                                            <input type="text" id="hubungan_ot" class="form-control"
-                                                                name="hubungan_ot"
-                                                                placeholder="Hubungan Dengan Orang Terdekat"
-                                                                value="{{ $data->hubungan_ot }}" />
+                                                            <input type="text" id="hubungan_ot" class="form-control" name="hubungan_ot" placeholder="Hubungan Dengan Orang Terdekat" value="{{ $data->hubungan_ot }}" />
                                                         </div>
                                                     </div>
                                                     <div class="col-md-4 col-12">
                                                         <div class="mb-1">
                                                             <label class="form-label" for="no_telp_ot">No Telp Orang
                                                                 Terdekat</label>
-                                                            <input type="text" id="no_telp_ot" class="form-control"
-                                                                name="no_telp_ot" placeholder="No Telp Orang Terdekat"
-                                                                value="{{ $data->no_telp_ot }}" />
+                                                            <input type="text" id="no_telp_ot" class="form-control" name="no_telp_ot" placeholder="No Telp Orang Terdekat" value="{{ $data->no_telp_ot }}" />
                                                         </div>
                                                     </div>
                                                     <div class="col-md-4 col-12">
                                                         <div class="mb-1">
                                                             <label class="form-label" for="asal_sekolah">Asal
                                                                 Sekolah</label>
-                                                            <input type="text" id="asal_sekolah" class="form-control"
-                                                                name="asal_sekolah" placeholder="Asal Sekolah"
-                                                                value="{{ $data->asal_sekolah }}" />
+                                                            <input type="text" id="asal_sekolah" class="form-control" name="asal_sekolah" placeholder="Asal Sekolah" value="{{ $data->asal_sekolah }}" required />
+                                                            <div class="invalid-feedback">Wajib Diisi</div>
                                                         </div>
                                                     </div>
                                                     <input type="hidden" name="user_id" value="{{ $data->user_id }}">
                                                     <div class="col-12">
-                                                        <button type="submit"
-                                                            class="btn btn-primary me-1">Submit</button>
-                                                        <button type="reset"
-                                                            class="btn btn-outline-secondary">Reset</button>
+                                                        <button type="submit" class="btn btn-primary me-1">Submit</button>
+                                                        <button type="reset" class="btn btn-outline-secondary">Reset</button>
                                                     </div>
                                                 </div>
                                             </form>
@@ -339,8 +310,7 @@
                     <div class="modal-dialog modal-lg modal-dialog-centered modal-edit-user">
                         <div class="modal-content">
                             <div class="modal-header bg-transparent">
-                                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                    aria-label="Close"></button>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body pb-5 px-sm-5 pt-50">
                                 <div class="text-center mb-2">
@@ -351,37 +321,42 @@
                                     @method('PUT')
                                     @csrf
                                     <input type="hidden" name="code" value="1">
-                                    <div class="col-12 col-md-6">
+                                    <div class="col-12">
                                         @if (isset($role))
                                             @if ($role->jabatan_id == 0)
                                                 <label class="form-label" for="modalEditUserFirstName">Nama</label>
-                                                <input type="text" id="modalEditUserFirstName" name="name"
-                                                    class="form-control" placeholder="John"
-                                                    value="{{ Auth::user()->name }}" data-msg="Masukan Nama Anda"
-                                                    required />
+                                                <input type="text" id="modalEditUserFirstName" name="name" class="form-control" placeholder="John" value="{{ Auth::user()->name }}" data-msg="Masukan Nama Anda" required />
                                             @else
                                                 {{-- <label class="form-label" for="modalEditUserFirstName">Nama</label> --}}
-                                                <input type="hidden" id="modalEditUserFirstName" name="name"
-                                                    class="form-control" placeholder="John"
-                                                    value="{{ Auth::user()->name }}" data-msg="Masukan Nama Anda"
-                                                    required />
+                                                <input type="hidden" id="modalEditUserFirstName" name="name" class="form-control" placeholder="John" value="{{ Auth::user()->name }}" data-msg="Masukan Nama Anda" required />
                                             @endif
                                         @else
                                             <label class="form-label" for="modalEditUserFirstName">Nama</label>
-                                            <input type="text" id="modalEditUserFirstName" name="name"
-                                                class="form-control" placeholder="John" value="{{ Auth::user()->name }}"
-                                                data-msg="Masukan Nama Anda" required />
+                                            <input type="text" id="modalEditUserFirstName" name="name" class="form-control" placeholder="John" value="{{ Auth::user()->name }}" data-msg="Masukan Nama Anda" required />
                                         @endif
                                     </div>
-                                    <div class="col-12">
+                                    <div class="col-12 mt-2">
+                                        <label class="form-label" for="username">Username</label>
+                                        <input type="text" id="username" name="username" class="form-control" value="{{ Auth::user()->username }}" data-msg="Masukan Username Anda" required />
+                                    </div>
+                                    <div class="col-12 mt-2">
                                         <label class="form-label" for="modalEditUserName">Email</label>
-                                        <input type="text" id="modalEditUserName" name="email" class="form-control"
-                                            value="{{ Auth::user()->email }}" data-msg="Masukan Nama Anda" required />
+                                        <input type="text" id="modalEditUserName" name="email" class="form-control" value="{{ Auth::user()->email }}" data-msg="Masukan Email Anda" required />
+                                    </div>
+                                    <div class="col-12 mt-2">
+                                        <label class="form-label" for="password">Password</label>
+                                        <input type="password" id="password" name="password" class="form-control" data-msg="Masukan Password Anda" required />
+                                    </div>
+                                    <div class="alert alert-danger mt-2" role="alert">
+                                        <h4 class="alert-heading"><i data-feather="alert-circle" class="me-50"></i> Perhatian</h4>
+                                        <div class="alert-body">
+                                            <p>- Sebelum Merubah Email/Username Silahkan Lengkapi Dulu Data Diri</p>
+                                            <p>- Masukan Password Anda Untuk Verifikasi</p>
+                                        </div>
                                     </div>
                                     <div class="col-12 text-center mt-2 pt-50">
                                         <button type="submit" class="btn btn-primary me-1">Submit</button>
-                                        <button type="reset" class="btn btn-outline-secondary" data-bs-dismiss="modal"
-                                            aria-label="Close">
+                                        <button type="reset" class="btn btn-outline-secondary" data-bs-dismiss="modal" aria-label="Close">
                                             Discard
                                         </button>
                                     </div>
@@ -396,34 +371,35 @@
                     <div class="modal-dialog modal-lg modal-dialog-centered modal-edit-user">
                         <div class="modal-content">
                             <div class="modal-header bg-transparent">
-                                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                    aria-label="Close"></button>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body pb-5 px-sm-5 pt-50">
                                 <div class="text-center mb-2">
                                     <h1 class="mb-1">Edit Password</h1>
                                     {{-- <p>Updating user details will receive a privacy audit.</p> --}}
                                 </div>
-                                <form id="editUserForm" method="POST" class="row gy-1 pt-75"
-                                    action="/profile/{{ $user->id }}">
+                                <form id="formpassword" method="POST" class="row gy-1 pt-75" action="/profile/{{ $user->id }}">
                                     @method('PUT')
                                     @csrf
                                     <input type="hidden" name="code" value="2">
                                     <div class="col-12 col-md-6">
                                         <label class="form-label" for="modalEditUserFirstName">Password
                                             Lama</label>
-                                        <input type="password" id="modalEditUserFirstName" name="password_lama"
-                                            class="form-control" data-msg="Masukan Password Lama" required />
+                                        <input type="password" id="modalEditUserFirstName" name="password_lama" class="form-control" data-msg="Masukan Password Lama" required />
                                     </div>
                                     <div class="col-12 col-md-6">
                                         <label class="form-label" for="modalEditUserLastName">Password Baru</label>
-                                        <input type="password" id="modalEditUserLastName" name="password_baru"
-                                            class="form-control" data-msg="Masukan Password Baru" required />
+                                        <input type="password" id="modalEditUserLastName" name="password_baru" class="form-control" data-msg="Masukan Password Baru" required />
+                                    </div>
+                                    <div class="alert alert-danger mt-2" role="alert">
+                                        <h4 class="alert-heading"><i data-feather="alert-circle" class="me-50"></i> Perhatian</h4>
+                                        <div class="alert-body">
+                                            <p>- Sebelum Merubah Password Silahkan Lengkapi Dulu Data Diri</p>
+                                        </div>
                                     </div>
                                     <div class="col-12 text-center mt-2 pt-50">
-                                        <button type="submit" class="btn btn-primary me-1">Submit</button>
-                                        <button type="reset" class="btn btn-outline-secondary" data-bs-dismiss="modal"
-                                            aria-label="Close">
+                                        <button type="submit" class="btn btn-primary me-1" onclick="event.preventDefault(); document.getElementById('formpassword').submit();">Submit</button>
+                                        <button type="reset" class="btn btn-outline-secondary" data-bs-dismiss="modal" aria-label="Close">
                                             Discard
                                         </button>
                                     </div>
@@ -438,30 +414,41 @@
                     <div class="modal-dialog modal-lg modal-dialog-centered modal-edit-user">
                         <div class="modal-content">
                             <div class="modal-header bg-transparent">
-                                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                    aria-label="Close"></button>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body pb-5 px-sm-5 pt-50">
                                 <div class="text-center mb-2">
                                     <h1 class="mb-1">Edit Photo</h1>
                                     {{-- <p>Updating user details will receive a privacy audit.</p> --}}
                                 </div>
-                                <form action="/profile/{{ $user->id }}" method="POST"
-                                    enctype="multipart/form-data">
+                                <form id="formfoto" action="/profile/{{ $user->id }}" method="POST" enctype="multipart/form-data">
                                     @method('PUT')
                                     @csrf
                                     <input type="hidden" name="code" value="3">
                                     <div class="col-12 col-md-6">
-                                        <label class="form-label" for="modalEditUserFirstName">Input Foto Baru</label>
-                                        <input type="file" id="modalEditUserFirstName" name="foto"
-                                            class="form-control" data-msg="Masukan Foto" required />
-                                        <input type="hidden" id="EditUserFirstName" name="foto_lama"
-                                            value="{{ Auth::user()->foto }}" class="form-control" />
+                                        <!-- upload and reset button -->
+                                        <div class="d-flex align-items-end mt-75 ms-1">
+                                            <a href="#" class="me-25">
+                                                <img src="{{ asset('storage/' . Auth::user()->avatar) }}" id="account-upload-img" class="uploadedAvatar rounded me-50" alt="profile image" height="100" width="100" />
+                                            </a>
+                                            <div>
+                                                <label for="account-upload" class="btn btn-sm btn-primary mb-75 me-75">Upload</label>
+                                                <input type="file" id="account-upload" name="avatar" hidden accept="image/*" />
+                                                <button type="button" id="account-reset" class="btn btn-sm btn-outline-secondary mb-75">Reset</button>
+                                                <p class="mb-0">Allowed file types: png, jpg, jpeg.</p>
+                                            </div>
+                                        </div>
+                                        <input type="hidden" id="EditUserFirstName" name="avatar_lama" value="{{ Auth::user()->avatar }}" class="form-control" />
+                                        <div class="alert alert-danger" role="alert">
+                                            <h4 class="alert-heading"><i data-feather="alert-circle" class="me-50"></i> Perhatian</h4>
+                                            <div class="alert-body">
+                                                <p>- Sebelum Merubah Foto Profile Silahkan Lengkapi Dulu Data Diri</p>
+                                            </div>
+                                        </div>
                                     </div>
                                     <div class="col-12 text-center mt-2 pt-50">
-                                        <button type="submit" class="btn btn-primary me-1">Submit</button>
-                                        <button type="reset" class="btn btn-outline-secondary" data-bs-dismiss="modal"
-                                            aria-label="Close">
+                                        <button type="submit" class="btn btn-primary me-1" onclick="event.preventDefault(); document.getElementById('formfoto').submit();">Submit</button>
+                                        <button type="reset" class="btn btn-outline-secondary" data-bs-dismiss="modal" aria-label="Close">
                                             Discard
                                         </button>
                                     </div>

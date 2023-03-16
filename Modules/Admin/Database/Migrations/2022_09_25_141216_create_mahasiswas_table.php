@@ -21,7 +21,7 @@ return new class extends Migration
             $table->text('no_rfid_cadangan')->nullable();
             $table->string('tahun_masuk')->nullable();
             $table->string('konsentrasi')->nullable();
-            $table->string('ipk')->nullable();
+            $table->text('ipk')->nullable();
             $table->string('kelas')->nullable();
             $table->string('kelas_ujian')->nullable();
             $table->text('no_ktp')->nullable();
@@ -42,6 +42,7 @@ return new class extends Migration
             $table->string('no_telp_ot')->nullable();
             $table->string('asal_sekolah')->nullable();
             $table->string('user_id')->nullable();
+            $table->string('status')->default('Aktif');
             $table->timestamps();
         });
     }

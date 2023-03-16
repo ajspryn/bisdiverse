@@ -35,7 +35,6 @@ class ProfileMahasiswaController extends Controller
      */
     public function store(Request $request)
     {
-
     }
 
     /**
@@ -94,12 +93,12 @@ class ProfileMahasiswaController extends Controller
         $input = $request->validate($rules);
 
         Mahasiswa::where('id', $id)
-        ->update($input);
+            ->update($input);
 
         User::where('id', $request->user_id)
-        ->update([
-            'name'=>$request->nama,
-        ]);
+            ->update([
+                'name' => $request->nama,
+            ]);
 
         return redirect('/profile')->with('success', 'Data Profile Kamu Berhasil Diubah');
     }

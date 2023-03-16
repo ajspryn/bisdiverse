@@ -1,4 +1,10 @@
-@extends('dosen::layouts.main')
+@extends('layouts.main')
+
+@section('title', 'Dahsboard Admin')
+
+@section('menu')
+    @include('dosen::layouts.menu')
+@endsection
 
 @section('content')
     <!-- BEGIN: Content-->
@@ -25,8 +31,7 @@
                 <div class="content-header-right text-md-end col-md-3 col-12 d-md-block d-none">
                     <div class="mb-1 breadcrumb-right">
                         <div class="dropdown">
-                            <a href="/judulskripsi/pembimbing/create" class="btn-icon btn btn-primary btn-round btn-lg"
-                                type="button"><span>Tambah Data</span></a>
+                            <a href="/judulskripsi/pembimbing/create" class="btn-icon btn btn-primary btn-round btn-lg" type="button"><span>Tambah Data</span></a>
                         </div>
                     </div>
                 </div>
@@ -52,7 +57,7 @@
                                             <tr>
                                                 <td></td>
                                                 <td style="text-align: center">{{ $loop->iteration }}</td>
-                                                <td style="text-align: center">{{ $bimbingan->mahasiswa_npm}}</td>
+                                                <td style="text-align: center">{{ $bimbingan->mahasiswa_npm }}</td>
                                                 <td style="text-align: center"></td>
                                                 <td style="text-align: center">{{ $bimbingan->konsentrasi }}</td>
                                                 <td style="text-align: center"><a href="/judulskripsi/bimbingan/{{ $bimbingan->id }}" class="btn btn-primary me-1">Lihat</a></td>

@@ -2,12 +2,13 @@
 
 namespace Modules\Admin\Http\Controllers;
 
+use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Modules\Admin\Entities\Dosen;
 use Illuminate\Routing\Controller;
 use Modules\Admin\Entities\Mahasiswa;
 use Illuminate\Contracts\Support\Renderable;
-use Modules\Admin\Entities\Dosen;
 
 class UserDosenController extends Controller
 {
@@ -26,6 +27,15 @@ class UserDosenController extends Controller
      */
     public function create()
     {
+        $cek = Dosen::select()->where('user_id', request('user'))->get()->first();
+        // return $cek->count();
+        if ($cek->count() > 0) {
+            Role::where('user_id', request('user'))->update([
+                'role_id' => 1,
+                'jabatan_id' => 2,
+            ]);
+            return back()->with('success', $cek->nama . ' ' . 'Sekarang Menjadi Dosen');
+        }
         $user_id = request('user');
         return view('admin::user.dosen', [
             'user' => User::select()->where('id', $user_id)->get()->first(),

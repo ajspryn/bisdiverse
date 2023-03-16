@@ -39,8 +39,9 @@
                                             <th style="text-align: center">NPM</th>
                                             <th style="text-align: center">Dosen Pembimbing</th>
                                             <th style="text-align: center">Instansi</th>
-                                            <th style="texzt-align: center">Alamat Instansi</th>
-                                            <th style="texzt-align: center"></th>
+                                            <th style="text-align: center">Alamat Instansi</th>
+                                            <th style="text-align: center">Status</th>
+                                            <th style="text-align: center"></th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -53,6 +54,19 @@
                                                 <td>{{ $mahasiswa->dosen->nama }}</td>
                                                 <td style="text-align: center">{{ $mahasiswa->instansi }}</td>
                                                 <td style="text-align: left">{{ $mahasiswa->alamat_instansi }}</td>
+                                                <td style="text-align: center">
+                                                    @if ($mahasiswa->status == 'Diajukan Mahasiswa')
+                                                        <span class="badge bg-primary">{{ $mahasiswa->status }}</span>
+                                                    @elseif ($mahasiswa->status == 'Ditinjau Admin Prodi' || $mahasiswa->status == 'Ditinjau Kaprodi')
+                                                        <span class="badge bg-info">{{ $mahasiswa->status }}</span>
+                                                    @elseif ($mahasiswa->status == 'Diverifikasi Admin Prodi')
+                                                        <span class="badge bg-success">{{ $mahasiswa->status }}</span>
+                                                    @elseif ($mahasiswa->status == 'Ditolak Admin Prodi' || $mahasiswa->status == 'Ditolak Kaprodi')
+                                                        <span class="badge bg-danger">{{ $mahasiswa->status }}</span>
+                                                    @elseif ($mahasiswa->status == 'Disetujui Kaprodi')
+                                                        <span class="badge bg-success">{{ $mahasiswa->status }}</span>
+                                                    @endif
+                                                </td>
                                                 <td style="text-align: center"><a href="/magang/pengajuan-magang/{{ $mahasiswa->id }}" class="btn btn-primary me-1">Lihat</a>
                                             </tr>
                                         @endforeach

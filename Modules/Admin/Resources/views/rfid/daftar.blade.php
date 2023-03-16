@@ -1,4 +1,10 @@
-@extends('admin::layouts.main')
+@extends('layouts.main')
+
+@section('title', 'Dahsboard Admin')
+
+@section('menu')
+    @include('admin::layouts.menu')
+@endsection
 
 @section('content')
     <!-- BEGIN: Content-->
@@ -44,15 +50,13 @@
                                             <div class="col-md-6 col-12">
                                                 <div class="mb-1">
                                                     <label class="form-label" for="first-name-column">No RFID</label>
-                                                    <input type="text" id="first-name-column" class="form-control"
-                                                        value="{{ $no_rfid->no_rfid }}" name="no_rfid" disabled />
+                                                    <input type="text" id="first-name-column" class="form-control" value="{{ $no_rfid->no_rfid }}" name="no_rfid" disabled />
                                                 </div>
                                             </div>
                                             <div class="col-md-6 col-12">
                                                 <div class="mb-1">
                                                     <label class="form-label" for="mahasiswa">Mahasiswa</label>
-                                                    <select class="select2 w-100" name="mahasiswa_id" id="mahasiswa"
-                                                        required>
+                                                    <select class="select2 w-100" name="mahasiswa_id" id="mahasiswa" required>
                                                         <option label="mahasiswa"></option>
                                                         @foreach ($mahasiswas as $mahasiswa)
                                                             <option value="{{ $mahasiswa->id }}">({{ $mahasiswa->npm }})

@@ -1,4 +1,10 @@
-@extends('admin::layouts.main')
+@extends('layouts.main')
+
+@section('title', 'Dahsboard Admin')
+
+@section('menu')
+    @include('admin::layouts.menu')
+@endsection
 
 @section('content')
     <!-- BEGIN: Content-->
@@ -72,8 +78,7 @@
                                                     <!-- Basic -->
                                                     <div class="col-md-12 mb-1">
                                                         <label class="form-label" for="select2-basic">Pilih NPM</label>
-                                                        <select class="select2 form-select" id="select2-basic"
-                                                            name="mahasiswa_id" required>
+                                                        <select class="select2 form-select" id="select2-basic" name="mahasiswa_id" required>
                                                             {{-- <option label=''></option> --}}
                                                             @foreach ($mahasiswas as $mahasiswa)
                                                                 <option value="{{ $mahasiswa->id }}">
@@ -85,8 +90,7 @@
                                                     <input type="hidden" name="user_id" value="{{ $user->id }}">
                                                     <div class="col-sm-12 text-center">
                                                         <button type="submit" class="btn btn-primary me-1">Submit</button>
-                                                        <button type="reset"
-                                                            class="btn btn-outline-secondary">Reset</button>
+                                                        <button type="reset" class="btn btn-outline-secondary">Reset</button>
                                                     </div>
                                                 </form>
                                             </div>

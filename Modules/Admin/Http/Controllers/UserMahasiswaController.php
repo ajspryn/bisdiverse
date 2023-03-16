@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Modules\Admin\Entities\Dosen;
 use Modules\Admin\Entities\Mahasiswa;
 
 class UserMahasiswaController extends Controller
@@ -17,8 +18,8 @@ class UserMahasiswaController extends Controller
      */
     public function index()
     {
-        return view('admin::user.index',[
-            'users'=>User::all(),
+        return view('admin::user.index', [
+            'users' => User::all(),
         ]);
     }
 
@@ -28,10 +29,10 @@ class UserMahasiswaController extends Controller
      */
     public function create()
     {
-        $user_id=request('user');
-        return view('admin::user.mahasiswa',[
-            'user'=>User::select()->where('id',$user_id)->get()->first(),
-            'mahasiswas'=>Mahasiswa::select()->where('user_id',null)->get(),
+        $user_id = request('user');
+        return view('admin::user.mahasiswa', [
+            'user' => User::select()->where('id', $user_id)->get()->first(),
+            'mahasiswas' => Mahasiswa::select()->where('user_id', null)->get(),
         ]);
     }
 
@@ -50,7 +51,7 @@ class UserMahasiswaController extends Controller
         $input = $request->validate($rules);
 
         Mahasiswa::where('id', $request->mahasiswa_id)
-        ->update($input);
+            ->update($input);
         Role::create([
             'user_id' => $request->user_id,
             'role_id' => 1,
@@ -95,8 +96,23 @@ class UserMahasiswaController extends Controller
      * @param int $id
      * @return Renderable
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
-        //
+        // return $request;
+        if ($request->jabatan_id == 1) {
+            Dosen::where('user_id', $id)->update(['user_id' => null]);
+            Role::destroy('user_id', $id);
+            // Dosen::destroy('user_id', $id);
+        } elseif ($request->jabatan_id == 2) {
+            Dosen::where('user_id', $id)->update(['user_id' => null]);
+            Role::destroy('user_id', $id);
+            // Dosen::destroy('user_id', $id);
+        } elseif ($request->jabatan_id == 3) {
+            Mahasiswa::where('user_id', $id)->update(['user_id' => null]);
+            Role::destroy('user_id', $id);
+            // Mahasiswa::destroy('user_id', $id);
+        }
+        User::destroy('id', $id);
+        return redirect()->back()->with('success', 'Data berhasil di Hapus');
     }
 }

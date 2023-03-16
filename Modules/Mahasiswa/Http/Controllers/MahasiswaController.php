@@ -2,9 +2,12 @@
 
 namespace Modules\Mahasiswa\Http\Controllers;
 
+use App\Models\Role;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Auth;
+use Modules\Admin\Entities\Mahasiswa;
 
 class MahasiswaController extends Controller
 {
@@ -14,6 +17,15 @@ class MahasiswaController extends Controller
      */
     public function index()
     {
+        $user = Auth::user();
+        $role = Role::select()->where('user_id', Auth::user()->id)->get();
+        $mahasiswa = Mahasiswa::select()->where('user_id', Auth::user()->id)->get();
+        // return $mahasiswa->count();
+        if ($role->count() == 0) {
+            return view('kamusiapa.role');
+        } elseif ($mahasiswa->count() == 0) {
+            return view('errors.authorized');
+        }
         return view('mahasiswa::index');
     }
 

@@ -1,4 +1,10 @@
-@extends('admin::layouts.main')
+@extends('layouts.main')
+
+@section('title', 'Dahsboard Admin')
+
+@section('menu')
+    @include('admin::layouts.menu')
+@endsection
 
 @section('content')
     <!-- BEGIN: Content-->
@@ -40,15 +46,13 @@
                                             <div class="col-md-6 col-12">
                                                 <div class="mb-1">
                                                     <label class="form-label" for="first-name-column">Nama Mahasiswa</label>
-                                                    <input type="text" id="first-name-column" class="form-control"
-                                                        placeholder="Masukan Nama Mahasiswa" name="nama" />
+                                                    <input type="text" id="first-name-column" class="form-control" placeholder="Masukan Nama Mahasiswa" name="nama" />
                                                 </div>
                                             </div>
                                             <div class="col-md-6 col-12">
                                                 <div class="mb-1">
                                                     <label class="form-label" for="first-name-column">NPM</label>
-                                                    <input type="number" id="first-name-column" class="form-control"
-                                                        placeholder="Masukan NPM" name="npm" />
+                                                    <input type="number" id="first-name-column" class="form-control" placeholder="Masukan NPM" name="npm" />
                                                 </div>
                                             </div>
                                             <div class="col-md-6 col-12">

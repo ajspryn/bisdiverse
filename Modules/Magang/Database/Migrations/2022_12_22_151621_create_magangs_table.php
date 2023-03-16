@@ -22,8 +22,11 @@ return new class extends Migration
             $table->text('posisi');
             $table->text('departemen');
             $table->text('no_telp');
-            $table->text('surat_permohonan');
+            $table->text('surat_permohonan')->nullable();
+            $table->text('tgl_mulai');
+            $table->text('tgl_berakhir');
             $table->text('status');
+            $table->text('nilai')->nullable();
             $table->text('user_id')->nullable();
             $table->timestamps();
         });

@@ -1,4 +1,10 @@
-@extends('admin::layouts.main')
+@extends('layouts.main')
+
+@section('title', 'Dahsboard Admin')
+
+@section('menu')
+    @include('admin::layouts.menu')
+@endsection
 
 @section('content')
     <!-- BEGIN: Content-->
@@ -41,12 +47,10 @@
                                             <div class="col-md-12 col-12">
                                                 <div class="mb-1">
                                                     <label class="form-label" for="first-name-column">Kode RFID</label>
-                                                    <input type="number" id="first-name-column"
-                                                        placeholder="Kode" name="no_rfid" autofocus
-                                                        value="{{ old('no_rfid') }}" class="form-control @error('no_rfid') is-invalid @enderror" />
-                                                        @error('no_rfid')
-                                                            <div class="invalid-feedback">{{ $message }}</div>
-                                                        @enderror
+                                                    <input type="number" id="first-name-column" placeholder="Kode" name="no_rfid" autofocus value="{{ old('no_rfid') }}" class="form-control @error('no_rfid') is-invalid @enderror" />
+                                                    @error('no_rfid')
+                                                        <div class="invalid-feedback">{{ $message }}</div>
+                                                    @enderror
                                                 </div>
                                             </div>
                                             <div class="col-12">
@@ -77,10 +81,7 @@
                                             <tr>
                                                 <td>{{ $loop->iteration }}</td>
                                                 <td style="text-align: center">{{ $kartu->no_rfid }}</td>
-                                                <td style="text-align: center"><a
-                                                        href="/admin/rfid/{{ $kartu->id }}/edit"
-                                                        class="btn-icon btn btn-primary btn-round btn-ml"
-                                                        type="button">Daftarkan</a></td>
+                                                <td style="text-align: center"><a href="/admin/rfid/{{ $kartu->id }}/edit" class="btn-icon btn btn-primary btn-round btn-ml" type="button">Daftarkan</a></td>
                                             </tr>
                                         @endforeach
                                     </tbody>
