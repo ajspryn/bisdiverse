@@ -166,10 +166,17 @@
                                             </div>
                                         </div>
                                         <div class="progress-wrapper mb-2">
-                                            <div id="example-caption-1">Progres&hellip; {{ ($selesai / $total) * 100 }}%</div>
-                                            <div class="progress progress-bar-primary">
-                                                <div class="progress-bar" role="progressbar" aria-valuenow="{{ ($selesai / $total) * 100 }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ ($selesai / $total) * 100 }}%" aria-describedby="example-caption-1"></div>
-                                            </div>
+                                            @if ($total > 0)
+                                                <div id="example-caption-1">Progres&hellip; {{ ($selesai / $total) * 100 }}%</div>
+                                                <div class="progress progress-bar-primary">
+                                                    <div class="progress-bar" role="progressbar" aria-valuenow="{{ ($selesai / $total) * 100 }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ ($selesai / $total) * 100 }}%" aria-describedby="example-caption-1"></div>
+                                                </div>
+                                            @else
+                                                <div id="example-caption-1">Progres&hellip; 0%</div>
+                                                <div class="progress progress-bar-primary">
+                                                    <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%" aria-describedby="example-caption-1"></div>
+                                                </div>
+                                            @endif
                                         </div>
 
                                         <div class="d-grid">
