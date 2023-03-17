@@ -27,7 +27,7 @@ class UserKaprodiController extends Controller
     public function create()
     {
         // return request('user');
-        $cek = Dosen::select()->where('user_id', request('user'))->get()->first();
+        $cek = Dosen::select()->where('user_id', request('user'))->get();
         // return $cek->count();
         if ($cek->count() > 0) {
             Role::where('user_id', request('user'))->update([

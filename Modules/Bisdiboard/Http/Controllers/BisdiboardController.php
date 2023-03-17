@@ -2,10 +2,12 @@
 
 namespace Modules\Bisdiboard\Http\Controllers;
 
-use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
-use Modules\Bisdiboard\Entities\Project;
+use Illuminate\Support\Facades\Auth;
+use Modules\Bisdiboard\Entities\BoardTask;
+use Illuminate\Contracts\Support\Renderable;
+use Modules\Bisdiboard\Entities\BoardProject;
 
 class BisdiboardController extends Controller
 {
@@ -15,8 +17,14 @@ class BisdiboardController extends Controller
      */
     public function index()
     {
+        $user_id = Auth::user()->id;
+        $classified = BoardProject::whereHas('task', function ($query) use ($user_id) {
+            $query->where('assigned_to', $user_id);
+        })->with('task')->where('jenis', 'Classified')->get();
+        $public = BoardProject::with('task')->select()->where('user_id', $user_id)->get();
+        // return $classified;
         return view('bisdiboard::dashboard', [
-            'projects' => Project::with('user')->select()->get(),
+            'projects' => $classified->Merge($public),
         ]);
     }
 

@@ -2,11 +2,13 @@
 
 namespace Modules\Bisdiboard\Http\Controllers;
 
-use Illuminate\Console\View\Components\Task;
-use Illuminate\Contracts\Support\Renderable;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
-use Modules\Bisdiboard\Entities\Tasks;
+use Illuminate\Support\Facades\Mail;
+use Modules\Bisdiboard\Entities\BoardTask;
+use Illuminate\Contracts\Support\Renderable;
+use Illuminate\Support\Facades\Auth;
 
 class TaskController extends Controller
 {
@@ -45,9 +47,25 @@ class TaskController extends Controller
             "project_id" => "required",
         ]);
 
+        $assigne = User::select()->where('id', $request->assigned_to)->get()->first();
+
+        $toEmail = $assigne->email;
+        $subject = 'Anda Memiliki Taks Baru Di BisdiBoard';
+
+        Mail::send('bisdiboard::emails.task-reminder', [
+            'nama' => $assigne->name,
+            'task' => $request->nama,
+            'prioritas' => $request->prioritas,
+            'deskripsi' => $request->deskripsi,
+            'batas_waktu' => $request->batas_waktu
+        ], function ($message) use ($toEmail, $subject) {
+            $message->to($toEmail)
+                ->subject($subject);
+        });
+
         $input = $request->all();
-        $input['status'] = 'Todo';
-        Tasks::create($input);
+        $input['status'] = 'To Do';
+        BoardTask::create($input);
         return back()->with('success', 'Task Baru Telah Ditambahkan');
     }
 
@@ -58,8 +76,13 @@ class TaskController extends Controller
      */
     public function show($id)
     {
+        if (request('prioritas')) {
+            $tasks = BoardTask::with('user')->select()->where('project_id', $id)->where('prioritas', request('prioritas'))->get();
+        } else {
+            $tasks = BoardTask::with('user')->select()->where('project_id', $id)->get();
+        }
         return view('bisdiboard::task', [
-            'tasks' => Tasks::with('user')->select()->where('project_id', $id)->get(),
+            'tasks' => $tasks,
             'project' => $id,
         ]);
     }
@@ -93,7 +116,7 @@ class TaskController extends Controller
         ];
 
         $input = $request->validate($data);
-        Tasks::where('id', $id)->update($input);
+        BoardTask::where('id', $id)->update($input);
         return back()->with('success', 'Task Berhasil Diedit');
     }
 

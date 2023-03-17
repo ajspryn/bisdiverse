@@ -42,7 +42,11 @@ class CommentController extends Controller
             "file" => "nullable",
         ]);
 
+
         $input = $request->all();
+        if ($request->file('file')) {
+            $input['file'] = $request->file('file')->store('file-board');
+        }
         BoardComment::create($input);
         return back()->with('success', 'Comment Baru Telah Ditambahkan');
     }

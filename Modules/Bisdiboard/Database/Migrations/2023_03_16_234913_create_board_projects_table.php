@@ -13,9 +13,16 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('board_teams', function (Blueprint $table) {
+        Schema::create('board_projects', function (Blueprint $table) {
             $table->id();
-
+            $table->string('user_id');
+            $table->string('jenis');
+            $table->string('kategori');
+            $table->text('nama');
+            $table->text('deskripsi')->nullable();
+            $table->text('status');
+            $table->string('tgl_mulai');
+            $table->string('tgl_selesai');
             $table->timestamps();
         });
     }
@@ -27,6 +34,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('board_teams');
+        Schema::dropIfExists('board_projects');
     }
 };

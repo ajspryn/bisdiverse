@@ -25,26 +25,30 @@ class HomeController extends Controller
      */
     public function index()
     {
-        // return Auth::user()->role;
+        // $role = Auth::user();
         if (Auth::user()) {
-            $role = Auth::user()->role;
+            $role = Auth::user();
         } else {
-            $role = false;
+            $role = null;
         }
 
         $url = '/';
 
         if ($role) {
-            if ($role->jabatan_id == 0) {
-                $url = '/admin';
-            } elseif ($role->jabatan_id == 1) {
-                $url = '/kaprodi';
-            } elseif ($role->jabatan_id == 2) {
-                $url = '/dosen';
-            } elseif ($role->jabatan_id == 3) {
-                $url = '/mahasiswa';
-            } elseif ($role->jabatan_id == 4) {
-                $url = '/bisdiboard';
+            if ($role->role) {
+                if ($role->role->jabatan_id == 0) {
+                    $url = '/admin';
+                } elseif ($role->role->jabatan_id == 1) {
+                    $url = '/kaprodi';
+                } elseif ($role->role->jabatan_id == 2) {
+                    $url = '/dosen';
+                } elseif ($role->role->jabatan_id == 3) {
+                    $url = '/mahasiswa';
+                } elseif ($role->role->jabatan_id == 4) {
+                    $url = '/bisdiboard';
+                } else {
+                    return view('errors.kamusiapa');
+                }
             } else {
                 return view('errors.kamusiapa');
             }

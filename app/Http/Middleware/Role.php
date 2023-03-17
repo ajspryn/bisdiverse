@@ -25,6 +25,8 @@ class Role
             if ($cekrole->role_id == $role) {
                 return $next($request);
             }
+        } else {
+            return view('errors.kamusiapa');
         }
         return redirect('/');
     }

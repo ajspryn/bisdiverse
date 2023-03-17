@@ -27,34 +27,41 @@
                                         <i data-feather="mail" class="font-medium-3 me-50"></i>
                                         <span class="align-middle"> My Task</span>
                                     </a>
-                                    <a href="#" class="list-group-item list-group-item-action">
+                                    {{-- <a href="#" class="list-group-item list-group-item-action">
                                         <i data-feather="check" class="font-medium-3 me-50"></i> <span class="align-middle">Completed</span>
                                     </a>
                                     <a href="#" class="list-group-item list-group-item-action">
                                         <i data-feather="trash" class="font-medium-3 me-50"></i> <span class="align-middle">Deleted</span>
-                                    </a>
+                                    </a> --}}
                                 </div>
-                                {{-- <div class="mt-3 px-2 d-flex justify-content-between">
-                                    <h6 class="section-label mb-1">Tags</h6>
-                                    <i data-feather="plus" class="cursor-pointer"></i>
-                                </div> --}}
-                                {{-- <div class="list-group list-group-labels">
-                                    <a href="#" class="list-group-item list-group-item-action d-flex align-items-center">
-                                        <span class="bullet bullet-sm bullet-primary me-1"></span>Team
-                                    </a>
-                                    <a href="#" class="list-group-item list-group-item-action d-flex align-items-center">
-                                        <span class="bullet bullet-sm bullet-success me-1"></span>Low
-                                    </a>
-                                    <a href="#" class="list-group-item list-group-item-action d-flex align-items-center">
-                                        <span class="bullet bullet-sm bullet-warning me-1"></span>Medium
-                                    </a>
-                                    <a href="#" class="list-group-item list-group-item-action d-flex align-items-center">
-                                        <span class="bullet bullet-sm bullet-danger me-1"></span>High
-                                    </a>
-                                    <a href="#" class="list-group-item list-group-item-action d-flex align-items-center">
-                                        <span class="bullet bullet-sm bullet-info me-1"></span>Update
-                                    </a>
-                                </div> --}}
+                                <div class="mt-3 px-2 d-flex justify-content-between">
+                                    <h6 class="section-label mb-1">Priority</h6>
+                                </div>
+                                <div class="list-group list-group-labels">
+                                    <form action="/bisdiboard/task/{{ $project }}">
+                                        <button type="submit" class="list-group-item list-group-item-action d-flex align-items-center">
+                                            <span class="bullet bullet-sm bullet-primary me-1"></span>All
+                                        </button>
+                                    </form>
+                                    <form action="/bisdiboard/task/{{ $project }}">
+                                        <input type="hidden" name="prioritas" value="Low">
+                                        <button type="submit" class="list-group-item list-group-item-action d-flex align-items-center">
+                                            <span class="bullet bullet-sm bullet-success me-1"></span>Low
+                                        </button>
+                                    </form>
+                                    <form action="/bisdiboard/task/{{ $project }}">
+                                        <input type="hidden" name="prioritas" value="Medium">
+                                        <button type="submit" class="list-group-item list-group-item-action d-flex align-items-center">
+                                            <span class="bullet bullet-sm bullet-warning me-1"></span>Medium
+                                        </button>
+                                    </form>
+                                    <form action="/bisdiboard/task/{{ $project }}">
+                                        <input type="hidden" name="prioritas" value="High">
+                                        <button type="submit" class="list-group-item list-group-item-action d-flex align-items-center">
+                                            <span class="bullet bullet-sm bullet-danger me-1"></span>High
+                                        </button>
+                                    </form>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -119,8 +126,8 @@
                                                         <button type="submit" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#edit{{ $task->id }}"><i data-feather="edit"></i>Edit</button>
                                                     </div>
                                                     <div class="badge-wrapper me-1">
-                                                        @if ($task->status == 'Todo')
-                                                            <span class="badge rounded-pill badge-light-primary">Todo</span>
+                                                        @if ($task->status == 'To Do')
+                                                            <span class="badge rounded-pill badge-light-primary">To Do</span>
                                                         @elseif ($task->status == 'In Progress')
                                                             <span class="badge rounded-pill badge-light-info">In Progress</span>
                                                         @elseif ($task->status == 'On Hold')
@@ -137,7 +144,7 @@
                                                             <span class="badge rounded-pill badge-light-success">Low</span>
                                                         @endif
                                                     </div>
-                                                    <small class="text-nowrap text-muted me-1">{{ Carbon\Carbon::parse($task->batas_waktu)->format('d-F-Y') }}</small>
+                                                    <span class="text-nowrap text-muted me-1">{{ Carbon\Carbon::now()->diffInDays($task->batas_waktu) == 0 ? 'Batas Waktu Habis' : Carbon\Carbon::now()->diffInDays($task->batas_waktu) . ' ' . 'Hari Lagi' }}</span>
                                                     <div class="avatar">
                                                         <img src="{{ asset('storage/' . $task->user->avatar) }}" alt="user-avatar" height="32" width="32" />
                                                     </div>
@@ -148,95 +155,93 @@
                                             <div class="modal-dialog modal-dialog-centered modal-xl">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
-                                                        <h5 class="modal-title" id="exampleModalCenterTitle">Task</h5>
+                                                        <h5 class="modal-title" id="exampleModalCenterTitle">Detail Task</h5>
                                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                     </div>
                                                     <div class="modal-body">
                                                         <!-- post 1 -->
-                                                        <div class="card">
-                                                            <div class="card-body">
-                                                                <div class="d-flex justify-content-start align-items-center mb-1">
-                                                                    <div class="profile-user-info">
-                                                                        <h6 class="mb-0">{{ $task->nama }}</h6>
-                                                                        <small class="text-muted">Created : {{ $task->created_at->format('d-m-Y') }}</small>
-                                                                        <small class="text-muted">Due Date : {{ Carbon\Carbon::parse($task->batas_waktu)->format('d-m-Y') }}</small>
-                                                                    </div>
-                                                                </div>
-                                                                <p class="card-text">
-                                                                    {{ $task->deskripsi }}
-                                                                </p>
-                                                                <!-- like share -->
-                                                                <div class="row d-flex justify-content-start align-items-center flex-wrap pb-50">
-                                                                    <div class="col-sm-6 d-flex justify-content-between justify-content-sm-start mb-2">
-                                                                        <a href="#" class="d-flex align-items-center text-muted text-nowrap">
-                                                                            <span>Assign To</span>
-                                                                        </a>
-
-                                                                        <!-- avatar group with tooltip -->
-                                                                        <div class="d-flex align-items-center">
-                                                                            <div class="avatar-group ms-1">
-                                                                                <div data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="bottom" title="{{ $task->user->username }}" class="avatar pull-up">
-                                                                                    <img src="{{ asset('storage/' . $task->user->avatar) }}" alt="Avatar" height="26" width="26" />
-                                                                                </div>
-                                                                            </div>
-                                                                            <a href="#" class="text-muted text-nowrap ms-50">{{ $task->user->username }}</a>
-                                                                        </div>
-                                                                        <!-- avatar group with tooltip -->
-                                                                    </div>
-
-                                                                    <!-- share and like count and icons -->
-                                                                    <div class="col-sm-6 d-flex justify-content-between justify-content-sm-end align-items-center mb-2">
-                                                                        <a href="#" class="text-nowrap">
-                                                                            <i data-feather="message-square" class="text-body font-medium-3 me-50"></i>
-                                                                            <span class="text-muted me-1">{{ $task->comment->count() }}</span>
-                                                                        </a>
-                                                                    </div>
-                                                                    <!-- share and like count and icons -->
-                                                                </div>
-                                                                <!-- like share -->
-
-                                                                <!-- comments -->
-                                                                @foreach ($task->comment as $comment)
-                                                                    <div class="d-flex align-items-start mb-1">
-                                                                        <div class="avatar mt-25 me-75">
-                                                                            <img src="{{ asset('storage/' . $comment->user->avatar) }}" alt="Avatar" height="34" width="34" />
-                                                                        </div>
-                                                                        <div class="profile-user-info w-100">
-                                                                            <div class="d-flex align-items-center justify-content-between">
-                                                                                <h6 class="mb-0">{{ $comment->user->username }}</h6>
-                                                                                <a href="#">
-                                                                                    <span class="align-middle text-muted">{{ $comment->created_at->diffForhumans() }}</span>
-                                                                                </a>
-                                                                            </div>
-                                                                            <small>
-                                                                                {{ $comment->comment }}
-                                                                            </small>
-                                                                        </div>
-                                                                    </div>
-                                                                @endforeach
-                                                                <!--/ comments -->
-
-                                                                <!-- comment box -->
-                                                                <form action="/bisdiboard/comment" method="POST" enctype="multipart/form-data">
-                                                                    @csrf
-                                                                    <fieldset class="mb-75">
-                                                                        <label class="form-label" for="label-textarea">Add Comment</label>
-                                                                        <textarea class="form-control" id="label-textarea" rows="3" placeholder="Add Comment" name="comment"></textarea>
-                                                                    </fieldset>
-                                                                    <fieldset class="mb-75">
-                                                                        <input class="form-control" type="file" name="file">
-                                                                        <input type="hidden" name="task_id" value="{{ $task->id }}">
-                                                                        <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
-                                                                    </fieldset>
-                                                                    <button type="submit" class="btn btn-sm btn-primary">Post Comment</button>
-                                                                </form>
-                                                                <!--/ comment box -->
+                                                        <div class="d-flex justify-content-start align-items-center mb-1">
+                                                            <div class="profile-user-info">
+                                                                <h6 class="mb-0">{{ $task->nama }}</h6>
+                                                                <small class="text-muted">Created : {{ $task->created_at->format('d-m-Y') }}</small>
+                                                                <small class="text-muted">Due Date : {{ Carbon\Carbon::parse($task->batas_waktu)->format('d-m-Y') }}</small>
                                                             </div>
                                                         </div>
-                                                        <!--/ post 1 -->
+                                                        <p class="card-text">
+                                                            {{ $task->deskripsi }}
+                                                        </p>
+                                                        <!-- like share -->
+                                                        <div class="row d-flex justify-content-start align-items-center flex-wrap pb-50">
+                                                            <div class="col-sm-6 d-flex justify-content-between justify-content-sm-start mb-2">
+                                                                <a href="#" class="d-flex align-items-center text-muted text-nowrap">
+                                                                    <span>Assign To</span>
+                                                                </a>
+
+                                                                <!-- avatar group with tooltip -->
+                                                                <div class="d-flex align-items-center">
+                                                                    <div class="avatar-group ms-1">
+                                                                        <div data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="bottom" title="{{ $task->user->username }}" class="avatar pull-up">
+                                                                            <img src="{{ asset('storage/' . $task->user->avatar) }}" alt="Avatar" height="26" width="26" />
+                                                                        </div>
+                                                                    </div>
+                                                                    <a href="#" class="text-muted text-nowrap ms-50">{{ $task->user->username }}</a>
+                                                                </div>
+                                                                <!-- avatar group with tooltip -->
+                                                            </div>
+
+                                                            <!-- share and like count and icons -->
+                                                            <div class="col-sm-6 d-flex justify-content-between justify-content-sm-end align-items-center mb-2">
+                                                                <a href="#" class="text-nowrap">
+                                                                    <i data-feather="message-square" class="text-body font-medium-3 me-50"></i>
+                                                                    <span class="text-muted me-1">{{ $task->comment->count() }}</span>
+                                                                </a>
+                                                            </div>
+                                                            <!-- share and like count and icons -->
+                                                        </div>
+                                                        <!-- like share -->
+                                                        <!-- comments -->
+                                                        @foreach ($task->comment as $comment)
+                                                            <div class="d-flex align-items-start mb-1">
+                                                                <div class="avatar mt-25 me-75">
+                                                                    <img src="{{ asset('storage/' . $comment->user->avatar) }}" alt="Avatar" height="34" width="34" />
+                                                                </div>
+                                                                <div class="profile-user-info w-100">
+                                                                    <div class="d-flex align-items-center justify-content-between">
+                                                                        <h6 class="mb-0">{{ $comment->user->username }}</h6>
+                                                                        <a href="#">
+                                                                            <span class="align-middle text-muted">{{ $comment->created_at->diffForhumans() }}</span>
+                                                                        </a>
+                                                                    </div>
+                                                                    <small>
+                                                                        {{ $comment->comment }}
+                                                                    </small>
+                                                                    @if ($comment->file != null)
+                                                                        <div class="d-flex flex-row align-items-center">
+                                                                            <i data-feather="paperclip"> </i>
+                                                                            <span><a href="{{ asset('storage/' . $comment->file) }}" target="blank"> File Lampiran</a></span>
+                                                                        </div>
+                                                                    @endif
+                                                                </div>
+                                                            </div>
+                                                        @endforeach
+                                                        <!--/ comments -->
+                                                        <form action="/bisdiboard/comment" method="POST" enctype="multipart/form-data">
+                                                            @csrf
+                                                            <div class="input-group">
+                                                                <span class="input-group-text">
+                                                                    <label for="attach-doc" class="attachment-icon mb-0">
+                                                                        <i data-feather="paperclip" class="cursor-pointer text-secondary"></i>
+                                                                        <input type="file" id="attach-doc" name="file" hidden />
+                                                                    </label>
+                                                                </span>
+                                                                <input type="text" class="form-control message" name="comment" placeholder="Type your message" required />
+                                                                <input type="hidden" name="task_id" value="{{ $task->id }}">
+                                                                <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
+                                                                <button class="btn btn-outline-primary" id="button-addon2" type="submit"><i data-feather="send" class="cursor-pointer text-secondary"></i></button>
+                                                            </div>
+                                                        </form>
                                                     </div>
-                                                </div>
-                                                <div class="modal-footer">
+                                                    <!--/ post 1 -->
                                                 </div>
                                             </div>
                                         </div>
@@ -297,8 +302,8 @@
                                                             <div class="mb-1">
                                                                 <label class="form-label" class="d-block">Status</label>
                                                                 <div class="form-check my-50">
-                                                                    <input type="radio" id="validationRadio3" name="status" value="Todo" class="form-check-input" required {{ old('status', $task->status) == 'Todo' ? 'checked' : '' }} />
-                                                                    <label class="form-check-label" for="validationRadio3"><span class="badge rounded-pill badge-light-primary">Todo</span></label>
+                                                                    <input type="radio" id="validationRadio3" name="status" value="Todo" class="form-check-input" required {{ old('status', $task->status) == 'To Do' ? 'checked' : '' }} />
+                                                                    <label class="form-check-label" for="validationRadio3"><span class="badge rounded-pill badge-light-primary">To Do</span></label>
                                                                 </div>
                                                                 <div class="form-check my-50">
                                                                     <input type="radio" id="validationRadio4" name="status" value="In Progress" class="form-check-input" required {{ old('status', $task->status) == 'In Progress' ? 'checked' : '' }} />

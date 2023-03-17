@@ -2,11 +2,12 @@
 
 namespace Modules\Bisdiboard\Http\Controllers;
 
-use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
 use Modules\Bisdiboard\Entities\Project;
+use Illuminate\Contracts\Support\Renderable;
+use Modules\Bisdiboard\Entities\BoardProject;
 
 class ProjectController extends Controller
 {
@@ -39,6 +40,7 @@ class ProjectController extends Controller
         $request->validate([
             "nama" => "required",
             "jenis" => "required",
+            "kategori" => "required",
             "deskripsi" => "required",
             "tgl_mulai" => "required",
             "tgl_selesai" => "required",
@@ -47,7 +49,7 @@ class ProjectController extends Controller
         $input = $request->all();
         $input['status'] = 'Active';
         $input['user_id'] = Auth::user()->id;
-        Project::create($input);
+        BoardProject::create($input);
         return back()->with('success', 'Project Baru Telah Ditambahkan');
     }
 

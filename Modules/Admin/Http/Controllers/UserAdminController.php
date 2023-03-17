@@ -34,17 +34,17 @@ class UserAdminController extends Controller
      */
     public function store(Request $request)
     {
-        // return $request;
+        // return $request['user_id'];
         if (Role::where('user_id', $request->user_id)->get()->count() > 0) {
             Role::where('user_id', $request->user_id)->update([
                 'role_id' => 1,
-                'jabatan_id' => $request['jabatan_id'],
+                'jabatan_id' => $request->jabatan_id,
             ]);
         } else {
             Role::create([
-                'user_id' => $request('user_id'),
+                'user_id' => $request->user_id,
                 'role_id' => 1,
-                'jabatan_id' => $request['jabatan_id'],
+                'jabatan_id' => $request->jabatan_id,
             ]);
         }
         return back()->with('success', 'Sekarang Menjadi Admin Prodi');

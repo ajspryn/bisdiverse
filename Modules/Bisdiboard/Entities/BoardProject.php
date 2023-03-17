@@ -5,8 +5,9 @@ namespace Modules\Bisdiboard\Entities;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use SebastianBergmann\CodeCoverage\Report\Xml\Project;
 
-class Tasks extends Model
+class BoardProject extends Model
 {
     use HasFactory;
 
@@ -16,15 +17,15 @@ class Tasks extends Model
 
     public function user()
     {
-        return $this->belongsTo(User::class, 'assigned_to', 'id');
+        return $this->belongsTo(User::class, 'user_id', 'id');
     }
-    public function comment()
+    public function task()
     {
-        return $this->hasMany(BoardComment::class, 'task_id', 'id');
+        return $this->hasMany(BoardTask::class, 'project_id', 'id');
     }
 
     protected static function newFactory()
     {
-        return \Modules\Bisdiboard\Database\factories\TasksFactory::new();
+        return \Modules\Bisdiboard\Database\factories\BoardProjectFactory::new();
     }
 }
