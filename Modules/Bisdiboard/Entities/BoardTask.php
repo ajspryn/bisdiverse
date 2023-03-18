@@ -20,6 +20,7 @@ class BoardTask extends Model
     {
         return $this->belongsTo(User::class, 'assigned_to', 'id');
     }
+
     public function project()
     {
         return $this->hasMany(BoardProject::class, 'id', 'project_id');

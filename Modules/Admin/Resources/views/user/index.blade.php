@@ -44,6 +44,7 @@
                                             <th style="text-align: center"></th>
                                             <th style="text-align: center">No</th>
                                             <th style="text-align: center">Nama</th>
+                                            <th style="text-align: center">Username</th>
                                             <th style="text-align: center">Email</th>
                                             <th style="text-align: center">Role</th>
                                             <th style="text-align: center"></th>
@@ -60,6 +61,7 @@
                                                 <td></td>
                                                 <td style="text-align: center">{{ $loop->iteration }}</td>
                                                 <td style="text-align: left">{{ $user->name }}</td>
+                                                <td style="text-align: left">{{ $user->username }}</td>
                                                 <td style="text-align: left">{{ $user->email }}</td>
                                                 <td style="text-align: left">
                                                     @if (isset($role))

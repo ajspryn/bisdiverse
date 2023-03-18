@@ -194,7 +194,9 @@
                                     </div>
                                     <div class="card-footer text-center">
                                         <a href="/bisdiboard/task/{{ $project->id }}" class="btn btn-primary">Detail</a>
-                                        <button class="btn btn-outline-primary" type="button" data-bs-toggle="modal" data-bs-target="#projectedit{{ $project->id }}"><i data-feather="edit"></i></button>
+                                        @if ($project->user_id == Auth::user()->id)
+                                            <button class="btn btn-outline-primary" type="button" data-bs-toggle="modal" data-bs-target="#projectedit{{ $project->id }}"><i data-feather="edit"></i></button>
+                                        @endif
                                     </div>
                                 </div>
                             </div>

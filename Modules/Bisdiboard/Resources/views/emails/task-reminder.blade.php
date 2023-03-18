@@ -177,7 +177,7 @@
                                         sans-serif;
                                       font-size: 14px;
                                     ">
-                                                                    <strong>{{ $task }} </strong>
+                                                                    <strong>{{ $task }} </strong>(
                                                                     @if ($prioritas == 'High')
                                                                         <span class="badge bg-danger">High</span>
                                                                     @elseif ($prioritas == 'Medium')
@@ -185,6 +185,7 @@
                                                                     @elseif ($prioritas == 'Low')
                                                                         <span class="badge bg-success">Low</span>
                                                                     @endif
+                                                                    )
                                                                 </td>
                                                             </tr>
                                                             <tr>
@@ -205,6 +206,15 @@
                                                                     <strong>Due Date : </strong>{{ $batas_waktu }}
                                                                 </td>
                                                             </tr>
+                                                            <tr>
+                                                                <td style="
+                                      font-family: 'Montserrat', Arial,
+                                        sans-serif;
+                                      font-size: 14px;
+                                    ">
+                                                                    <strong>Calendar : </strong><a href="{{ $link }}"> Tambahkan Ke Google Calendar</a>
+                                                                </td>
+                                                            </tr>
                                                         </table>
                                                     </td>
                                                 </tr>
@@ -215,10 +225,10 @@
                             margin-top: 6px;
                             margin-bottom: 20px;
                           ">
-                                                Taks Ini Akan Otomatis Masuk Ke Google Clendar Kamu
+                                                Simpan Taks Ini Ke Google Clendar Kamu
                                                 Jika Email Yang Kamu Gunakan Adalah Google.
-                                                <a href="https://bisdiverse.com/bisdiboard">Klik Disini</a>
-                                                Untuk Melihat Semua Taks Kamu.
+                                                <a href="{{ $url }}">Klik Disini</a>
+                                                Untuk Melihat Detail Taks Kamu.
                                             </p>
                                             <p style="
                             font-size: 14px;

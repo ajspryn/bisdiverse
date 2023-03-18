@@ -51,7 +51,6 @@
     <link rel="stylesheet" type="text/css" href="{{ url('/') }}/app-assets/css/pages/app-todo.css">
     <link rel="stylesheet" type="text/css" href="{{ url('/') }}/app-assets/css/core/menu/menu-types/horizontal-menu.css">
     <link rel="stylesheet" type="text/css" href="{{ url('/') }}/app-assets/css/plugins/forms/form-quill-editor.css">
-    <link rel="stylesheet" type="text/css" href="{{ url('/') }}/app-assets/css/plugins/forms/pickers/form-flat-pickr.css">
     <link rel="stylesheet" type="text/css" href="../../../app-assets/css/plugins/forms/form-wizard.css">
     <!-- END: Page CSS-->
 

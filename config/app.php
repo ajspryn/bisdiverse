@@ -188,6 +188,7 @@ return [
         RealRashid\SweetAlert\SweetAlertServiceProvider::class,
         Barryvdh\DomPDF\ServiceProvider::class,
         Barryvdh\Snappy\ServiceProvider::class,
+        Spatie\GoogleCalendar\GoogleCalendarServiceProvider::class,
         /*
          * Application Service Providers...
          */
@@ -218,6 +219,7 @@ return [
         'LaravelPwa' => \Ladumor\LaravelPwa\LaravelPwa::class,
         'SnappyPdf' => Barryvdh\Snappy\Facades\SnappyPdf::class,
         'PDF' => Barryvdh\DomPDF\Facade::class,
+        'GoogleCalendar' => Spatie\GoogleCalendar\GoogleCalendarFacade::class,
         // 'ExampleClass' => App\Example\ExampleClass::class,
     ])->toArray(),
 

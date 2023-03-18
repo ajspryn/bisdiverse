@@ -77,13 +77,21 @@
                                     <h4 class="card-title">Tambahkan Mahasiswa</h4>
                                 </div>
                                 <div class="card-body">
-                                    <form class="needs-validation" novalidate method="POST" action="/admin/mahasiswa">
+                                    <form id="mahasiswa" class="needs-validation" novalidate method="POST" action="/admin/mahasiswa">
                                         @csrf
                                         <div class="row">
                                             <div class="col-md-6 col-12">
                                                 <div class="mb-1">
                                                     <label class="form-label" for="first-name-column">Nama Mahasiswa</label>
-                                                    <input type="text" id="first-name-column" class="form-control" placeholder="Masukan Nama Mahasiswa" name="nama" required />
+                                                    <input type="text" id="first-name-column" class="form-control @error('nama') is-invalid @enderror" placeholder="Masukan Nama Mahasiswa" name="nama" required />
+                                                    <div class="valid-feedback">Ok!</div>
+                                                    <div class="invalid-feedback">Wajib Diisi</div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 col-12">
+                                                <div class="mb-1">
+                                                    <label class="form-label" for="first-name-column">Email</label>
+                                                    <input type="email" id="first-name-column" class="form-control @error('email') is-invalid @enderror" placeholder="Masukan Email" name="email" required />
                                                     <div class="valid-feedback">Ok!</div>
                                                     <div class="invalid-feedback">Wajib Diisi</div>
                                                 </div>
@@ -91,7 +99,7 @@
                                             <div class="col-md-6 col-12">
                                                 <div class="mb-1">
                                                     <label class="form-label" for="first-name-column">NPM</label>
-                                                    <input type="number" id="first-name-column" class="form-control" placeholder="Masukan NPM" name="npm" required />
+                                                    <input type="number" id="first-name-column" class="form-control @error('npm') is-invalid @enderror" placeholder="Masukan NPM" name="npm" required />
                                                     <div class="valid-feedback">Ok!</div>
                                                     <div class="invalid-feedback">Wajib Diisi</div>
                                                 </div>
@@ -99,7 +107,7 @@
                                             <div class="col-md-6 col-12">
                                                 <div class="mb-1">
                                                     <label class="form-label" for="first-name-column">No RFID</label>
-                                                    <input type="number" id="first-name-column" class="form-control" placeholder="Masukan No RFID" name="no_rfid" required />
+                                                    <input type="number" id="first-name-column" class="form-control @error('no_rfid') is-invalid @enderror" placeholder="Masukan No RFID" name="no_rfid" required />
                                                     <div class="valid-feedback">Ok!</div>
                                                     <div class="invalid-feedback">Wajib Diisi</div>
                                                 </div>
@@ -107,13 +115,13 @@
                                             <div class="col-md-6 col-12">
                                                 <div class="mb-1">
                                                     <label class="form-label" for="first-name-column">No RFID Cadangan</label>
-                                                    <input type="number" id="first-name-column" class="form-control" placeholder="Masukan No rfid Cadangan" name="no_rfid_cadangan" />
+                                                    <input type="number" id="first-name-column" class="form-control @error('no_rfid_cadangan') is-invalid @enderror" placeholder="Masukan No rfid Cadangan" name="no_rfid_cadangan" />
                                                 </div>
                                             </div>
                                             <div class="col-md-6 col-12">
                                                 <div class="mb-1">
                                                     <label class="form-label" for="first-name-column">Tahun Masuk</label>
-                                                    <input type="number" id="first-name-column" class="form-control" placeholder="Tahun Masuk" name="tahun_masuk" required />
+                                                    <input type="number" id="first-name-column" class="form-control @error('tahun_masuk') is-invalid @enderror" placeholder="Tahun Masuk" name="tahun_masuk" required />
                                                     <div class="valid-feedback">Ok!</div>
                                                     <div class="invalid-feedback">Wajib Diisi</div>
                                                 </div>
@@ -121,7 +129,7 @@
                                             <div class="col-md-6 col-12">
                                                 <div class="mb-1">
                                                     <label class="form-label" for="kelas">Kelas</label>
-                                                    <select class="form-select" name="kelas" id="kelas" required>
+                                                    <select class="form-select @error('kelas') is-invalid @enderror" name="kelas" id="kelas" required>
                                                         <option label="kelas"></option>
                                                         @foreach ($kelass as $kelas)
                                                             <option value="{{ $kelas->kelas }} {{ $kelas->tahun }}">{{ $kelas->kelas }} ({{ $kelas->tahun }})</option>
@@ -135,7 +143,7 @@
                                             <div class="col-md-6 col-12">
                                                 <div class="mb-1">
                                                     <label class="form-label" for="kelas_ujian">Kelas Ujian</label>
-                                                    <select class="form-select" name="kelas_ujian" id="kelas_ujian" required>
+                                                    <select class="form-select @error('kelas_ujian') is-invalid @enderror" name="kelas_ujian" id="kelas_ujian" required>
                                                         <option label="kelas_ujian"></option>
                                                         <option>A</option>
                                                         <option>B</option>
@@ -267,7 +275,7 @@
                                             </div>
 
                                             <div class="col-12">
-                                                <button type="submit" class="btn btn-primary me-1">Submit</button>
+                                                <button type="submit" class="btn btn-primary me-1" onclick="document.getElementById('mahasiswa').submit()">Submit</button>
                                                 <button type="reset" class="btn btn-outline-secondary">Reset</button>
                                             </div>
                                         </div>

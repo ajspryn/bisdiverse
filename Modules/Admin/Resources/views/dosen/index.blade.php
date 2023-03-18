@@ -32,7 +32,7 @@
             <div class="content-body">
                 <!-- Basic multiple Column Form section start -->
                 <div class="row">
-                    <div class="col-9">
+                    <div class="col-md-8 col-12">
                         <section id="multiple-column-form">
                             <div class="row">
                                 <div class="col-12">
@@ -41,7 +41,7 @@
                                             <h4 class="card-title">Dosen</h4>
                                         </div>
                                         <div class="card-body">
-                                            <form class="needs-validation" novalidate method="POST" action="/admin/dosen">
+                                            <form class="needs-validation" novalidate id="dosenForm" method="POST" action="/admin/dosen">
                                                 @csrf
                                                 <div class="row">
                                                     <div class="col-md-6 col-12">
@@ -49,11 +49,11 @@
                                                             <label class="form-label" for="first-name-column">Nama
                                                                 Dosen</label>
                                                             <input type="text" id="first-name-column" class="form-control @error('nama') is-invalid @enderror" placeholder="Nama Dosen" name="nama" required />
-                                                            @error('nama')
+                                                            {{-- @error('nama')
                                                                 <span class="invalid-feedback" role="alert">
                                                                     <strong>{{ $message }}</strong>
                                                                 </span>
-                                                            @enderror
+                                                            @enderror --}}
                                                             <div class="invalid-feedback">Wajib Diisi</div>
                                                         </div>
                                                     </div>
@@ -61,11 +61,11 @@
                                                         <div class="mb-1">
                                                             <label class="form-label" for="first-name-column">Email</label>
                                                             <input type="email" id="first-name-column" class="form-control @error('email') is-invalid @enderror" placeholder="Email Dosen" name="email" required />
-                                                            @error('email')
+                                                            {{-- @error('email')
                                                                 <span class="invalid-feedback" role="alert">
                                                                     <strong>{{ $message }}</strong>
                                                                 </span>
-                                                            @enderror
+                                                            @enderror --}}
                                                             <div class="invalid-feedback">Wajib Diisi</div>
                                                         </div>
                                                     </div>
@@ -74,11 +74,11 @@
                                                             <label class="form-label" for="first-name-column">Kode
                                                                 Dosen</label>
                                                             <input type="number" id="first-name-column" class="form-control @error('kds') is-invalid @enderror" placeholder="Kode Dosen" name="kds" required />
-                                                            @error('kds')
+                                                            {{-- @error('kds')
                                                                 <span class="invalid-feedback" role="alert">
                                                                     <strong>{{ $message }}</strong>
                                                                 </span>
-                                                            @enderror
+                                                            @enderror --}}
                                                             <div class="invalid-feedback">Wajib Diisi</div>
                                                         </div>
                                                     </div>
@@ -87,15 +87,15 @@
                                                             <label class="form-label" for="first-name-column">NIDN /
                                                                 NIDK</label>
                                                             <input type="text" id="first-name-column" class="form-control @error('nidn_nidk') is-invalid @enderror" placeholder="NIDN / NIDK" name="nidn_nidk" />
-                                                            @error('nidn_nidk')
+                                                            {{-- @error('nidn_nidk')
                                                                 <span class="invalid-feedback" role="alert">
                                                                     <strong>{{ $message }}</strong>
                                                                 </span>
-                                                            @enderror
+                                                            @enderror --}}
                                                         </div>
                                                     </div>
                                                     <div class="col-12">
-                                                        <button type="submit" class="btn btn-primary me-1">Submit</button>
+                                                        <button type="submit" class="btn btn-primary me-1" onclick="document.getElementById('dosenForm').submit()">Submit</button>
                                                         <button type="reset" class="btn btn-outline-secondary">Reset</button>
                                                     </div>
                                                 </div>
@@ -106,7 +106,7 @@
                             </div>
                         </section>
                     </div>
-                    <div class="col-3">
+                    <div class="col-md-4 col-12">
                         <section id="multiple-column-form">
                             <div class="row">
                                 <div class="col-12">
