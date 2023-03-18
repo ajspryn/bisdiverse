@@ -6,14 +6,14 @@
     <meta name="keywords" content="Bisdiverse,Bisdiverse.com,Sistem Akademik,Bisnis Digital,Sistem Terintegrasi Bisnis Digital,Fakultas Ekonomi Dan Bisnis,Unpak,Universitas Unpak,FEB,Bisdi,Bogor">
     <meta name="author" content="Adji Supriyono">
     <title>@yield('title')</title>
-    <link rel="apple-touch-icon" href="{{ url('/') }}/favicon.png">
-    <link rel="shortcut icon" type="image/x-icon" href="{{ url('/') }}/favicon.png">
+    <link rel="apple-touch-icon" href="{{ url('/') }}/pwa.png">
+    <link rel="shortcut icon" type="image/x-icon" href="{{ url('/') }}/pwa.png">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500;1,600" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
     <!-- PWA  -->
-    <meta name="theme-color" content="#7367F0" />
-    <link rel="apple-touch-icon" href="{{ url('/') }}/favicon.png">
+    <meta name="theme-color" content="#fffff" />
+    <link rel="apple-touch-icon" href="{{ url('/') }}/pwa.png">
     <link rel="manifest" href="{{ asset('/manifest.json') }}">
 
     <!-- BEGIN: Vendor CSS-->

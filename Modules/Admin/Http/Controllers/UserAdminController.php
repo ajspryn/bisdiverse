@@ -35,15 +35,22 @@ class UserAdminController extends Controller
     public function store(Request $request)
     {
         // return $request['user_id'];
+        if ($request->jabatan_id == 0) {
+            $role_id = 0;
+        } else {
+            $role_id = 1;
+        }
         if (Role::where('user_id', $request->user_id)->get()->count() > 0) {
             Role::where('user_id', $request->user_id)->update([
-                'role_id' => 1,
+                'role_id' => $role_id,
+                'divisi_id' => 0,
                 'jabatan_id' => $request->jabatan_id,
             ]);
         } else {
             Role::create([
                 'user_id' => $request->user_id,
-                'role_id' => 1,
+                'role_id' => $role_id,
+                'divisi_id' => 0,
                 'jabatan_id' => $request->jabatan_id,
             ]);
         }
