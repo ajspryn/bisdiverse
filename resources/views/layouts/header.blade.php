@@ -6,14 +6,13 @@
     <meta name="keywords" content="Bisdiverse,Bisdiverse.com,Sistem Akademik,Bisnis Digital,Sistem Terintegrasi Bisnis Digital,Fakultas Ekonomi Dan Bisnis,Unpak,Universitas Unpak,FEB,Bisdi,Bogor">
     <meta name="author" content="Adji Supriyono">
     <title>@yield('title')</title>
-    <link rel="apple-touch-icon" href="{{ url('/') }}/pwa.png">
-    <link rel="shortcut icon" type="image/x-icon" href="{{ url('/') }}/pwa.png">
+    <link rel="apple-touch-icon" href="{{ url('/') }}/favicon.png">
+    <link rel="shortcut icon" type="image/x-icon" href="{{ url('/') }}/favicon.png">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500;1,600" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
     <!-- PWA  -->
     <meta name="theme-color" content="#fffff" />
-    <link rel="apple-touch-icon" href="{{ url('/') }}/pwa.png">
     <link rel="manifest" href="{{ asset('/manifest.json') }}">
 
     <!-- BEGIN: Vendor CSS-->
@@ -57,107 +56,5 @@
     <!-- BEGIN: Custom CSS-->
     <link rel="stylesheet" type="text/css" href="{{ url('/') }}/assets/css/style.css">
     <!-- END: Custom CSS-->
-
-    <script>
-        $(document).ready(function() {
-            // Load Provinsi saat halaman dimuat
-            loadProvinces();
-
-            // Load Kabupaten/Kota saat Provinsi dipilih
-            $('#province').change(function() {
-                var provinceId = $(this).val();
-                loadCities(provinceId);
-            });
-
-            // Load Kecamatan saat Kabupaten/Kota dipilih
-            $('#city').change(function() {
-                var cityId = $(this).val();
-                loadDistricts(cityId);
-            });
-
-            // Load Kelurahan/Desa saat Kecamatan dipilih
-            $('#district').change(function() {
-                var districtId = $(this).val();
-                loadSubdistricts(districtId);
-            });
-
-            // Load Kode Pos saat Kelurahan/Desa dipilih
-            $('#subdistrict').change(function() {
-                var subdistrictId = $(this).val();
-                loadPostcode(subdistrictId);
-            });
-        });
-
-        function loadProvinces() {
-            $.ajax({
-                url: 'https://dev.farizdotid.com/api/daerahindonesia/provinsi',
-                type: 'GET',
-                dataType: 'json',
-                success: function(result) {
-                    var options = '<option value="">Pilih Provinsi</option>';
-                    $.each(result.provinsi, function(index, value) {
-                        options += '<option value="' + value.nama + '">' + value.nama + '</option>';
-                    });
-                    $('#province').html(options);
-                }
-            });
-        }
-
-        function loadCities(provinceId) {
-            $.ajax({
-                url: 'https://dev.farizdotid.com/api/daerahindonesia/kota?id_provinsi=' + provinceId,
-                type: 'GET',
-                dataType: 'json',
-                success: function(result) {
-                    var options = '<option value="">Pilih Kabupaten/Kota</option>';
-                    $.each(result.kota_kabupaten, function(index, value) {
-                        options += '<option value="' + value.nama + '">' + value.nama + '</option>';
-                    });
-                    $('#city').html(options);
-                }
-            });
-        }
-
-        function loadDistricts(cityId) {
-            $.ajax({
-                url: 'https://dev.farizdotid.com/api/daerahindonesia/kecamatan?id_kota=' + cityId,
-                type: 'GET',
-                dataType: 'json',
-                success: function(result) {
-                    var options = '<option value="">Pilih Kecamatan</option>';
-                    $.each(result.kecamatan, function(index, value) {
-                        options += '<option value="' + value.nama + '">' + value.nama + '</option>';
-                    });
-                    $('#district').html(options);
-                }
-            });
-        }
-
-        function loadSubdistricts(districtId) {
-            $.ajax({
-                url: 'https://dev.farizdotid.com/api/daerahindonesia/kelurahan?id_kecamatan=' + districtId,
-                type: 'GET',
-                dataType: 'json',
-                success: function(result) {
-                    var options = '<option value="">Pilih Kelurahan/Desa</option>';
-                    $.each(result.kelurahan, function(index, value) {
-                        options += '<option value="' + value.nama + '">' + value.nama + '</option>';
-                    });
-                    $('#subdistrict').html(options);
-                }
-            });
-        }
-
-        function loadPostcode(subdistrictId) {
-            $.ajax({
-                url: 'https://dev.farizdotid.com/api/daerahindonesia/kelurahan?id_kelurahan=' + subdistrictId,
-                type: 'GET',
-                dataType: 'json',
-                success: function(result) {
-                    $('#postcode').val(result.kelurahan.kode_pos);
-                }
-            });
-        }
-    </script>
 
 </head>

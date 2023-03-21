@@ -14,7 +14,6 @@
 
 
     <!-- BEGIN: Main Menu-->
-    {{-- @include('layouts.menu') --}}
     @yield('menu')
     <!-- END: Main Menu-->
     @include('sweetalert::alert')

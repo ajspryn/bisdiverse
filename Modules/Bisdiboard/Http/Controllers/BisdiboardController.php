@@ -20,11 +20,12 @@ class BisdiboardController extends Controller
         $user_id = Auth::user()->id;
         $classified = BoardProject::whereHas('task', function ($query) use ($user_id) {
             $query->where('assigned_to', $user_id);
-        })->with('task')->where('jenis', 'Classified')->get();
-        $public = BoardProject::with('task')->select()->where('user_id', $user_id)->get();
-        // return $classified;
+        })->with('task')->get();
+        $public = BoardProject::with('task')->select()->where('jenis', 'Public')->get();
+        $privat = BoardProject::with('task')->select()->where('jenis', 'Classified')->where('user_id', $user_id)->get();
+        // return $classified->Merge($privat)->Merge($public);
         return view('bisdiboard::dashboard', [
-            'projects' => $classified->Merge($public),
+            'projects' => $classified->Merge($privat)->Merge($public),
         ]);
     }
 
