@@ -205,7 +205,15 @@
                                 <div class="modal-dialog modal-dialog-centered">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalCenterTitle">Form Edit Project</h5>
+                                            <h5 class="modal-title pe-1" id="exampleModalCenterTitle">Form Edit Project</h5>
+                                            <form action="/bisdiboard/project/{{ $project->id }}" method="post" class="d-inline">
+                                                @method('delete')
+                                                @csrf
+                                                <a href="#" class="btn btn-outline-danger btn-sm" onclick="return Swal.fire({title:'Apakah Anda yakin ingin menghapus Project ini?',icon:'warning',showCancelButton:true,confirmButtonText:'Ya',cancelButtonText:'Tidak',reverseButtons:true}).then((result) => {if (result.isConfirmed) {this.closest('form').submit();} else {return false;}});">
+                                                    <i data-feather="trash" class="me-50"></i>
+                                                    <span>Delete</span>
+                                                </a>
+                                            </form>
                                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                         </div>
                                         <form method="POST" action="/bisdiboard/project">

@@ -17,9 +17,11 @@
                     <div class="sidebar-content todo-sidebar">
                         <div class="todo-app-menu">
                             <div class="add-task">
-                                <button type="button" class="btn btn-primary w-100" data-bs-toggle="modal" data-bs-target="#exampleModalCenter"><i data-feather="plus"></i>
-                                    Add Task
-                                </button>
+                                @if ($project->user_id == Auth::user()->id)
+                                    <button type="button" class="btn btn-primary w-100" data-bs-toggle="modal" data-bs-target="#exampleModalCenter"><i data-feather="plus"></i>
+                                        Add Task
+                                    </button>
+                                @endif
                             </div>
                             <div class="sidebar-menu-list">
                                 <div class="list-group list-group-filters">
@@ -251,7 +253,17 @@
                                             <div class="modal-dialog modal-dialog-centered">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
-                                                        <h5 class="modal-title" id="exampleModalCenterTitle">Form Edit Task</h5>
+                                                        <h5 class="modal-title pe-1" id="exampleModalCenterTitle">Form Edit Task</h5>
+                                                        @if ($project->user_id == Auth::user()->id)
+                                                            <form action="/bisdiboard/task/{{ $task->id }}" method="post" class="d-inline">
+                                                                @method('delete')
+                                                                @csrf
+                                                                <a href="#" class="btn btn-outline-danger btn-sm" onclick="return Swal.fire({title:'Apakah Anda yakin ingin menghapus Taks ini?',icon:'warning',showCancelButton:true,confirmButtonText:'Ya',cancelButtonText:'Tidak',reverseButtons:true}).then((result) => {if (result.isConfirmed) {this.closest('form').submit();} else {return false;}});">
+                                                                    <i data-feather="trash" class="me-50"></i>
+                                                                    <span>Delete</span>
+                                                                </a>
+                                                            </form>
+                                                        @endif
                                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                     </div>
                                                     <form method="POST" action="/bisdiboard/task/{{ $task->id }}">
@@ -304,7 +316,7 @@
                                                             <div class="mb-1">
                                                                 <label class="form-label" class="d-block">Status</label>
                                                                 <div class="form-check my-50">
-                                                                    <input type="radio" id="validationRadio3" name="status" value="Todo" class="form-check-input" required {{ old('status', $task->status) == 'To Do' ? 'checked' : '' }} />
+                                                                    <input type="radio" id="validationRadio3" name="status" value="To Do" class="form-check-input" required {{ old('status', $task->status) == 'To Do' ? 'checked' : '' }} />
                                                                     <label class="form-check-label" for="validationRadio3"><span class="badge rounded-pill badge-light-primary">To Do</span></label>
                                                                 </div>
                                                                 <div class="form-check my-50">

@@ -23,6 +23,7 @@ use Google_Service_Calendar_EventDateTime;
 use Modules\Bisdiboard\Entities\BoardTask;
 use Google_Service_Gmail_MessagePartHeader;
 use Illuminate\Contracts\Support\Renderable;
+use Modules\Bisdiboard\Entities\BoardProject;
 
 class TaskController extends Controller
 {
@@ -115,7 +116,7 @@ class TaskController extends Controller
         }
         return view('bisdiboard::task', [
             'tasks' => $tasks,
-            'project' => $id,
+            'project' => BoardProject::where('id', $id)->get()->first(),
         ]);
     }
 
@@ -159,6 +160,7 @@ class TaskController extends Controller
      */
     public function destroy($id)
     {
-        //
+        BoardTask::destroy('id', $id);
+        return redirect()->back()->with('success', 'Task berhasil di Hapus');
     }
 }
