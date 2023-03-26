@@ -6,10 +6,10 @@
         </div>
     @endforeach
 
-    @if ($todos->count())
-        {{-- <button class="btn btn-danger" wire:click.prevent="deleteSelected">Delete Selected</button> --}}
+    {{-- @if ($todos->count())
+        <button class="btn btn-danger" wire:click.prevent="deleteSelected">Delete Selected</button>
         <button class="btn btn-primary" wire:click.prevent="markAllAsCompleted">Mark All as Completed</button>
-    @endif
+    @endif --}}
 </div>
 
 {{-- <div class="collapse mb-1" id="collapseExample">
