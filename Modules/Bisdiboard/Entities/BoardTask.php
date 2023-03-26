@@ -4,6 +4,7 @@ namespace Modules\Bisdiboard\Entities;
 
 use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
+use Modules\Bisdiboard\Entities\BoardTodo;
 use Modules\Bisdiboard\Entities\BoardComment;
 use Modules\Bisdiboard\Entities\BoardProject;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -29,6 +30,11 @@ class BoardTask extends Model
     public function comment()
     {
         return $this->hasMany(BoardComment::class, 'task_id', 'id');
+    }
+
+    public function todo()
+    {
+        return $this->hasMany(BoardTodo::class, 'task_id', 'id');
     }
 
     protected static function newFactory()

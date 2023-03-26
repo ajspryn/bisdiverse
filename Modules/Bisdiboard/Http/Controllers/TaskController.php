@@ -17,6 +17,7 @@ use Google_Service_Gmail_Message;
 use Google_Service_Calendar_Event;
 // use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Mail;
 use Google_Service_Gmail_MessagePart;
 use Google_Service_Calendar_EventDateTime;
@@ -109,6 +110,10 @@ class TaskController extends Controller
      */
     public function show($id)
     {
+        // $response = Http::get('http://www.bisdiverse.test/bisdiboard/todo/15', [
+        //     'completed' => 'true'
+        // ]);
+        // return $response;
         if (request('prioritas')) {
             $tasks = BoardTask::with('user')->select()->where('project_id', $id)->where('prioritas', request('prioritas'))->get();
         } else {

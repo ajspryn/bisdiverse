@@ -40,24 +40,24 @@
                                     <h6 class="section-label mb-1">Priority</h6>
                                 </div>
                                 <div class="list-group list-group-labels">
-                                    <form action="/bisdiboard/task/{{ $project }}">
+                                    <form action="/bisdiboard/task/{{ $project->id }}">
                                         <button type="submit" class="list-group-item list-group-item-action d-flex align-items-center">
                                             <span class="bullet bullet-sm bullet-primary me-1"></span>All
                                         </button>
                                     </form>
-                                    <form action="/bisdiboard/task/{{ $project }}">
+                                    <form action="/bisdiboard/task/{{ $project->id }}">
                                         <input type="hidden" name="prioritas" value="Low">
                                         <button type="submit" class="list-group-item list-group-item-action d-flex align-items-center">
                                             <span class="bullet bullet-sm bullet-success me-1"></span>Low
                                         </button>
                                     </form>
-                                    <form action="/bisdiboard/task/{{ $project }}">
+                                    <form action="/bisdiboard/task/{{ $project->id }}">
                                         <input type="hidden" name="prioritas" value="Medium">
                                         <button type="submit" class="list-group-item list-group-item-action d-flex align-items-center">
                                             <span class="bullet bullet-sm bullet-warning me-1"></span>Medium
                                         </button>
                                     </form>
-                                    <form action="/bisdiboard/task/{{ $project }}">
+                                    <form action="/bisdiboard/task/{{ $project->id }}">
                                         <input type="hidden" name="prioritas" value="High">
                                         <button type="submit" class="list-group-item list-group-item-action d-flex align-items-center">
                                             <span class="bullet bullet-sm bullet-danger me-1"></span>High
@@ -174,6 +174,20 @@
                                                         <p class="card-text">
                                                             {{ $task->deskripsi }}
                                                         </p>
+                                                        <button class="btn btn-primary me-1 mb-1" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample"><i data-feather="check-square" class="me-50"></i>
+                                                            Add Todo
+                                                        </button>
+                                                        <div class="collapse mb-1" id="collapseExample">
+                                                            <livewire:form-todo taskid="{{ $task->id }}" />
+                                                        </div>
+                                                        <div class="card">
+                                                            <div class="card-content" id="todo-list">
+                                                                <div class="card-body">
+                                                                    <livewire:todo-list :taskid="$task->id" />
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        {{-- <livewire:todo-list :taskid="$task->id" /> --}}
                                                         <!-- like share -->
                                                         <div class="row d-flex justify-content-start align-items-center flex-wrap pb-50">
                                                             <div class="col-sm-6 d-flex justify-content-between justify-content-sm-start mb-2">
@@ -421,7 +435,7 @@
                             <label class="form-label">Description</label>
                             <textarea class="form-control" name="deskripsi" rows="3"></textarea>
                         </div>
-                        <input type="hidden" name="project_id" value="{{ $project }}">
+                        <input type="hidden" name="project_id" value="{{ $project->id }}">
                     </div>
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-primary">Submit</button>
