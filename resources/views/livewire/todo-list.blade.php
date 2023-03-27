@@ -5,11 +5,6 @@
             <label class="form-check-label" for="inlineCheckbox{{ $todo->id }}">{!! $todo->status == 'checked' ? '<del>' : '' !!}{{ $todo->todo }}{!! $todo->status == 'checked' ? '<del>' : '' !!}</label>
         </div>
     @endforeach
-
-    {{-- @if ($todos->count())
-        <button class="btn btn-danger" wire:click.prevent="deleteSelected">Delete Selected</button>
-        <button class="btn btn-primary" wire:click.prevent="markAllAsCompleted">Mark All as Completed</button>
-    @endif --}}
 </div>
 
 {{-- <div class="collapse mb-1" id="collapseExample">
