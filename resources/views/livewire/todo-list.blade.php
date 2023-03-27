@@ -2,7 +2,7 @@
     @foreach ($todos as $todo)
         <div class="form-check form-check-inline mb-1">
             <input class="form-check-input" type="checkbox" id="inlineCheckbox{{ $todo->id }}" wire:click.prevent="markAsCompleted('{{ $todo->id }}')" value="checked" {{ $todo->status == 'checked' ? 'checked' : '' }} />
-            <label class="form-check-label" for="inlineCheckbox{{ $todo->id }}">{{ $todo->todo }}</label>
+            <label class="form-check-label" for="inlineCheckbox{{ $todo->id }}">{!! $todo->status == 'checked' ? '<del>' : '' !!}{{ $todo->todo }}{!! $todo->status == 'checked' ? '<del>' : '' !!}</label>
         </div>
     @endforeach
 
