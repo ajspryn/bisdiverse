@@ -14,8 +14,7 @@ use Modules\Mahasiswa\Http\Controllers\ProfileMahasiswaController;
 |
 */
 
-Route::prefix('mahasiswa')->middleware(['auth:sanctum', 'verified', 'role:1', 'jabatan:3'])->group(function() {
-    // Route::get('/', 'MahasiswaController@index');
+Route::prefix('mahasiswa')->middleware(['auth:sanctum', 'verified', 'role:1', 'jabatan:3'])->group(function () {
     Route::resource('/', MahasiswaController::class);
     Route::resource('/profile', ProfileMahasiswaController::class);
 });
