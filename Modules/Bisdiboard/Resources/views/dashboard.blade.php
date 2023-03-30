@@ -564,11 +564,6 @@
                                                                                     </div>
                                                                                 </div>
                                                                                 <div class="todo-item-action">
-                                                                                    @if ($task->project->user_id == Auth::user()->id || $task->assigned_to == Auth::user()->id)
-                                                                                        <div class="me-1">
-                                                                                            <button type="submit" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#edit{{ $task->id }}"><i data-feather="edit"></i>Edit</button>
-                                                                                        </div>
-                                                                                    @endif
                                                                                     <div class="badge-wrapper me-1">
                                                                                         @if ($task->status == 'To Do')
                                                                                             <span class="badge rounded-pill badge-light-primary">To Do</span>
