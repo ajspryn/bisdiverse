@@ -258,7 +258,7 @@
                                                     <p class="card-text">task with a todo that is due</p>
                                                     {{-- <h6 class="mb-75">Basic price is $130</h6> --}}
                                                     <div class="accordion accordion-margin mt-2" id="faq-cancellation-qna">
-                                                        @foreach ($taskss->wherenot('batas_waktu', '=>', Carbon\Carbon::now())->limit(5)->get() as $task)
+                                                        @foreach ($taskss->limit(5)->get() as $task)
                                                             <div class="card accordion-item">
                                                                 <h2 class="accordion-header">
                                                                     <button class="accordion-button collapsed" data-bs-toggle="collapse" role="button" data-bs-target="#task{{ $task->id }}" aria-expanded="false" aria-controls="task{{ $task->id }}">

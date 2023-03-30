@@ -27,7 +27,7 @@ class BisdiboardController extends Controller
         // return $classified->Merge($privat)->Merge($public);
         return view('bisdiboard::dashboard', [
             'projects' => $classified->Merge($privat)->Merge($public),
-            'taskss' => BoardTask::where('batas_waktu', '<=', Carbon::now())->where('assigned_to', Auth::user()->id)->orderBy('batas_waktu', 'desc'),
+            'taskss' => BoardTask::where('batas_waktu', '<=', Carbon::now()->format('Y-M-Y'))->wherenot('status', 'done')->where('assigned_to', Auth::user()->id)->orderBy('batas_waktu', 'desc'),
         ]);
     }
 
