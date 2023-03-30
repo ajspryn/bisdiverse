@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Modules\Bisdiboard\Entities\Project;
 use Illuminate\Contracts\Support\Renderable;
 use Modules\Bisdiboard\Entities\BoardProject;
+use Modules\Bisdiboard\Entities\BoardTask;
 
 class ProjectController extends Controller
 {
@@ -92,6 +93,7 @@ class ProjectController extends Controller
     public function destroy($id)
     {
         BoardProject::destroy('id', $id);
+        BoardTask::destroy('project_id', $id);
         return redirect()->back()->with('success', 'Project berhasil di Hapus');
     }
 }
