@@ -173,13 +173,15 @@
                                                         <div class="collapse mb-1" id="collapseExample">
                                                             <livewire:form-todo taskid="{{ $task->id }}" />
                                                         </div>
-                                                        <div class="card">
+                                                        <livewire:todo-list :taskid="$task->id" />
+
+                                                        {{-- <div class="card">
                                                             <div class="card-content" id="todo-list">
                                                                 <div class="card-body">
                                                                     <livewire:todo-list :taskid="$task->id" />
                                                                 </div>
                                                             </div>
-                                                        </div>
+                                                        </div> --}}
                                                         <!-- like share -->
                                                         <div class="row d-flex justify-content-start align-items-center flex-wrap pb-50">
                                                             <div class="col-sm-6 d-flex justify-content-between justify-content-sm-start mb-2">
@@ -307,35 +309,35 @@
                                                             <div class="mb-1">
                                                                 <label class="form-label" class="d-block">Priority</label>
                                                                 <div class="form-check my-50">
-                                                                    <input type="radio" id="validationRadio3" name="prioritas" value="High" class="form-check-input" required {{ old('prioritas', $task->prioritas) == 'High' ? 'checked' : '' }} />
-                                                                    <label class="form-check-label" for="validationRadio3"><span class="badge rounded-pill badge-light-danger">High</span></label>
+                                                                    <input type="radio" id="validationRadio1" name="prioritas" value="High" class="form-check-input" required {{ old('prioritas', $task->prioritas) == 'High' ? 'checked' : '' }} />
+                                                                    <label class="form-check-label" for="validationRadio1"><span class="badge rounded-pill badge-light-danger">High</span></label>
                                                                 </div>
                                                                 <div class="form-check my-50">
-                                                                    <input type="radio" id="validationRadio4" name="prioritas" value="Medium" class="form-check-input" required {{ old('prioritas', $task->prioritas) == 'Medium' ? 'checked' : '' }} />
-                                                                    <label class="form-check-label" for="validationRadio3"><span class="badge rounded-pill badge-light-warning">Medium</span></label>
+                                                                    <input type="radio" id="validationRadio2" name="prioritas" value="Medium" class="form-check-input" required {{ old('prioritas', $task->prioritas) == 'Medium' ? 'checked' : '' }} />
+                                                                    <label class="form-check-label" for="validationRadio2"><span class="badge rounded-pill badge-light-warning">Medium</span></label>
                                                                 </div>
                                                                 <div class="form-check">
-                                                                    <input type="radio" id="validationRadio5" name="prioritas" value="Low" class="form-check-input" required {{ old('prioritas', $task->prioritas) == 'Low' ? 'checked' : '' }} />
-                                                                    <label class="form-check-label" for="validationRadio4"><span class="badge rounded-pill badge-light-success">Low</span></label>
+                                                                    <input type="radio" id="validationRadio3" name="prioritas" value="Low" class="form-check-input" required {{ old('prioritas', $task->prioritas) == 'Low' ? 'checked' : '' }} />
+                                                                    <label class="form-check-label" for="validationRadio3"><span class="badge rounded-pill badge-light-success">Low</span></label>
                                                                 </div>
                                                             </div>
                                                             <div class="mb-1">
                                                                 <label class="form-label" class="d-block">Status</label>
                                                                 <div class="form-check my-50">
-                                                                    <input type="radio" id="validationRadio3" name="status" value="To Do" class="form-check-input" required {{ old('status', $task->status) == 'To Do' ? 'checked' : '' }} />
-                                                                    <label class="form-check-label" for="validationRadio3"><span class="badge rounded-pill badge-light-primary">To Do</span></label>
+                                                                    <input type="radio" id="validationRadio4" name="status" value="To Do" class="form-check-input" required {{ old('status', $task->status) == 'To Do' ? 'checked' : '' }} />
+                                                                    <label class="form-check-label" for="validationRadio4"><span class="badge rounded-pill badge-light-primary">To Do</span></label>
                                                                 </div>
                                                                 <div class="form-check my-50">
-                                                                    <input type="radio" id="validationRadio4" name="status" value="In Progress" class="form-check-input" required {{ old('status', $task->status) == 'In Progress' ? 'checked' : '' }} />
-                                                                    <label class="form-check-label" for="validationRadio3"><span class="badge rounded-pill badge-light-info">In Progress</span></label>
+                                                                    <input type="radio" id="validationRadio5" name="status" value="In Progress" class="form-check-input" required {{ old('status', $task->status) == 'In Progress' ? 'checked' : '' }} />
+                                                                    <label class="form-check-label" for="validationRadio5"><span class="badge rounded-pill badge-light-info">In Progress</span></label>
                                                                 </div>
                                                                 <div class="form-check my-50">
-                                                                    <input type="radio" id="validationRadio5" name="status" value="On Hold" class="form-check-input" required {{ old('status', $task->status) == 'On Hold' ? 'checked' : '' }} />
-                                                                    <label class="form-check-label" for="validationRadio4"><span class="badge rounded-pill badge-light-danger">On Hold</span></label>
+                                                                    <input type="radio" id="validationRadio6" name="status" value="On Hold" class="form-check-input" required {{ old('status', $task->status) == 'On Hold' ? 'checked' : '' }} />
+                                                                    <label class="form-check-label" for="validationRadio6"><span class="badge rounded-pill badge-light-danger">On Hold</span></label>
                                                                 </div>
                                                                 <div class="form-check">
-                                                                    <input type="radio" id="validationRadio5" name="status" value="Done" class="form-check-input" required {{ old('status', $task->status) == 'Done' ? 'checked' : '' }} />
-                                                                    <label class="form-check-label" for="validationRadio4"><span class="badge rounded-pill badge-light-success">Done</span></label>
+                                                                    <input type="radio" id="validationRadio7" name="status" value="Done" class="form-check-input" required {{ old('status', $task->status) == 'Done' ? 'checked' : '' }} />
+                                                                    <label class="form-check-label" for="validationRadio7"><span class="badge rounded-pill badge-light-success">Done</span></label>
                                                                 </div>
                                                             </div>
                                                             <div class="mb-1">

@@ -2,6 +2,7 @@
 
 namespace Modules\Bisdiboard\Http\Controllers;
 
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -26,6 +27,7 @@ class BisdiboardController extends Controller
         // return $classified->Merge($privat)->Merge($public);
         return view('bisdiboard::dashboard', [
             'projects' => $classified->Merge($privat)->Merge($public),
+            'taskss' => BoardTask::where('batas_waktu', '<=', Carbon::now())->where('assigned_to', Auth::user()->id)->orderBy('batas_waktu', 'desc'),
         ]);
     }
 
