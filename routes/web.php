@@ -24,7 +24,7 @@ use App\Http\Controllers\FormSkpdController;
 Auth::routes();
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index']);
-// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::middleware(['auth:sanctum', 'verified'])->resource('/profile', UserController::class);
 
 Route::get('/jadwal', function () {

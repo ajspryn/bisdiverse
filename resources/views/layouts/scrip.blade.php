@@ -26,10 +26,12 @@
 <script src="{{ url('/') }}/app-assets/vendors/js/editors/quill/highlight.min.js"></script>
 <script src="{{ url('/') }}/app-assets/vendors/js/editors/quill/quill.min.js"></script>
 <script src="{{ url('/') }}/app-assets/vendors/js/extensions/dragula.min.js"></script>
-<script src="../../../app-assets/vendors/js/forms/wizard/bs-stepper.min.js"></script>
+<script src="{{ url('/') }}/app-assets/vendors/js/forms/wizard/bs-stepper.min.js"></script>
 <!-- END: Page Vendor JS-->
 
 <!-- BEGIN: Theme JS-->
+<script src="{{ url('/') }}/app-assets/js/core/app-menu.js"></script>
+<script src="{{ url('/') }}/app-assets/js/core/app.js"></script>
 <script src="{{ url('/') }}/app-assets/js/core/app-menu.min.js"></script>
 <script src="{{ url('/') }}/app-assets/js/core/app.min.js"></script>
 <script src="{{ url('/') }}/app-assets/js/scripts/customizer.min.js"></script>
@@ -44,7 +46,7 @@
 <script src="{{ url('/') }}/app-assets/js/scripts/pages/page-profile.js"></script>
 <script src="{{ url('/') }}/app-assets/js/scripts/pages/app-todo.js"></script>
 <script src="{{ url('/') }}/app-assets/js/scripts/forms/form-validation.js"></script>
-<script src="../../../app-assets/js/scripts/forms/form-wizard.js"></script>
+<script src="{{ url('/') }}/app-assets/js/scripts/forms/form-wizard.js"></script>
 <!-- END: Page JS-->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 <script>
@@ -78,7 +80,7 @@
 
 @include('layouts.cs')
 
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+{{-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> --}}
 {{-- <script>
     $(document).ready(function() {
         // Mengambil form

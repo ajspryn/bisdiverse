@@ -42,14 +42,16 @@ class TodoList extends Component
 
     public function markAsCompleted($todoId)
     {
-
         BoardTodo::find($todoId)->update(['status' => 'checked']);
-        // $this->emit('todoAdded');
     }
 
     public function markAsUncompleted($todoId)
     {
         BoardTodo::find($todoId)->update(['status' => 'unchecked']);
-        // $this->emit('todoAdded');
+    }
+
+    public function deleteTodo($todoId)
+    {
+        BoardTodo::find($todoId)->delete();
     }
 }

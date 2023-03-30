@@ -29,12 +29,6 @@
                                         <i data-feather="mail" class="font-medium-3 me-50"></i>
                                         <span class="align-middle"> My Task</span>
                                     </a>
-                                    {{-- <a href="#" class="list-group-item list-group-item-action">
-                                        <i data-feather="check" class="font-medium-3 me-50"></i> <span class="align-middle">Completed</span>
-                                    </a>
-                                    <a href="#" class="list-group-item list-group-item-action">
-                                        <i data-feather="trash" class="font-medium-3 me-50"></i> <span class="align-middle">Deleted</span>
-                                    </a> --}}
                                 </div>
                                 <div class="mt-3 px-2 d-flex justify-content-between">
                                     <h6 class="section-label mb-1">Priority</h6>
@@ -95,11 +89,6 @@
                                     <div class="dropdown-menu dropdown-menu-end" aria-labelledby="todoActions">
                                         <a class="dropdown-item sort-asc" href="#">Sort A - Z</a>
                                         <a class="dropdown-item sort-desc" href="#">Sort Z - A</a>
-                                        <a class="dropdown-item" href="#">Sort Assignee</a>
-                                        <a class="dropdown-item" href="#">Sort Due Date</a>
-                                        <a class="dropdown-item" href="#">Sort Today</a>
-                                        <a class="dropdown-item" href="#">Sort 1 Week</a>
-                                        <a class="dropdown-item" href="#">Sort 1 Month</a>
                                     </div>
                                 </div>
                             </div>
@@ -121,6 +110,10 @@
                                                         <span class="todo-title">{{ $task->nama }}</span>
                                                         <i data-feather="message-square" class="text-body font-medium-3 me-50"></i>
                                                         <span class="text-muted me-1">{{ $task->comment->count() }}</span>
+                                                        @if ($task->todo->count() > 0)
+                                                            <i data-feather="check-square" class="text-body font-medium-3 me-50"></i>
+                                                            <span class="text-muted me-1">{{ $task->todo->count() }}/{{ $task->todo->where('status', 'checked')->count() }}</span>
+                                                        @endif
                                                     </div>
                                                 </div>
                                                 <div class="todo-item-action">
@@ -187,7 +180,6 @@
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        {{-- <livewire:todo-list :taskid="$task->id" /> --}}
                                                         <!-- like share -->
                                                         <div class="row d-flex justify-content-start align-items-center flex-wrap pb-50">
                                                             <div class="col-sm-6 d-flex justify-content-between justify-content-sm-start mb-2">
@@ -375,7 +367,6 @@
         </div>
     </div>
     <!-- END: Content-->
-
     <!-- Modal -->
     <div class="modal fade" id="exampleModalCenter" tabindex="-1" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
@@ -447,4 +438,5 @@
             </div>
         </div>
     </div>
+
 @endsection
