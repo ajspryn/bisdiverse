@@ -93,7 +93,7 @@ class ProjectController extends Controller
     public function destroy($id)
     {
         BoardProject::destroy('id', $id);
-        BoardTask::destroy('project_id', $id);
+        BoardTask::where('project_id', $id)->delete();
         return redirect()->back()->with('success', 'Project berhasil di Hapus');
     }
 }
