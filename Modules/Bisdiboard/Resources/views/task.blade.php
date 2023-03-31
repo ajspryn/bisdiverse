@@ -141,7 +141,7 @@
                                                             <span class="badge rounded-pill badge-light-success">Low</span>
                                                         @endif
                                                     </div>
-                                                    <span class="text-nowrap text-muted me-1">{{ Carbon\Carbon::now()->diffInDays($task->batas_waktu) == 0 ? 'Batas Waktu Habis' : Carbon\Carbon::now()->diffInDays($task->batas_waktu) . ' ' . 'Hari Lagi' }}</span>
+                                                    <span class="text-nowrap text-muted me-1">{{ Carbon\Carbon::now()->diffInDays($task->batas_waktu) == 0 ? 'Waktu Habis' : Carbon\Carbon::now()->diffInDays($task->batas_waktu) . ' ' . 'Hari Lagi' }}</span>
                                                     <div class="avatar">
                                                         <img src="{{ asset('storage/' . $task->user->avatar) }}" alt="user-avatar" height="32" width="32" />
                                                     </div>

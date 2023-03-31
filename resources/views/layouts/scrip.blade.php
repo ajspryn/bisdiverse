@@ -30,8 +30,6 @@
 <!-- END: Page Vendor JS-->
 
 <!-- BEGIN: Theme JS-->
-<script src="{{ url('/') }}/app-assets/js/core/app-menu.js"></script>
-<script src="{{ url('/') }}/app-assets/js/core/app.js"></script>
 <script src="{{ url('/') }}/app-assets/js/core/app-menu.min.js"></script>
 <script src="{{ url('/') }}/app-assets/js/core/app.min.js"></script>
 <script src="{{ url('/') }}/app-assets/js/scripts/customizer.min.js"></script>
@@ -48,6 +46,7 @@
 <script src="{{ url('/') }}/app-assets/js/scripts/forms/form-validation.js"></script>
 <script src="{{ url('/') }}/app-assets/js/scripts/forms/form-wizard.js"></script>
 <!-- END: Page JS-->
+
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 <script>
     $(window).on('load', function() {
@@ -77,6 +76,14 @@
     }
 </script>
 
+<script src="{{ asset('/sw.js') }}"></script>
+<script>
+    if (!navigator.serviceWorker.controller) {
+        navigator.serviceWorker.register("/sw.js").then(function(reg) {
+            console.log("Service worker has been registered for scope: " + reg.scope);
+        });
+    }
+</script>
 
 @include('layouts.cs')
 
