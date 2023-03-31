@@ -59,4 +59,66 @@
     <link rel="stylesheet" type="text/css" href="{{ url('/') }}/assets/css/style.css">
     <!-- END: Custom CSS-->
 
+    <style>
+        .swal2-container {
+            z-index: 9999;
+        }
+    </style>
+    <style>
+        .loading1 {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            /* background-color: #fff; */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            backdrop-filter: blur(10px);
+        }
+
+        .spinner {
+            width: 60px;
+            height: 60px;
+            /* background-color: #333; */
+
+            margin: 100px auto;
+            -webkit-animation: sk-rotateplane 1.2s infinite ease-in-out;
+            animation: sk-rotateplane 1.2s infinite ease-in-out;
+        }
+
+        @-webkit-keyframes sk-rotateplane {
+            0% {
+                -webkit-transform: perspective(120px)
+            }
+
+            50% {
+                -webkit-transform: perspective(120px) rotateX(-180deg)
+            }
+
+            100% {
+                -webkit-transform: perspective(120px) rotateX(-180deg) rotateY(-180deg)
+            }
+        }
+
+        @keyframes sk-rotateplane {
+            0% {
+                transform: perspective(120px) rotateY(0deg) rotateX(0deg);
+                -webkit-transform: perspective(120px) rotateY(0deg) rotateX(0deg)
+            }
+
+            50% {
+                transform: perspective(120px) rotateY(180.1deg) rotateX(0deg);
+                -webkit-transform: perspective(120px) rotateY(180.1deg) rotateX(0deg)
+            }
+
+            100% {
+                transform: perspective(120px) rotateY(180deg) rotateX(179.9deg);
+                -webkit-transform: perspective(120px) rotateY(-180deg) rotateX(-179.9deg);
+            }
+        }
+    </style>
+
 </head>

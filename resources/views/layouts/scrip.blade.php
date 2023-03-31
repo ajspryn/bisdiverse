@@ -87,6 +87,18 @@
 
 @include('layouts.cs')
 
+<script>
+    $(document).ready(function() {
+        $('.loading1').show(); // Menampilkan spinner
+    });
+
+    $(window).on('load', function() {
+        $('.loading1').fadeOut('slow', function() {
+            $(this).remove(); // Menghapus spinner setelah konten halaman dimuat
+        });
+    });
+</script>
+
 {{-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> --}}
 {{-- <script>
     $(document).ready(function() {

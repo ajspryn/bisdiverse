@@ -5,13 +5,18 @@
 <!-- END: Head-->
 
 <!-- BEGIN: Body-->
+<div class="loading1">
+    <div class="spinner">
+        <img src="{{ url('/') }}/favicon.png" width="60" alt="">
+    </div>
+</div>
 
 <body class="horizontal-layout horizontal-menu  navbar-floating footer-static" data-open="hover" data-menu="horizontal-menu" data-col="">
+
 
     <!-- BEGIN: Header-->
     @include('layouts.navbar')
     <!-- END: Header-->
-
 
     <!-- BEGIN: Main Menu-->
     @yield('menu')
