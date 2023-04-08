@@ -31,7 +31,7 @@
             </div>
             <div class="content-body">
                 <!-- Basic multiple Column Form section start -->
-                <section id="multiple-column-form">
+                <section id="multiple-column-form ">
                     <div class="row">
                         <div class="col-12">
                             <div class="card">
@@ -238,6 +238,188 @@
                                 </div>
                             </div>
                         </div>
+                    </div>
+                </section>
+                <section class="form-control-repeater">
+                    <div class="row">
+                        <!-- Invoice repeater -->
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h4 class="card-title">KRS Mahasiswa</h4>
+                                </div>
+                                <div class="card-body">
+                                    <form action="/admin/krs" class="invoice-repeater" method="POST">
+                                        @csrf
+                                        <div data-repeater-list="krs">
+                                            @if ($mahasiswa->krs)
+                                                @foreach ($mahasiswa->krs as $krs)
+                                                    <div data-repeater-item>
+                                                        <div class="row d-flex align-items-end">
+                                                            <div class="col-md-4 col-12">
+                                                                <div class="mb-1">
+                                                                    <label class="form-label" for="matkul">Matakuliah</label>
+                                                                    <select id="matkul" name="matkul_kode" class="form-select" aria-label="Default select example" required>
+                                                                        <option label=""></option>
+                                                                        @foreach ($matkuls as $matkul)
+                                                                            <option value="{{ $matkul->kode }}" {{ $krs->matkul_kode == $matkul->kode ? 'selected' : '' }}>{{ $matkul->nama }}</option>
+                                                                        @endforeach
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-md-2 col-12">
+                                                                <div class="mb-1">
+                                                                    <label class="form-label" for="kelas_id">Kelas</label>
+                                                                    <select id="kelas_id" name="kelas" class="form-select" aria-label="Default select example" required>
+                                                                        <option value="">Silahkan Pilih Kelas</option>
+                                                                        @foreach ($kelass as $kelas)
+                                                                            <option value="{{ $kelas->kelas }} {{ $kelas->tahun }}" {{ $krs->kelas == $kelas->tahun ? 'selected' : '' }}>{{ $kelas->kelas }} ({{ $kelas->tahun }})</option>
+                                                                        @endforeach
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-md-2 col-12">
+                                                                <div class="mb-1">
+                                                                    <label class="form-label" for="kelas_id">Kelas Ujian</label>
+                                                                    <select id="kelas_ujian" name="kelas_ujian" class="form-select" aria-label="Default select example" required>
+                                                                        <option value="">Silahkan Pilih Kelas</option>
+                                                                        <option {{ $krs->kelas_ujian == 'A' ? 'selected' : '' }}>A</option>
+                                                                        <option {{ $krs->kelas_ujian == 'B' ? 'selected' : '' }}>B</option>
+                                                                        <option {{ $krs->kelas_ujian == 'C' ? 'selected' : '' }}>C</option>
+                                                                        <option {{ $krs->kelas_ujian == 'D' ? 'selected' : '' }}>D</option>
+                                                                        <option {{ $krs->kelas_ujian == 'E' ? 'selected' : '' }}>E</option>
+                                                                        <option {{ $krs->kelas_ujian == 'F' ? 'selected' : '' }}>F</option>
+                                                                        <option {{ $krs->kelas_ujian == 'G' ? 'selected' : '' }}>G</option>
+                                                                        <option {{ $krs->kelas_ujian == 'H' ? 'selected' : '' }}>H</option>
+                                                                        <option {{ $krs->kelas_ujian == 'I' ? 'selected' : '' }}>I</option>
+                                                                        <option {{ $krs->kelas_ujian == 'J' ? 'selected' : '' }}>J</option>
+                                                                        <option {{ $krs->kelas_ujian == 'K' ? 'selected' : '' }}>K</option>
+                                                                        <option {{ $krs->kelas_ujian == 'L' ? 'selected' : '' }}>L</option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-md-2 col-12">
+                                                                <div class="mb-1">
+                                                                    <label class="form-label" for="dosen_id">Dosen</label>
+                                                                    <select id="dosen_id" name="dosen_kds" class="form-select" aria-label="Default select example">
+                                                                        <option value="">Silahkan Pilih Dosen</option>
+                                                                        @foreach ($dosens as $dosen)
+                                                                            <option value="{{ $dosen->kds }}">{{ $dosen->nama }}</option>
+                                                                        @endforeach
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                            <input type="hidden" id="mahasiswa_ujian" class="form-input" name="mahasiswa_npm" value="{{ $mahasiswa->npm }}">
+                                                            <div class="col-md-2 col-12">
+                                                                <div class="mb-1">
+                                                                    <button class="btn btn-outline-danger text-nowrap px-1" data-repeater-delete type="button">
+                                                                        <i data-feather="x" class="me-25"></i>
+                                                                        <span>Delete</span>
+                                                                    </button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <hr />
+                                                    </div>
+                                                @endforeach
+                                            @else
+                                                <div data-repeater-item>
+                                                    <div class="row d-flex align-items-end">
+                                                        {{-- <div class="col-md-2 col-12">
+                                                        <div class="mb-1">
+                                                            <label class="form-label" for="npm">NPM</label>
+                                                            <input type="text" class="form-control" id="npm" aria-describedby="npm" name="mahasiswa_npm" value="{{ $mahasiswa->npm }}" readonly />
+                                                        </div>
+                                                    </div> --}}
+                                                        <div class="col-md-4 col-12">
+                                                            <div class="mb-1">
+                                                                <label class="form-label" for="matkul">Matakuliah</label>
+                                                                <select id="matkul" name="matkul_kode" class="form-select" aria-label="Default select example" required>
+                                                                    <option label=""></option>
+                                                                    @foreach ($matkuls as $matkul)
+                                                                        <option value="{{ $matkul->kode }}">{{ $matkul->nama }}</option>
+                                                                    @endforeach
+                                                                </select>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-md-2 col-12">
+                                                            <div class="mb-1">
+                                                                <label class="form-label" for="kelas_id">Kelas</label>
+                                                                <select id="kelas_id" name="kelas" class="form-select" aria-label="Default select example" required>
+                                                                    <option value="">Silahkan Pilih Kelas</option>
+                                                                    @foreach ($kelass as $kelas)
+                                                                        <option value="{{ $kelas->kelas }} {{ $kelas->tahun }}">{{ $kelas->kelas }} ({{ $kelas->tahun }})</option>
+                                                                    @endforeach
+                                                                </select>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-md-2 col-12">
+                                                            <div class="mb-1">
+                                                                <label class="form-label" for="kelas_id">Kelas Ujian</label>
+                                                                <select id="kelas_ujian" name="kelas_ujian" class="form-select" aria-label="Default select example" required>
+                                                                    <option value="">Silahkan Pilih Kelas</option>
+                                                                    <option>A</option>
+                                                                    <option>B</option>
+                                                                    <option>C</option>
+                                                                    <option>D</option>
+                                                                    <option>E</option>
+                                                                    <option>F</option>
+                                                                    <option>G</option>
+                                                                    <option>H</option>
+                                                                    <option>I</option>
+                                                                    <option>J</option>
+                                                                    <option>K</option>
+                                                                    <option>L</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-md-2 col-12">
+                                                            <div class="mb-1">
+                                                                <label class="form-label" for="dosen_id">Dosen</label>
+                                                                <select id="dosen_id" name="dosen_kds" class="form-select" aria-label="Default select example">
+                                                                    <option value="">Silahkan Pilih Dosen</option>
+                                                                    @foreach ($dosens as $dosen)
+                                                                        <option value="{{ $dosen->kds }}">{{ $dosen->nama }}</option>
+                                                                    @endforeach
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <input type="hidden" id="mahasiswa_ujian" class="form-input" name="mahasiswa_npm" value="{{ $mahasiswa->npm }}">
+                                                        <div class="col-md-2 col-12">
+                                                            <div class="mb-1">
+                                                                <button class="btn btn-outline-danger text-nowrap px-1" data-repeater-delete type="button">
+                                                                    <i data-feather="x" class="me-25"></i>
+                                                                    <span>Delete</span>
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <hr />
+                                                </div>
+                                            @endif
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <button class="btn btn-icon btn-primary" type="button" data-repeater-create>
+                                                    <i data-feather="plus" class="me-25"></i>
+                                                    <span>Add New</span>
+                                                </button>
+                                                <button class="btn btn-icon btn-primary" type="submit">
+                                                    <span>Submit</span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /Invoice repeater -->
                     </div>
                 </section>
             </div>

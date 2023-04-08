@@ -13,6 +13,8 @@ use Maatwebsite\Excel\Facades\Excel;
 use Laravolt\Avatar\Facade as Avatar;
 use Modules\Admin\Entities\Mahasiswa;
 use Illuminate\Contracts\Support\Renderable;
+use Modules\Admin\Entities\Dosen;
+use Modules\Admin\Entities\Matkul;
 
 class MahasiswaController extends Controller
 {
@@ -133,7 +135,8 @@ class MahasiswaController extends Controller
         return view('admin::mahasiswa.edit', [
             'kelass' => Kelas::all(),
             'mahasiswas' => Mahasiswa::all(),
-            //             'daftar' => Rfid::select()->where('id', $id)->get()->first(),
+            'matkuls' => Matkul::all(),
+            'dosens' => Dosen::all(),
             'mahasiswa' => Mahasiswa::select()->where('id', $id)->get()->first(),
         ]);
     }

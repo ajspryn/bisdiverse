@@ -135,118 +135,95 @@
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        {{-- <div class="col-md-3 col-sm-6 col-12 mb-2 mb-sm-0">
-                                                            <div class="d-flex flex-row">
-                                                                <div class="avatar bg-light-danger me-2">
-                                                                    <div class="avatar-content">
-                                                                        <i data-feather="box" class="avatar-icon"></i>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="my-auto">
-                                                                    <h4 class="fw-bolder mb-0">1.423k</h4>
-                                                                    <p class="card-text font-small-3 mb-0">Products</p>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-md-3 col-sm-6 col-12">
-                                                            <div class="d-flex flex-row">
-                                                                <div class="avatar bg-light-success me-2">
-                                                                    <div class="avatar-content">
-                                                                        <i data-feather="dollar-sign" class="avatar-icon"></i>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="my-auto">
-                                                                    <h4 class="fw-bolder mb-0">$9745</h4>
-                                                                    <p class="card-text font-small-3 mb-0">Revenue</p>
-                                                                </div>
-                                                            </div>
-                                                        </div> --}}
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="col-lg-4 col-12">
-                                            @php
-                                                $project = $projects->where('tgl_selesai', '<=', Carbon\carbon::now())->first();
-                                                $tasks = Modules\Bisdiboard\Entities\BoardTask::with('user')
-                                                    ->select()
-                                                    ->where('project_id', $project->id)
-                                                    ->get();
-                                                $selesai = $tasks->where('status', 'Done')->count();
-                                                $total = $tasks->count();
-                                            @endphp
-                                            <!-- App Design Card -->
-                                            <div class="col-lg-12 col-md-6 col-12">
-                                                <div class="card card-app-design">
-                                                    <div class="card-body">
-                                                        <span class="badge badge-light-primary badge-xl me-1">{{ Carbon\Carbon::parse($project->tgl_mulai)->format('d-F-Y') }} - {{ Carbon\Carbon::parse($project->tgl_selesai)->format('d-F-Y') }} </span>
-                                                        <h4 class="card-title mt-1 mb-75">{{ $project->nama }} <span class="section-label">({{ $project->kategori }})</span></h4>
-                                                        <p class="card-text mb-2">
-                                                            {{ $project->deskripsi }}
-                                                        </p>
-                                                        @if ($project->jenis == 'Classified')
-                                                            <span class="badge badge-light-warning">{{ $project->jenis }}</span>
-                                                        @elseif ($project->jenis == 'Public')
-                                                            <span class="badge badge-light-primary">{{ $project->jenis }}</span>
-                                                        @endif
-                                                        <div class="design-group mt-1">
-                                                            <h6 class="section-label">Dibuat Oleh</h6>
-                                                            <div class="d-flex flex-row align-items-center">
-                                                                <div class="avatar">
-                                                                    <img src="{{ asset('storage/' . $project->user->avatar) }}" alt="avatar" height="38" width="38" />
-                                                                </div>
-                                                                <div class="ms-50">
-                                                                    <h6 class="mb-0"> {{ $project->user->name }}</h6>
-                                                                    <span>{{ $project->user->email }}</span>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="design-group">
-                                                            <h6 class="section-label">Members</h6>
-                                                            <div class="avatar-group">
-                                                                @foreach ($tasks->unique('assigned_to') as $member)
-                                                                    <div data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top" title="{{ $member->user->username }}" class="avatar pull-up">
-                                                                        <img src="{{ asset('storage/' . $member->user->avatar) }}" alt="Avatar" height="32" width="32" />
+                                            @if ($projects->where('tgl_selesai', '<=', Carbon\carbon::now()->format('d-m-Y'))->first())
+                                                @php
+                                                    $project = $projects->where('tgl_selesai', '<=', Carbon\carbon::now()->format('d-m-Y'))->first();
+                                                    $tasks = Modules\Bisdiboard\Entities\BoardTask::with('user')
+                                                        ->select()
+                                                        ->where('project_id', $project->id)
+                                                        ->get();
+                                                    $selesai = $tasks->where('status', 'Done')->count();
+                                                    $total = $tasks->count();
+                                                @endphp
+                                                @dump($project)
+                                                <!-- App Design Card -->
+                                                <div class="col-lg-12 col-md-6 col-12">
+                                                    <div class="card card-app-design">
+                                                        <div class="card-body">
+                                                            <span class="badge badge-light-primary badge-xl me-1">{{ Carbon\Carbon::parse($project->tgl_mulai)->format('d-F-Y') }} - {{ Carbon\Carbon::parse($project->tgl_selesai)->format('d-F-Y') }} </span>
+                                                            <h4 class="card-title mt-1 mb-75">{{ $project->nama }} <span class="section-label">({{ $project->kategori }})</span></h4>
+                                                            <p class="card-text mb-2">
+                                                                {{ $project->deskripsi }}
+                                                            </p>
+                                                            @if ($project->jenis == 'Classified')
+                                                                <span class="badge badge-light-warning">{{ $project->jenis }}</span>
+                                                            @elseif ($project->jenis == 'Public')
+                                                                <span class="badge badge-light-primary">{{ $project->jenis }}</span>
+                                                            @endif
+                                                            <div class="design-group mt-1">
+                                                                <h6 class="section-label">Dibuat Oleh</h6>
+                                                                <div class="d-flex flex-row align-items-center">
+                                                                    <div class="avatar">
+                                                                        <img src="{{ asset('storage/' . $project->user->avatar) }}" alt="avatar" height="38" width="38" />
                                                                     </div>
-                                                                @endforeach
+                                                                    <div class="ms-50">
+                                                                        <h6 class="mb-0"> {{ $project->user->name }}</h6>
+                                                                        <span>{{ $project->user->email }}</span>
+                                                                    </div>
+                                                                </div>
                                                             </div>
-                                                        </div>
-                                                        <div class="design-planning-wrapper">
-                                                            <div class="design-planning">
-                                                                <p class="card-text mb-25">Task Complete</p>
-                                                                <h6 class="mb-0">{{ $selesai }}/{{ $total }}</h6>
+                                                            <div class="design-group">
+                                                                <h6 class="section-label">Members</h6>
+                                                                <div class="avatar-group">
+                                                                    @foreach ($tasks->unique('assigned_to') as $member)
+                                                                        <div data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top" title="{{ $member->user->username }}" class="avatar pull-up">
+                                                                            <img src="{{ asset('storage/' . $member->user->avatar) }}" alt="Avatar" height="32" width="32" />
+                                                                        </div>
+                                                                    @endforeach
+                                                                </div>
                                                             </div>
-                                                            <div class="design-planning">
-                                                                <p class="card-text mb-25">Status</p>
-                                                                @if ($project->status == 'Active')
-                                                                    <span class="badge badge-light-info">{{ $project->status }}</span>
-                                                                @elseif ($project->status == 'Pending')
-                                                                    <span class="badge badge-light-warning">{{ $project->status }}</span>
-                                                                @elseif ($project->status == 'Canceled')
-                                                                    <span class="badge badge-light-danger">{{ $project->status }}</span>
+                                                            <div class="design-planning-wrapper">
+                                                                <div class="design-planning">
+                                                                    <p class="card-text mb-25">Task Complete</p>
+                                                                    <h6 class="mb-0">{{ $selesai }}/{{ $total }}</h6>
+                                                                </div>
+                                                                <div class="design-planning">
+                                                                    <p class="card-text mb-25">Status</p>
+                                                                    @if ($project->status == 'Active')
+                                                                        <span class="badge badge-light-info">{{ $project->status }}</span>
+                                                                    @elseif ($project->status == 'Pending')
+                                                                        <span class="badge badge-light-warning">{{ $project->status }}</span>
+                                                                    @elseif ($project->status == 'Canceled')
+                                                                        <span class="badge badge-light-danger">{{ $project->status }}</span>
+                                                                    @endif
+                                                                </div>
+                                                            </div>
+                                                            <div class="progress-wrapper mb-2">
+                                                                @if ($total > 0)
+                                                                    <div id="example-caption-1">Progres&hellip; {{ round(($selesai / $total) * 100) }}%</div>
+                                                                    <div class="progress progress-bar-primary">
+                                                                        <div class="progress-bar" role="progressbar" aria-valuenow="{{ round(($selesai / $total) * 100) }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ round(($selesai / $total) * 100) }}%" aria-describedby="example-caption-1"></div>
+                                                                    </div>
+                                                                @else
+                                                                    <div id="example-caption-1">Progres&hellip; 0%</div>
+                                                                    <div class="progress progress-bar-primary">
+                                                                        <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%" aria-describedby="example-caption-1"></div>
+                                                                    </div>
                                                                 @endif
                                                             </div>
                                                         </div>
-                                                        <div class="progress-wrapper mb-2">
-                                                            @if ($total > 0)
-                                                                <div id="example-caption-1">Progres&hellip; {{ round(($selesai / $total) * 100) }}%</div>
-                                                                <div class="progress progress-bar-primary">
-                                                                    <div class="progress-bar" role="progressbar" aria-valuenow="{{ round(($selesai / $total) * 100) }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ round(($selesai / $total) * 100) }}%" aria-describedby="example-caption-1"></div>
-                                                                </div>
-                                                            @else
-                                                                <div id="example-caption-1">Progres&hellip; 0%</div>
-                                                                <div class="progress progress-bar-primary">
-                                                                    <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%" aria-describedby="example-caption-1"></div>
-                                                                </div>
-                                                            @endif
+                                                        <div class="card-footer text-center">
+                                                            <a href="/bisdiboard/task/{{ $project->id }}" class="btn btn-primary">Detail</a>
                                                         </div>
                                                     </div>
-                                                    <div class="card-footer text-center">
-                                                        <a href="/bisdiboard/task/{{ $project->id }}" class="btn btn-primary">Detail</a>
-                                                    </div>
                                                 </div>
-                                            </div>
-                                            <!--/ App Design Card -->
+                                                <!--/ App Design Card -->
+                                            @endif
                                         </div>
                                         <div class="col-lg-8 col-12">
                                             <div class="card business-card">

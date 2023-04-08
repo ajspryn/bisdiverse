@@ -21,6 +21,7 @@ use Modules\Admin\Http\Controllers\MahasiswaController;
 use Modules\Admin\Http\Controllers\UserAdminController;
 use Modules\Admin\Http\Controllers\UserDosenController;
 use Modules\Admin\Http\Controllers\UserKaprodiController;
+use Modules\Admin\Http\Controllers\KrsMahasiswaController;
 use Modules\Admin\Http\Controllers\LihatPresensiController;
 use Modules\Admin\Http\Controllers\PrintPresensiController;
 use Modules\Admin\Http\Controllers\RekapPresensiController;
@@ -45,6 +46,7 @@ Route::prefix('admin')->middleware(['auth:sanctum', 'verified', 'role:0', 'divis
     Route::resource('/user-kaprodi', UserKaprodiController::class);
     Route::resource('/user-admin', UserAdminController::class);
     Route::resource('/akademik', AkademikController::class);
+    Route::resource('/krs', KrsMahasiswaController::class);
     Route::post('/akademik/enable/{AkademikName}', 'AkademikController@enable');
     Route::post('/akademik/disable/{AkademikName}', 'AkademikController@disable');
     // Route::post('/modules/{id}/toggle', [ModulesController::class, 'toggle']);

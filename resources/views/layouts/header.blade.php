@@ -53,6 +53,7 @@
     <link rel="stylesheet" type="text/css" href="{{ url('/') }}/app-assets/css/core/menu/menu-types/horizontal-menu.css">
     <link rel="stylesheet" type="text/css" href="{{ url('/') }}/app-assets/css/plugins/forms/form-quill-editor.css">
     <link rel="stylesheet" type="text/css" href="{{ url('/') }}/app-assets/css/plugins/forms/form-wizard.css">
+    <link rel="stylesheet" type="text/css" href="{{ url('/') }}/app-assets/css/pages/app-invoice.min.css">
     <!-- END: Page CSS-->
 
     <!-- BEGIN: Custom CSS-->

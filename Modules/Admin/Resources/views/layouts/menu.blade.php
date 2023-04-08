@@ -86,7 +86,13 @@
                         </li>
                         <li class="{{ Request::is('admin/dosen*') ? 'active' : 'nav-item' }}"data-menu=""><a class="dropdown-item d-flex align-items-center" href="/admin/dosen" data-bs-toggle="" data-i18n="Leaflet Maps"><i data-feather="user"></i><span data-i18n="Leaflet Maps">Dosen</span></a>
                         </li>
-                        <li class="{{ Request::is('admin/mahasiswa*') ? 'active' : 'nav-item' }}"data-menu=""><a class="dropdown-item d-flex align-items-center" href="/admin/mahasiswa" data-bs-toggle="" data-i18n="Leaflet Maps"><i data-feather="user"></i><span data-i18n="Leaflet Maps">Mahasiswa</span></a>
+                        <li class="dropdown dropdown-submenu" data-menu="dropdown-submenu"><a class="dropdown-item d-flex align-items-center dropdown-toggle" href="#" data-bs-toggle="dropdown" data-i18n="Second Level"><i data-feather="user"></i><span data-i18n="Second Level">mahasiswa</span></a>
+                            <ul class="dropdown-menu" data-bs-popper="none">
+                                <li class="{{ Request::is('admin/mahasiswa*') ? 'active' : 'nav-item' }}"data-menu=""><a class="dropdown-item d-flex align-items-center" href="/admin/mahasiswa" data-bs-toggle="" data-i18n="Leaflet Maps"><i data-feather="user"></i><span data-i18n="Leaflet Maps">Data Mahasiswa</span></a>
+                                </li>
+                                <li class="{{ Request::is('admin/krs*') ? 'active' : 'nav-item' }}"data-menu=""><a class="dropdown-item d-flex align-items-center" href="/admin/krs" data-bs-toggle="" data-i18n="Leaflet Maps"><i data-feather="book-open"></i><span data-i18n="Leaflet Maps">KRS Mahasiswa</span></a>
+                                </li>
+                            </ul>
                         </li>
                         <li class="{{ Request::is('admin/kelas*') ? 'active' : 'nav-item' }}"data-menu=""><a class="dropdown-item d-flex align-items-center" href="/admin/kelas" data-bs-toggle="" data-i18n="Profile"><i data-feather="bookmark"></i><span data-i18n="Profile">Kelas</span></a>
                         </li>
