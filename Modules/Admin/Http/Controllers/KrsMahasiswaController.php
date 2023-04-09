@@ -45,18 +45,20 @@ class KrsMahasiswaController extends Controller
      */
     public function store(Request $request)
     {
-        return $request;
+        // return $request;
         if ($request->file('upload_file')) {
             Excel::import(new KrsMahasiswaImport, request()->file('upload_file'));
             // Excel::import(new StokProductImport, request()->file('upload_file'));
             return redirect()->back()->with('success', 'Data KRS Berhasil Di Simpan');
         }
-        $npm = $request->krs[0]['mahasiswa_npm'];
+        $npm = $request->mahasiswa_npm;
         KrsMahasiswa::where('mahasiswa_npm', $npm)->delete();
-        foreach ($request->krs as $data) {
-            $input = $data;
-            $input['mahasiswa_npm'] = $npm;
-            KrsMahasiswa::create($input);
+        if ($request->krs) {
+            foreach ($request->krs as $data) {
+                $input = $data;
+                $input['mahasiswa_npm'] = $npm;
+                KrsMahasiswa::create($input);
+            }
         }
 
         return redirect()->back()->with('success', 'Data KRS Berhasil Di Simpan');

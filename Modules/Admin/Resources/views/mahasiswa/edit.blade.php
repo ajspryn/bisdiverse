@@ -252,7 +252,7 @@
                                     <form action="/admin/krs" class="invoice-repeater" method="POST">
                                         @csrf
                                         <div data-repeater-list="krs">
-                                            @if ($mahasiswa->krs)
+                                            @if ($mahasiswa->krs->count() > 0)
                                                 @foreach ($mahasiswa->krs as $krs)
                                                     <div data-repeater-item>
                                                         <div class="row d-flex align-items-end">
@@ -312,7 +312,6 @@
                                                                     </select>
                                                                 </div>
                                                             </div>
-                                                            <input type="hidden" id="mahasiswa_ujian" class="form-input" name="mahasiswa_npm" value="{{ $mahasiswa->npm }}">
                                                             <div class="col-md-2 col-12">
                                                                 <div class="mb-1">
                                                                     <button class="btn btn-outline-danger text-nowrap px-1" data-repeater-delete type="button">
@@ -390,7 +389,6 @@
                                                                 </select>
                                                             </div>
                                                         </div>
-                                                        <input type="hidden" id="mahasiswa_ujian" class="form-input" name="mahasiswa_npm" value="{{ $mahasiswa->npm }}">
                                                         <div class="col-md-2 col-12">
                                                             <div class="mb-1">
                                                                 <button class="btn btn-outline-danger text-nowrap px-1" data-repeater-delete type="button">
@@ -404,6 +402,7 @@
                                                 </div>
                                             @endif
                                         </div>
+                                        <input type="hidden" id="mahasiswa_npm" class="form-input" name="mahasiswa_npm" value="{{ $mahasiswa->npm }}">
                                         <div class="row">
                                             <div class="col-12">
                                                 <button class="btn btn-icon btn-primary" type="button" data-repeater-create>
