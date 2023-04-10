@@ -143,7 +143,6 @@
                                                             </select>
                                                         </div>
                                                     </div>
-                                                    {{-- <input type="hidden" id="mahasiswa_ujian" class="form-input" name="mahasiswa_npm" value="{{ $mahasiswa->npm }}"> --}}
                                                     <div class="col-md-2 col-12">
                                                         <div class="mb-1">
                                                             <button class="btn btn-outline-danger text-nowrap px-1" data-repeater-delete type="button">

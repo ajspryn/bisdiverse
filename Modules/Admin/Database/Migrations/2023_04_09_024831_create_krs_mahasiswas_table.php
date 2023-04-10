@@ -15,11 +15,11 @@ return new class extends Migration
     {
         Schema::create('krs_mahasiswas', function (Blueprint $table) {
             $table->id();
-            $table->string('mahasiswa_npm');
+            $table->text('mahasiswa_npm');
             $table->string('kelas');
             $table->string('kelas_ujian');
-            $table->string('matkul_kode');
-            $table->string('dosen_kds')->nullable();
+            $table->text('matkul_kode');
+            $table->text('dosen_kds')->nullable();
             $table->timestamps();
         });
     }

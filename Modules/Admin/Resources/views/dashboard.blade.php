@@ -143,7 +143,7 @@
 
                                         <!-- frequent answer and question  collapse  -->
                                         <div class="card pb-5 px-sm-5 pt-50 mt-3">
-                                            <form class="needs-validation" novalidate id="editUserForm" class="row gy-1 pt-75" method="POST" action="/admin">
+                                            <form class="form" novalidate id="editUserForm" class="row gy-1 pt-75" method="POST" action="/admin">
                                                 @csrf
                                                 <div class="row mt-3">
                                                     <div class="col-12 col-md-6 mb-2">
@@ -162,7 +162,7 @@
                                                         <select id="matkul" name="matkul_kode" class="form-select" aria-label="Default select example" required>
                                                             <option label=""></option>
                                                             @foreach ($matkuls as $matkul)
-                                                                <option value="{{ $matkul->kode }}">{{ $matkul->nama }}</option>
+                                                                <option value="{{ $matkul->kode }}">{{ $matkul->nama }} ({{ $matkul->dosen->nama }})</option>
                                                             @endforeach
                                                         </select>
                                                     </div>

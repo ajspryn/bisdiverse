@@ -274,7 +274,7 @@
                                                                     <select id="kelas_id" name="kelas" class="form-select" aria-label="Default select example" required>
                                                                         <option value="">Silahkan Pilih Kelas</option>
                                                                         @foreach ($kelass as $kelas)
-                                                                            <option value="{{ $kelas->kelas }} {{ $kelas->tahun }}" {{ $krs->kelas == $kelas->tahun ? 'selected' : '' }}>{{ $kelas->kelas }} ({{ $kelas->tahun }})</option>
+                                                                            <option value="{{ $kelas->kelas }}" {{ $krs->kelas == $kelas->kelas ? 'selected' : '' }}>{{ $kelas->kelas }} ({{ $kelas->tahun }})</option>
                                                                         @endforeach
                                                                     </select>
                                                                 </div>
@@ -307,7 +307,7 @@
                                                                     <select id="dosen_id" name="dosen_kds" class="form-select" aria-label="Default select example">
                                                                         <option value="">Silahkan Pilih Dosen</option>
                                                                         @foreach ($dosens as $dosen)
-                                                                            <option value="{{ $dosen->kds }}">{{ $dosen->nama }}</option>
+                                                                            <option value="{{ $dosen->kds }}" {{ $krs->dosen_kds == $dosen->kds ? 'selected' : '' }}>{{ $dosen->nama }}</option>
                                                                         @endforeach
                                                                     </select>
                                                                 </div>
@@ -351,7 +351,7 @@
                                                                 <select id="kelas_id" name="kelas" class="form-select" aria-label="Default select example" required>
                                                                     <option value="">Silahkan Pilih Kelas</option>
                                                                     @foreach ($kelass as $kelas)
-                                                                        <option value="{{ $kelas->kelas }} {{ $kelas->tahun }}">{{ $kelas->kelas }} ({{ $kelas->tahun }})</option>
+                                                                        <option value="{{ $kelas->kelas }}">{{ $kelas->kelas }} ({{ $kelas->tahun }})</option>
                                                                     @endforeach
                                                                 </select>
                                                             </div>
