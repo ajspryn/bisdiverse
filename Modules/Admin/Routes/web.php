@@ -15,6 +15,7 @@ use Modules\Admin\Http\Controllers\AdminController;
 use Modules\Admin\Http\Controllers\DosenController;
 use Modules\Admin\Http\Controllers\KelasController;
 use Modules\Admin\Http\Controllers\MatkulController;
+use Modules\Admin\Http\Controllers\EduLinkController;
 use Modules\Admin\Http\Controllers\RuanganController;
 use Modules\Admin\Http\Controllers\AkademikController;
 use Modules\Admin\Http\Controllers\MahasiswaController;
@@ -34,6 +35,7 @@ Route::prefix('admin')->middleware(['auth:sanctum', 'verified', 'role:0', 'divis
     Route::view('/lihat', 'admin::lihat');
     Route::resource('/dosen', DosenController::class);
     Route::resource('/mahasiswa', MahasiswaController::class);
+    Route::resource('/edulink', EduLinkController::class);
     Route::resource('/kelas', KelasController::class);
     Route::resource('/ruangan', RuanganController::class);
     Route::resource('/matkul', MatkulController::class);

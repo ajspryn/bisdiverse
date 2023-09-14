@@ -2,14 +2,12 @@
 
 namespace Modules\Admin\Http\Controllers;
 
-use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
-use Modules\Admin\Entities\Presensi;
-use Modules\Admin\Entities\JadwalUjian;
+use Modules\EduLink\Entities\EduLink;
 use Illuminate\Contracts\Support\Renderable;
 
-class PrintPresensiController extends Controller
+class EduLinkController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,20 +15,7 @@ class PrintPresensiController extends Controller
      */
     public function index()
     {
-        $jadwal_ujian = JadwalUjian::select()->where('matkul_kode', Request('matkul'))->where('kelas_ujian', Request('kelas'))->get()->first();
-        // return $jadwal_ujian->tgl_ujian;
-        if ($jadwal_ujian) {
-            $str_tgl_ujian = strtotime($jadwal_ujian->tgl_ujian);
-            $tgl_ujian = strtotime($str_tgl_ujian);
-            $tanggal = Carbon::parse($tgl_ujian);
-            return view('admin::print.rekap_presensi', [
-                'presensis' => Presensi::select()->where('matkul_kode', Request('matkul'))->where('kelas_ujian', Request('kelas'))->wheredate('created_at', Request('tanggal'))->orderBy('npm', 'asc')->get(),
-                'ujian' => JadwalUjian::select()->where('matkul_kode', Request('matkul'))->where('kelas_ujian', Request('kelas'))->wheredate('tgl_ujian', Request('tanggal'))->get()->first(),
-                'tgl_ujian' => Carbon::parse($jadwal_ujian->tgl_ujian),
-            ]);
-        } else {
-            return view('admin::rekap-presensi.index');
-        }
+        return view('admin::edulink.create', []);
     }
 
     /**
@@ -49,7 +34,30 @@ class PrintPresensiController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // return $request;
+        // $request->validate([
+        //     'mahasiswa_npm' => 'required',
+        //     'semester' => 'required',
+        //     'tahun' => 'required',
+        //     'dokumen' => 'required',
+        // ]);
+
+        if ($request->krs) {
+            foreach ($request->krs as $data) {
+                $input = $data;
+                // dd($input['dokumen']);
+                $input['mahasiswa_npm'] = $input['mahasiswa_npm'];
+                $input['tahun'] = $input['tahun'];
+                $input['semester'] = $input['semester'];
+
+                if ($input['dokumen']) {
+                    $input['dokumen'] = $input['dokumen']->store('dokumen-edulink');
+                }
+                EduLink::create($input);
+            }
+        }
+
+        return redirect()->back()->with('success', 'Data Berhasil Di Simpan');
     }
 
     /**

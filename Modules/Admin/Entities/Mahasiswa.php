@@ -5,6 +5,7 @@ namespace Modules\Admin\Entities;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Modules\EduLink\Entities\EduLink;
 
 class Mahasiswa extends Model
 {
@@ -17,6 +18,11 @@ class Mahasiswa extends Model
     public function krs()
     {
         return $this->hasMany(KrsMahasiswa::class, 'mahasiswa_npm', 'npm');
+    }
+
+    public function edulink()
+    {
+        return $this->hasMany(EduLink::class, 'mahasiswa_npm', 'npm');
     }
 
     public function kelas()

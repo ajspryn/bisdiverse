@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\FormSkpdController;
+use App\Models\EduLink;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,6 +26,7 @@ Auth::routes();
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index']);
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/edulink', [App\Http\Controllers\EduLinkController::class, 'index'])->name('edulink');
 Route::middleware(['auth:sanctum', 'verified'])->resource('/profile', UserController::class);
 
 Route::get('/jadwal', function () {

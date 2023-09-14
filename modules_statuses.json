@@ -9,5 +9,6 @@
     "Controller": true,
     "PengajuanSeminar": true,
     "Judulskripsi": true,
-    "Bisdiboard": true
+    "Bisdiboard": true,
+    "EduLink": true
 }
