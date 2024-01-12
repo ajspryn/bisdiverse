@@ -1,0 +1,17 @@
+{
+    "name": "Bisdiverse",
+    "short_name": "Bisdiverse",
+    "start_url": "/",
+    "background_color": "#ffffff",
+    "description": "Sistem Terintegrasi Prodi Bisnis Digital Universitas Pakuan",
+    "display": "fullscreen",
+    "theme_color": "#ffffff",
+    "icons": [
+        {
+            "src": "../../../pwa.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "any maskable"
+        }
+    ]
+}

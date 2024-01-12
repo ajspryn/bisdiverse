@@ -1,0 +1,11 @@
+{
+    "name": "EduLink",
+    "alias": "edulink",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\EduLink\\Providers\\EduLinkServiceProvider"
+    ],
+    "files": []
+}

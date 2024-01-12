@@ -1,0 +1,11 @@
+{
+    "name": "Bisdiboard",
+    "alias": "bisdiboard",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\Bisdiboard\\Providers\\BisdiboardServiceProvider"
+    ],
+    "files": []
+}

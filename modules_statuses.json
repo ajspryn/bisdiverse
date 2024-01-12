@@ -1,0 +1,14 @@
+{
+    "Admin": true,
+    "PresensiUjian": true,
+    "Magang": true,
+    "Mahasiswa": true,
+    "Dosen": true,
+    "Kaprodi": true,
+    "Seminar": true,
+    "Controller": true,
+    "PengajuanSeminar": true,
+    "Judulskripsi": true,
+    "Bisdiboard": true,
+    "EduLink": true
+}
