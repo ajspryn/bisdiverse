@@ -86,7 +86,7 @@
                                                         <th style="text-align: center">Nama Matkul</th>
                                                         <th style="text-align: center">Dosen Penguji</th>
                                                         <th style="text-align: center">Kelas</th>
-                                                        <th style="text-align: center">Kelas Ujian</th>
+                                                        <th style="text-align: center">Tahun</th>
                                                         <th style="text-align: center">Ruangan</th>
                                                         <th style="text-align: center">Action</th>
                                                     </tr>
@@ -102,7 +102,7 @@
                                                             <td>{{ $jadwal->matkul->nama }}</td>
                                                             <td>{{ $jadwal->dosen->nama }}</td>
                                                             <td style="text-align: center">{{ $jadwal->kelas }}</td>
-                                                            <td style="text-align: center">{{ $jadwal->kelas_ujian }}</td>
+                                                            <td style="text-align: center">{{ $jadwal->tahun }}</td>
                                                             <td style="text-align: center">{{ $jadwal->ruangan }}</td>
                                                             <td style="text-align: center">
                                                                 <div class="dropdown">
