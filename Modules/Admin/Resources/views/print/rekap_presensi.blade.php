@@ -118,6 +118,10 @@
                                         <td>: {{ $ujian->matkul->nama }}</td>
                                     </tr>
                                     <tr>
+                                        <td class="pe-1"><strong>Kelas</strong></td>
+                                        <td>: {{ $ujian->kelas }}</td>
+                                    </tr>
+                                    <tr>
                                         <td class="pe-1"><strong>Hari/Tanggal</strong></td>
                                         <td>: {{ $tgl_ujian->format('l/dd-mm-Y') }}</td>
                                     </tr>
@@ -129,7 +133,7 @@
                                     </tr>
                                     <tr>
                                         <td class="pe-1"><strong>Dosen/Penguji</strong></td>
-                                        <td>: {{ $ujian->dosen->nama }}</td>
+                                        <td>: {{ $ujian->dosen->nama }} / {{ $ujian->dosen->kds }}</td>
                                     </tr>
                                 </tbody>
                             </table>
