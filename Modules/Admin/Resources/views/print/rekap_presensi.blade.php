@@ -11,6 +11,9 @@
     <link rel="shortcut icon" type="image/x-icon" href="../../../favicon.png">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500;1,600" rel="stylesheet">
 
+
+    <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+    {{-- <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.6/dist/JsBarcode.all.min.js"></script> --}}
     <!-- BEGIN: Vendor CSS-->
     <link rel="stylesheet" type="text/css" href="../../../app-assets/vendors/css/vendors.min.css">
     <!-- END: Vendor CSS-->
@@ -110,7 +113,7 @@
                             <p class="mb-25">718-986-6062</p>
                             <p class="mb-0">peakyFBlinders@gmail.com</p>
                         </div> --}}
-                        <div class="col-sm-6 mt-sm-0">
+                        <div class="col-sm-7 mt-sm-0">
                             <table>
                                 <tbody>
                                     <tr>
@@ -123,7 +126,7 @@
                                     </tr>
                                     <tr>
                                         <td class="pe-1"><strong>Hari/Tanggal</strong></td>
-                                        <td>: {{ carbon\carbon::parse($tgl_ujian)->format('l / D-M-Y') }}</td>
+                                        <td>: {{ Carbon\Carbon::now()->format('l/d-m-Y') }}</td>
                                     </tr>
                                     <tr>
                                         <td class="pe-1"><strong>Waktu/Ruangan</strong></td>
@@ -145,11 +148,11 @@
                             <thead>
                                 <tr>
                                     <th width="1%" style="text-align: center">No</th>
-                                    <th class="py-1" width="9%" style="text-align: center">NPM</th>
-                                    <th class="py-1" width="50%">Nama</th>
+                                    <th class="py-1" width="5%" style="text-align: center">NPM</th>
+                                    <th class="py-1" width="60%">Nama</th>
                                     {{-- <th class="py-1" width="25%" style="text-align: center">Tgl</th> --}}
                                     {{-- <th class="py-1" width="15%" style="text-align: center">Waktu</th> --}}
-                                    <th class="py-1" width="20%" style="text-align: center">Status</th>
+                                    <th class="py-1" width="30%" style="text-align: center">Status</th>
                                     <th class="py-1" width="10%" style="text-align: center">Jam Absensi</th>
                                     <th></th>
                                 </tr>
@@ -203,7 +206,7 @@
                                                 <p>Bogor, {{ Carbon\Carbon::now()->format('d-m-Y') }}</p>
                                                 <p>Ketua Program Studi Bisnis Digital</p>
                                                 <br>
-                                                <br>
+                                                <div id="qrcode"></div>
                                                 <br>
                                                 <p>Dion Achmad Armadi, S.E., M.Si.</p>
                                             </td>
@@ -237,6 +240,61 @@
     <script src="../../../app-assets/js/scripts/pages/app-invoice-print.min.js"></script>
     <!-- END: Page JS-->
 
+    {{-- <script>
+        // Fungsi untuk mendapatkan tanggal dan jam dalam format yang diinginkan
+        function getFormattedDateTime() {
+            var currentDateTime = new Date();
+
+            // Format tanggal dan jam sebagai string
+            var formattedDateTime = currentDateTime.toISOString().replace(/[-:]/g, "").slice(0, -5);
+
+            return formattedDateTime;
+        }
+
+        // Mendapatkan tanggal dan jam saat ini
+        var currentDateTime = getFormattedDateTime();
+
+        // Data tanda tangan digital
+        var signatureText = "Tanda Tangan Digital Oleh : ";
+
+        // Gabungkan teks tanda tangan dengan tanggal dan jam
+        var barcodeData = signatureText + " " + currentDateTime;
+
+        // Buat barcode menggunakan JsBarcode
+        JsBarcode("#barcode", barcodeData, {
+            format: "CODE128", // Pilih format barcode, misalnya CODE128
+            displayValue: true // Tampilkan nilai barcode di bawahnya
+        });
+    </script> --}}
+
+    <script>
+        // Fungsi untuk mendapatkan tanggal dan jam dalam format yang diinginkan
+        function getFormattedDateTime() {
+            var currentDateTime = new Date();
+            var formattedDateTime = currentDateTime.toLocaleString();
+            return formattedDateTime;
+        }
+
+        // Fungsi untuk menghasilkan QR code dengan tanggal, jam, dan tanda tangan digital
+        function generateQRCode() {
+            var signatureText = "Tanda Tangan Digital Oleh : Dion Achmad Armadi, S.E., M.Si.";
+            var dateTime = getFormattedDateTime();
+            var data = signatureText + " " + dateTime;
+
+            // Konfigurasi QR code menggunakan library qrcodejs
+            var qrcode = new QRCode(document.getElementById("qrcode"), {
+                text: data,
+                width: 128,
+                height: 128,
+                colorDark: "#000000",
+                colorLight: "#ffffff",
+                correctLevel: QRCode.CorrectLevel.H
+            });
+        }
+
+        // Panggil fungsi untuk menghasilkan QR code
+        generateQRCode();
+    </script>
     <script>
         $(window).on('load', function() {
             if (feather) {
