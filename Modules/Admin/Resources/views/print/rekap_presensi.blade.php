@@ -149,7 +149,7 @@
                                     <th class="py-1" width="40%">Nama</th>
                                     {{-- <th class="py-1" width="25%" style="text-align: center">Tgl</th> --}}
                                     {{-- <th class="py-1" width="15%" style="text-align: center">Waktu</th> --}}
-                                    <th class="py-1" width="10%" style="text-align: center">Status</th>
+                                    <th class="py-1" width="20%" style="text-align: center">Status</th>
                                     <th class="py-1" width="10%" style="text-align: center">Jam Absensi</th>
                                     <th></th>
                                 </tr>
