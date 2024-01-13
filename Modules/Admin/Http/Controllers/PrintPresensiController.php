@@ -23,7 +23,7 @@ class PrintPresensiController extends Controller
         // return $jadwal_ujian->tgl_ujian;
         if ($jadwal_ujian) {
             $str_tgl_ujian = strtotime($jadwal_ujian->tgl_ujian);
-            $tgl_ujian = strtotime($str_tgl_ujian);
+            $tgl_ujian = $str_tgl_ujian;
             $tanggal = Carbon::parse($tgl_ujian);
             $rekap = Presensi::select()->where('matkul_kode', Request('matkul'))->where('kelas', Request('kelas'))->wheredate('created_at', Request('tanggal'))->orderBy('npm', 'asc')->get();
             $mahasiswa = Mahasiswa::select()->where('kelas', Request('kelas'))->where('tahun_masuk', Request('tahun'))->orderBy('npm', 'asc')->get();

@@ -123,7 +123,7 @@
                                     </tr>
                                     <tr>
                                         <td class="pe-1"><strong>Hari/Tanggal</strong></td>
-                                        <td>: {{ $tgl_ujian->format('l/dd-mm-Y') }}</td>
+                                        <td>: {{ $tgl_ujian->format('l/d-m-Y') }}</td>
                                     </tr>
                                     <tr>
                                         <td class="pe-1"><strong>Waktu/Ruangan</strong></td>
