@@ -188,7 +188,7 @@
                         </table>
                     </div>
 
-                    <div class="row invoice-sales-total-wrapper mt-3">
+                    <div class="row invoice-sales-total-wrapper mt-1">
                         <div class="col-md-6 order-md-1 order-2 mt-md-0 mt-1">
                             <p class="card-text mb-0"><span class="fw-bold">Total Hadir :</span> <span class="ms-75">{{ $presensis->count() }} Mahasiswa</span></p>
                         </div>
