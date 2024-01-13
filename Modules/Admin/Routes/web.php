@@ -29,7 +29,7 @@ use Modules\Admin\Http\Controllers\RekapPresensiController;
 use Modules\Admin\Http\Controllers\RfidMahasiswaController;
 use Modules\Admin\Http\Controllers\UserMahasiswaController;
 
-Route::prefix('admin')->middleware(['auth:sanctum', 'verified', 'role:0', 'role:1', 'divisi:0', 'jabatan:0', 'jabatan:4'])->group(function () {
+Route::prefix('admin')->middleware(['auth:sanctum', 'verified', 'role:0', 'divisi:0', 'jabatan:0'])->group(function () {
     Route::resource('/', AdminController::class);
     Route::resource('/jadwal', AdminController::class);
     Route::view('/lihat', 'admin::lihat');
@@ -52,4 +52,9 @@ Route::prefix('admin')->middleware(['auth:sanctum', 'verified', 'role:0', 'role:
     Route::post('/akademik/enable/{AkademikName}', 'AkademikController@enable');
     Route::post('/akademik/disable/{AkademikName}', 'AkademikController@disable');
     // Route::post('/modules/{id}/toggle', [ModulesController::class, 'toggle']);
+});
+Route::prefix('admin')->middleware(['auth:sanctum', 'verified'])->group(function () {
+    Route::resource('/rekap-presensi', RekapPresensiController::class);
+    Route::resource('/lihat-presensi', LihatPresensiController::class);
+    Route::resource('/print-presensi', PrintPresensiController::class);
 });
