@@ -197,7 +197,7 @@
                     <hr class="my-2" />
                     <div class="row">
                         <div class="col-sm-6 ml-0">
-                            <div class="table-responsive mt-2">
+                            <div class="table-responsive mt-1">
                                 <table class="table">
                                     <tbody>
                                         <tr>
