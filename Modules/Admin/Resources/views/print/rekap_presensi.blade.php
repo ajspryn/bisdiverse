@@ -205,7 +205,6 @@
                                             <td>
                                                 <p>Bogor, {{ Carbon\Carbon::now()->format('d-m-Y') }}</p>
                                                 <p>Ketua Program Studi Bisnis Digital</p>
-                                                <br>
                                                 <div id="qrcode"></div>
                                                 <br>
                                                 <p>Dion Achmad Armadi, S.E., M.Si.</p>
