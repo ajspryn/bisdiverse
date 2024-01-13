@@ -123,7 +123,7 @@
                                     </tr>
                                     <tr>
                                         <td class="pe-1"><strong>Hari/Tanggal</strong></td>
-                                        <td>: {{ carbon\carbon::parse($tgl_ujian)->format('l/d-m-Y') }}</td>
+                                        <td>: {{ carbon\carbon::parse($tgl_ujian)->format('l / D-M-Y') }}</td>
                                     </tr>
                                     <tr>
                                         <td class="pe-1"><strong>Waktu/Ruangan</strong></td>
@@ -146,7 +146,7 @@
                                 <tr>
                                     <th width="1%" style="text-align: center">No</th>
                                     <th class="py-1" width="9%" style="text-align: center">NPM</th>
-                                    <th class="py-1" width="40%">Nama</th>
+                                    <th class="py-1" width="50%">Nama</th>
                                     {{-- <th class="py-1" width="25%" style="text-align: center">Tgl</th> --}}
                                     {{-- <th class="py-1" width="15%" style="text-align: center">Waktu</th> --}}
                                     <th class="py-1" width="20%" style="text-align: center">Status</th>
