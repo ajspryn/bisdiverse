@@ -29,7 +29,7 @@ use Modules\Admin\Http\Controllers\RekapPresensiController;
 use Modules\Admin\Http\Controllers\RfidMahasiswaController;
 use Modules\Admin\Http\Controllers\UserMahasiswaController;
 
-Route::prefix('admin')->middleware(['auth:sanctum', 'verified', 'role:0', 'divisi:0', 'jabatan:0'])->group(function () {
+Route::prefix('admin')->middleware(['auth:sanctum', 'verified', 'role:0', 'role:4', 'divisi:0', 'jabatan:0'])->group(function () {
     Route::resource('/', AdminController::class);
     Route::resource('/jadwal', AdminController::class);
     Route::view('/lihat', 'admin::lihat');
