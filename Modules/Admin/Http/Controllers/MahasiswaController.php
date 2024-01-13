@@ -149,6 +149,7 @@ class MahasiswaController extends Controller
      */
     public function update(Request $request, $id)
     {
+        // return $request;
         $rules = [
             'nama' => 'required',
             'npm' => 'required',
