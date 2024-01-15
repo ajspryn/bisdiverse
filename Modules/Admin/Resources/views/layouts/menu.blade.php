@@ -43,41 +43,43 @@
                         </ul>
                     </li>
                 @endif
+                @if (Auth::user()->role->jabatan_id->0)
+
                 @if (Module::collections()->has('Magang'))
-                    <li class="dropdown nav-item" data-menu="dropdown"><a class="dropdown-toggle nav-link d-flex align-items-center" href="#" data-bs-toggle="dropdown"><i data-feather="layers"></i><span data-i18n="Charts &amp; Maps">Magang</span></a>
-                        <ul class="dropdown-menu" data-bs-popper="none">
-                            <li class="{{ Request::is('magang/pembimbing*') ? 'active' : 'nav-item' }}"data-menu=""><a class="dropdown-item d-flex align-items-center" href="/magang/pembimbing" data-bs-toggle="" data-i18n="Leaflet Maps"><i data-feather="user"></i><span data-i18n="Leaflet Maps">Dosen Pembimbing Magang</span></a>
-                            </li>
-                            <li class="{{ Request::is('magang/pengajuan*') ? 'active' : 'nav-item' }}"data-menu="">
-                                <a class="dropdown-item d-flex align-items-center" href="/magang/pengajuan" data-bs-toggle="" data-i18n="Leaflet Maps"><i data-feather="file-text"></i><span data-i18n="Leaflet Maps">Pengajuan Magang</span></a>
-                            </li>
-                        </ul>
-                    </li>
+                <li class="dropdown nav-item" data-menu="dropdown"><a class="dropdown-toggle nav-link d-flex align-items-center" href="#" data-bs-toggle="dropdown"><i data-feather="layers"></i><span data-i18n="Charts &amp; Maps">Magang</span></a>
+                    <ul class="dropdown-menu" data-bs-popper="none">
+                        <li class="{{ Request::is('magang/pembimbing*') ? 'active' : 'nav-item' }}"data-menu=""><a class="dropdown-item d-flex align-items-center" href="/magang/pembimbing" data-bs-toggle="" data-i18n="Leaflet Maps"><i data-feather="user"></i><span data-i18n="Leaflet Maps">Dosen Pembimbing Magang</span></a>
+                        </li>
+                        <li class="{{ Request::is('magang/pengajuan*') ? 'active' : 'nav-item' }}"data-menu="">
+                            <a class="dropdown-item d-flex align-items-center" href="/magang/pengajuan" data-bs-toggle="" data-i18n="Leaflet Maps"><i data-feather="file-text"></i><span data-i18n="Leaflet Maps">Pengajuan Magang</span></a>
+                        </li>
+                    </ul>
+                </li>
                 @endif
                 @if (Module::collections()->has('Judulskripsi'))
-                    <li class="dropdown nav-item" data-menu="dropdown"><a class="dropdown-toggle nav-link d-flex align-items-center" href="#" data-bs-toggle="dropdown"><i data-feather="book"></i><span data-i18n="Charts &amp; Maps">Judul Skripsi</span></a>
-                        <ul class="dropdown-menu" data-bs-popper="none">
-                            <li class="{{ Request::is('judulskripsi/pembimbing*') ? 'active' : 'nav-item' }}"data-menu=""><a class="dropdown-item d-flex align-items-center" href="/judulskripsi/pembimbing" data-bs-toggle="" data-i18n="Leaflet Maps"><i data-feather="user"></i><span data-i18n="Leaflet Maps">Dosen Pembimbing Skripsi</span></a>
-                            </li>
-                            <li class="{{ Request::is('judulskripsi/pengajuan*') ? 'active' : 'nav-item' }}"data-menu="">
-                                <a class="dropdown-item d-flex align-items-center" href="/judulskripsi/pengajuan" data-bs-toggle="" data-i18n="Leaflet Maps"><i data-feather="file-text"></i><span data-i18n="Leaflet Maps">Pengajuan Judul Skripsi</span></a>
-                            </li>
-                        </ul>
-                    </li>
+                <li class="dropdown nav-item" data-menu="dropdown"><a class="dropdown-toggle nav-link d-flex align-items-center" href="#" data-bs-toggle="dropdown"><i data-feather="book"></i><span data-i18n="Charts &amp; Maps">Judul Skripsi</span></a>
+                    <ul class="dropdown-menu" data-bs-popper="none">
+                        <li class="{{ Request::is('judulskripsi/pembimbing*') ? 'active' : 'nav-item' }}"data-menu=""><a class="dropdown-item d-flex align-items-center" href="/judulskripsi/pembimbing" data-bs-toggle="" data-i18n="Leaflet Maps"><i data-feather="user"></i><span data-i18n="Leaflet Maps">Dosen Pembimbing Skripsi</span></a>
+                        </li>
+                        <li class="{{ Request::is('judulskripsi/pengajuan*') ? 'active' : 'nav-item' }}"data-menu="">
+                            <a class="dropdown-item d-flex align-items-center" href="/judulskripsi/pengajuan" data-bs-toggle="" data-i18n="Leaflet Maps"><i data-feather="file-text"></i><span data-i18n="Leaflet Maps">Pengajuan Judul Skripsi</span></a>
+                        </li>
+                    </ul>
+                </li>
                 @endif
                 @if (Module::collections()->has('Seminar'))
-                    <li class="dropdown nav-item" data-menu="dropdown"><a class="dropdown-toggle nav-link d-flex align-items-center" href="#" data-bs-toggle="dropdown"><i data-feather="airplay"></i><span data-i18n="Charts &amp; Maps">Seminar</span></a>
-                        <ul class="dropdown-menu" data-bs-popper="none">
-                            {{-- <li class="{{ Request::is('seminar/pembimbing*') ? 'active' : 'nav-item' }}"data-menu=""><a
-                                    class="dropdown-item d-flex align-items-center" href="/seminar/pembimbing"
-                                    data-bs-toggle="" data-i18n="Leaflet Maps"><i data-feather="user"></i><span
-                                        data-i18n="Leaflet Maps">Dosen Pembimbing Seminar</span></a>
-                            </li> --}}
-                            <li class="{{ Request::is('seminar/pengajuan*') ? 'active' : 'nav-item' }}"data-menu="">
-                                <a class="dropdown-item d-flex align-items-center" href="/seminar/pengajuan" data-bs-toggle="" data-i18n="Leaflet Maps"><i data-feather="file-text"></i><span data-i18n="Leaflet Maps">Pengajuan Seminar</span></a>
-                            </li>
-                        </ul>
-                    </li>
+                <li class="dropdown nav-item" data-menu="dropdown"><a class="dropdown-toggle nav-link d-flex align-items-center" href="#" data-bs-toggle="dropdown"><i data-feather="airplay"></i><span data-i18n="Charts &amp; Maps">Seminar</span></a>
+                    <ul class="dropdown-menu" data-bs-popper="none">
+                        {{-- <li class="{{ Request::is('seminar/pembimbing*') ? 'active' : 'nav-item' }}"data-menu=""><a
+                            class="dropdown-item d-flex align-items-center" href="/seminar/pembimbing"
+                            data-bs-toggle="" data-i18n="Leaflet Maps"><i data-feather="user"></i><span
+                            data-i18n="Leaflet Maps">Dosen Pembimbing Seminar</span></a>
+                        </li> --}}
+                        <li class="{{ Request::is('seminar/pengajuan*') ? 'active' : 'nav-item' }}"data-menu="">
+                            <a class="dropdown-item d-flex align-items-center" href="/seminar/pengajuan" data-bs-toggle="" data-i18n="Leaflet Maps"><i data-feather="file-text"></i><span data-i18n="Leaflet Maps">Pengajuan Seminar</span></a>
+                        </li>
+                    </ul>
+                </li>
                 @endif
 
                 <li class="dropdown nav-item" data-menu="dropdown"><a class="dropdown-toggle nav-link d-flex align-items-center" href="#" data-bs-toggle="dropdown"><i data-feather="settings"></i><span data-i18n="Charts &amp; Maps">Pengaturan</span></a>
@@ -103,15 +105,16 @@
                         </li>
                         <li class="{{ Request::is('admin/matkul*') ? 'active' : 'nav-item' }}"data-menu=" data-menu=">
                             <a class="dropdown-item d-flex align-items-center" href="/admin/matkul" data-bs-toggle="" data-i18n="Profile"><i data-feather="book"></i><span data-i18n="Profile">Mata
-                                    Kuliah</span></a>
-                        </li>
-                        <li class="{{ Request::is('admin/user*') ? 'active' : 'nav-item' }}"data-menu=" data-menu=">
-                            <a class="dropdown-item d-flex align-items-center" href="/admin/user-mahasiswa" data-bs-toggle="" data-i18n="Profile"><i data-feather="users"></i><span data-i18n="users">User</span></a>
-                        </li>
-                    </ul>
-                </li>
-            </ul>
+                                Kuliah</span></a>
+                            </li>
+                            <li class="{{ Request::is('admin/user*') ? 'active' : 'nav-item' }}"data-menu=" data-menu=">
+                                <a class="dropdown-item d-flex align-items-center" href="/admin/user-mahasiswa" data-bs-toggle="" data-i18n="Profile"><i data-feather="users"></i><span data-i18n="users">User</span></a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+                @endif
+            </div>
         </div>
-    </div>
 </div>
 <!-- END: Main Menu-->
