@@ -12,16 +12,14 @@ class Presensi extends Model
     protected $guarded = [
         'id',
     ];
-
     public function kelas()
     {
         return $this->belongsTo(Kelas::class);
     }
     public function matkul()
     {
-        return $this->belongsTo(Matkul::class, 'kode', 'matkul_kode');
+        return $this->belongsTo(Matkul::class, 'matkul_kode', 'kode');
     }
-
     protected static function newFactory()
     {
         return \Modules\Admin\Database\factories\PresensiFactory::new();

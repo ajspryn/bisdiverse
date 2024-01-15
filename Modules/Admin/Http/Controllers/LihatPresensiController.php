@@ -18,7 +18,7 @@ class LihatPresensiController extends Controller
     {
         $tgl_now = Carbon::now()->format('Y-m-d');
         return view('admin::lihat_absensi.index', [
-            'presensis' => Presensi::select()->wheredate('created_at', $tgl_now)->get()
+            'presensis' => Presensi::select()->with('matkul')->wheredate('created_at', $tgl_now)->get()
         ]);
     }
 

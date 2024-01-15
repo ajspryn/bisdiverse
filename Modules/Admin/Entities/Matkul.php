@@ -18,11 +18,11 @@ class Matkul extends Model
     }
     public function presensi()
     {
-        return $this->hasMany(Presensi::class);
+        return $this->hasMany(Presensi::class, 'npm', 'npm');
     }
     public function dosen()
     {
-        return $this->belongsTo(Dosen::class,'dosen_kds','kds');
+        return $this->belongsTo(Dosen::class, 'dosen_kds', 'kds');
     }
 
     protected static function newFactory()
