@@ -26,6 +26,10 @@
                 @endif
                 <li class="{{ Request::is('edulink') ? 'active' : 'nav-item' }}"><a class="nav-link d-flex align-items-center" href="/edulink"><i data-feather="cpu"></i><span class="menu-title text-truncate" data-i18n="Dashboards">EduLink</span></a>
                 </li>
+                @if (Module::collections()->has('QnA'))
+                    <li class="{{ Request::is('qna*') ? 'active' : 'nav-item' }}"><a class="nav-link d-flex align-items-center" href="/qna"><i data-feather="help-circle"></i><span class="menu-title text-truncate" data-i18n="Dashboards">Faq and Q&A</span></a>
+                    </li>
+                @endif
                 {{-- <li class="{{ Request::is('simulasi') ? 'active' : 'nav-item' }} "><a
                         class="nav-link d-flex align-items-center" href="/simulasi"><i data-feather="monitor"></i><span
                             class="menu-title text-truncate" data-i18n="home">Simulasi</span></a>

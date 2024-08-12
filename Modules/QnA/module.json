@@ -1,0 +1,11 @@
+{
+    "name": "QnA",
+    "alias": "qna",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\QnA\\Providers\\QnAServiceProvider"
+    ],
+    "files": []
+}

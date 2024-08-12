@@ -1,11 +1,12 @@
 <?php
 
+use App\Models\EduLink;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\FormSkpdController;
-use App\Models\EduLink;
+use Modules\QnA\Http\Controllers\QnAController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,6 +29,8 @@ Route::get('/', [App\Http\Controllers\HomeController::class, 'index']);
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/edulink', [App\Http\Controllers\EduLinkController::class, 'index'])->name('edulink');
 Route::middleware(['auth:sanctum', 'verified'])->resource('/profile', UserController::class);
+Route::post('/chat', [QnAController::class, 'generateResponse']);
+
 
 Route::get('/jadwal', function () {
     return view('home');

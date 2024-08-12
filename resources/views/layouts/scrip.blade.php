@@ -32,8 +32,10 @@
 
  <!-- BEGIN: Theme JS-->
  <script src="{{ url('/') }}/app-assets/js/core/app-menu.js"></script>
- <script src="{{ url('/') }}/app-assets/js/core/app.js"></script>
- <script src="{{ url('/') }}/app-assets/js/core/app-menu.min.js"></script>
+ <script src="{{ url('/') }}/app-assets/js/core/app.js">
+     < /scrip> <
+     script src = "{{ url('/') }}/app-assets/js/core/app-menu.min.js" >
+ </script>
  <script src="{{ url('/') }}/app-assets/js/core/app.min.js"></script>
  <script src="{{ url('/') }}/app-assets/js/scripts/customizer.min.js"></script>
  <!-- END: Theme JS-->
