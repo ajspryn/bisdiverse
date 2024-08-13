@@ -258,7 +258,7 @@
             <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
         <div class="offcanvas-body my-auto mx-0 flex-grow-0">
-            <form class="needs-validation" novalidate action="/magang" method="POST" enctype="multipart/form-data">
+            <form class="row gy-1 gx-2 mt-75" action="/magang" method="POST" enctype="multipart/form-data">
                 @csrf
                 <div class="col-12">
                     <label class="form-label" for="select2-basic">Pilih Dosen Pembimbing</label>
@@ -312,7 +312,7 @@
 
                 <div class="col-md-12 mt-1">
                     <label class="form-label" for="exampleFormControlTextarea1">Catatan</label>
-                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Catatan Anda" name="catatan"></textarea>
+                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Catatan Anda" name="catatan" required></textarea>
                 </div>
 
                 <input type="hidden" value="{{ $mahasiswa->npm }}" name='mahasiswa_npm'>
