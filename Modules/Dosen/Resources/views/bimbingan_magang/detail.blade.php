@@ -372,7 +372,7 @@
                     </h4>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form class="needs-validation" novalidate action="/magang/bimbingan" method='POST'>
+                <form action="/magang/bimbingan" method='POST'>
                     @csrf
                     <div class="modal-body">
                         <div class="row">
