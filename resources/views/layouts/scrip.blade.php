@@ -106,83 +106,20 @@
      });
  </script>
 
- {{-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> --}}
- {{-- <script>
-    $(document).ready(function() {
-        // Mengambil form
-        var formTodo = $('#form-todo');
+ <script>
+     document.getElementById('fullScreenBtn').addEventListener('click', function() {
+         let elem = document.documentElement;
 
-        // Mengambil input pada form
-        var inputComment = $('input[name=todo]');
-        var inputTaskId = $('input[name=task_id]');
-
-        // Mengambil tombol submit pada form
-        var submitBtn = $('button[type=submit]');
-
-        // Event listener ketika form di-submit
-        formTodo.on('submit', function(e) {
-            e.preventDefault();
-
-            // Men-disable tombol submit sementara
-            submitBtn.prop('disabled', true);
-
-            // Mengambil data dari form
-            var formData = {
-                '_token': '{{ csrf_token() }}',
-                'todo': inputComment.val(),
-                'task_id': inputTaskId.val(),
-            };
-
-            // Melakukan Ajax POST request ke URL /bisdiboard/todo
-            $.ajax({
-                url: '/bisdiboard/todo',
-                type: 'POST',
-                data: formData,
-                success: function(response) {
-                    // Jika sukses, tampilkan pesan sukses dan reset form
-                    alert(response.message);
-                    formTodo.trigger('reset');
-                },
-                error: function(xhr, status, error) {
-                    // Jika gagal, tampilkan pesan error
-                    alert('Error: ' + error);
-                },
-                complete: function() {
-                    // Meng-enable tombol submit kembali setelah request selesai
-                    submitBtn.prop('disabled', false);
-                }
-            });
-        });
-    });
-</script> --}}
-
- {{-- <script>
-    $(document).ready(function() {
-        // Mencegah form submit secara default
-        $('#form-todo').submit(function(e) {
-            e.preventDefault();
-
-            // Mengambil data dari form
-            var formData = $(this).serialize();
-
-            // Melakukan Ajax POST request ke URL /bisdiboard/todo
-            $.ajax({
-                url: '/bisdiboard/todo',
-                type: 'POST',
-                data: formData,
-                success: function(response) {
-                    // Jika sukses, tampilkan pesan sukses dan reset form
-                    $('#reload').trigger('click');
-                    // alert(response.message);
-                    $('#form-todo')[0].reset();
-                },
-                error: function(xhr, status, error) {
-                    // Jika gagal, tampilkan pesan error
-                    alert(error);
-                }
-            });
-        });
-    });
-</script> --}}
+         if (elem.requestFullscreen) {
+             elem.requestFullscreen();
+         } else if (elem.mozRequestFullScreen) { // Firefox
+             elem.mozRequestFullScreen();
+         } else if (elem.webkitRequestFullscreen) { // Chrome, Safari and Opera
+             elem.webkitRequestFullscreen();
+         } else if (elem.msRequestFullscreen) { // IE/Edge
+             elem.msRequestFullscreen();
+         }
+     });
+ </script>
 
  @livewireScripts

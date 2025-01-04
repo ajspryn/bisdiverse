@@ -14,7 +14,7 @@
         </div>
 
         <ul class="nav navbar-nav align-items-center ms-auto">
-            <li class="nav-item d-none d-lg-block"><a class="nav-link nav-link-style"><i class="ficon" data-feather="moon"></i></a></li>
+            {{-- <li class="nav-item "><a class="nav-link" id="fullScreenBtn"><i class="ficon" data-feather="maximize"></i></a></li> --}}
             <li class="nav-item nav-search"><a class="nav-link nav-link-search"><i class="ficon" data-feather="search"></i></a>
                 <div class="search-input">
                     <div class="search-input-icon"><i data-feather="search"></i></div>

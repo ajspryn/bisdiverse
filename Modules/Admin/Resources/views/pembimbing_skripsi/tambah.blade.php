@@ -59,10 +59,10 @@
                                             <tbody>
                                                 @foreach ($dosens as $dosen)
                                                     @php
-                                                        $cek = Modules\judulskripsi\Entities\DosenPembimbingSkripsi::where('dosen_kds', $dosen->kds)
+                                                        $cek = Modules\Judulskripsi\Entities\DosenPembimbingSkripsi::where('dosen_kds', $dosen->kds)
                                                             ->get()
                                                             ->first();
-                                                        
+
                                                     @endphp
                                                     <tr>
                                                         <td></td>
