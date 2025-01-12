@@ -8,6 +8,7 @@ use Illuminate\Routing\Controller;
 use Modules\Admin\Entities\Matkul;
 use Modules\Admin\Entities\Presensi;
 use Illuminate\Contracts\Support\Renderable;
+use Modules\Admin\Entities\KrsMahasiswa;
 use Modules\Admin\Entities\Mahasiswa;
 
 class RekapPresensiController extends Controller
@@ -22,7 +23,8 @@ class RekapPresensiController extends Controller
         $mahasiswa = null;
         if (Request('matkul') && Request('kelas') && Request('tanggal')) {
             $rekap = Presensi::select()->where('matkul_kode', Request('matkul'))->where('kelas', Request('kelas'))->wheredate('created_at', Request('tanggal'))->orderBy('npm', 'asc')->get();
-            $mahasiswa = Mahasiswa::select()->where('kelas', Request('kelas'))->where('tahun_masuk', Request('tahun'))->orderBy('nama', 'asc')->get();
+            $mahasiswa = KrsMahasiswa::with('mahasiswa')->where('kelas', Request('kelas'))->where('matkul_kode', Request('matkul'))->orderBy('mahasiswa_npm', 'asc')->get();
+            // $mahasiswa = Mahasiswa::select()->where('kelas', Request('kelas'))->where('tahun_masuk', Request('tahun'))->orderBy('nama', 'asc')->get();
         }
         // return $mahasiswa->presensi;
         return view('admin::rekap-presensi.index', [

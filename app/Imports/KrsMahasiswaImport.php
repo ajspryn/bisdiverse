@@ -18,7 +18,6 @@ class KrsMahasiswaImport implements ToModel, WithHeadingRow
         KrsMahasiswa::updateOrInsert([
             'mahasiswa_npm' => $row['mahasiswa_npm'],
             'kelas' => $row['kelas'],
-            'kelas_ujian' => $row['kelas_ujian'],
             'matkul_kode' => $row['matkul_kode'],
             'dosen_kds' => $row['dosen_kds'],
         ]);

@@ -1,0 +1,11 @@
+{
+    "name": "BisdiEvent",
+    "alias": "bisdievent",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\BisdiEvent\\Providers\\BisdiEventServiceProvider"
+    ],
+    "files": []
+}

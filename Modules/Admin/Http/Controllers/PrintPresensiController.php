@@ -8,6 +8,7 @@ use Illuminate\Routing\Controller;
 use Modules\Admin\Entities\Presensi;
 use Modules\Admin\Entities\Mahasiswa;
 use Modules\Admin\Entities\JadwalUjian;
+use Modules\Admin\Entities\KrsMahasiswa;
 use Illuminate\Contracts\Support\Renderable;
 
 class PrintPresensiController extends Controller
@@ -26,7 +27,7 @@ class PrintPresensiController extends Controller
             $tgl_ujian = $str_tgl_ujian;
             $tanggal = Carbon::parse($tgl_ujian);
             $rekap = Presensi::select()->where('matkul_kode', Request('matkul'))->where('kelas', Request('kelas'))->wheredate('created_at', Request('tanggal'))->orderBy('npm', 'asc')->get();
-            $mahasiswa = Mahasiswa::select()->where('kelas', Request('kelas'))->where('tahun_masuk', Request('tahun'))->orderBy('npm', 'asc')->get();
+            $mahasiswa = KrsMahasiswa::with('mahasiswa')->where('kelas', Request('kelas'))->where('matkul_kode', Request('matkul'))->orderBy('mahasiswa_npm', 'asc')->get();
             return view('admin::print.rekap_presensi', [
                 // 'presensis' => Presensi::select()->where('matkul_kode', Request('matkul'))->where('kelas', Request('kelas'))->wheredate('created_at', Request('tanggal'))->orderBy('npm', 'asc')->get(),
                 'ujian' => JadwalUjian::select()->where('matkul_kode', Request('matkul'))->where('kelas', Request('kelas'))->where('tahun', Request('tahun'))->wheredate('tgl_ujian', Request('tanggal'))->get()->first(),

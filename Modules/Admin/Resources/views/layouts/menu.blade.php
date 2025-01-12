@@ -24,6 +24,8 @@
                         </li>
                         <li class="{{ Request::is('bisdiboard*') ? 'active' : 'nav-item' }}" data-menu=""><a class="dropdown-item d-flex align-items-center" href="/bisdiboard" data-bs-toggle="" data-i18n="Bisdiboard"><i data-feather="clipboard"></i><span data-i18n="Bisdiboard">Bisdiboard</span></a>
                         </li>
+                        <li class="{{ Request::is('admin/bisdievent') ? 'active' : 'nav-item' }}" data-menu=""><a class="dropdown-item d-flex align-items-center" href="/admin/bisdievent" data-bs-toggle="" data-i18n="Bisdiboard"><i data-feather="calendar"></i><span data-i18n="Bisdiboard">BisdiEvent</span></a>
+                        </li>
                     </ul>
                 </li>
                 {{-- <li class="{{ Request::is('/', 'admin') ? 'active' : 'nav-item' }}"><a class="toggle nav-link d-flex align-items-center" href="/"><i data-feather="home"></i><span data-i18n="Dashboards">Dashboard</span></a>

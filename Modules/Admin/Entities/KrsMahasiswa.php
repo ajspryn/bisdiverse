@@ -13,6 +13,10 @@ class KrsMahasiswa extends Model
         'id',
     ];
 
+    public function mahasiswa()
+    {
+        return $this->belongsTo(Mahasiswa::class, 'mahasiswa_npm', 'npm');
+    }
     protected static function newFactory()
     {
         return \Modules\Admin\Database\factories\KrsMahasiswaFactory::new();

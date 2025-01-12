@@ -161,8 +161,8 @@
                                 @foreach ($mahasiswas as $mahasiswa)
                                     @php
                                         $presensi = Modules\Admin\Entities\Presensi::select()
-                                            ->where('npm', $mahasiswa->npm)
-                                            ->where('kelas', $mahasiswa->kelas)
+                                            ->where('npm', $mahasiswa->mahasiswa->npm)
+                                            ->where('kelas', $mahasiswa->mahasiswa->kelas)
                                             ->where('matkul_kode', Request('matkul'))
                                             ->wheredate('created_at', Request('tanggal'))
                                             ->get()
@@ -170,8 +170,8 @@
                                     @endphp
                                     <tr>
                                         <td style="text-align: center">{{ $loop->iteration }}</td>
-                                        <td style="text-align: center">{{ $mahasiswa->npm }}</td>
-                                        <td>{{ $mahasiswa->nama }}</td>
+                                        <td style="text-align: center">{{ $mahasiswa->mahasiswa->npm }}</td>
+                                        <td>{{ $mahasiswa->mahasiswa->nama }}</td>
                                         @if ($presensi)
                                             <td style="text-align: center">Masuk</td>
                                             <td style="text-align: center">{{ $presensi->created_at->format('H:i') }}</td>

@@ -11,5 +11,7 @@
     "Judulskripsi": true,
     "Bisdiboard": true,
     "EduLink": true,
-    "QnA": true
+    "QnA": true,
+    "PresensiAcara": true,
+    "BisdiEvent": true
 }

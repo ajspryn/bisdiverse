@@ -63,7 +63,7 @@
                                                             @endforeach
                                                         </select>
                                                     </div>
-                                                    <div class="col-md-4 mb-1">
+                                                    {{-- <div class="col-md-4 mb-1">
                                                         <label class="form-label" for="tahun">Tahun</label>
                                                         <select class="select2 form-select" id="tahun" name="tahun">
                                                             <option>Silahkan Pilih tahun</option>
@@ -72,7 +72,7 @@
                                                                 </option>
                                                             @endforeach
                                                         </select>
-                                                    </div>
+                                                    </div> --}}
                                                     <div class="col-md-4 col-12">
                                                         <div class="mb-1">
                                                             <label class="form-label" for="last-name-column">Tangal</label>
@@ -156,10 +156,10 @@
                                                 @endphp
                                                 <tr>
                                                     <td style="text-align: center">{{ $loop->iteration }}</td>
-                                                    <td style="text-align: center">{{ $mahasiswa->no_rfid }}</td>
-                                                    <td>{{ $mahasiswa->nama }}</td>
-                                                    <td style="text-align: center">{{ $mahasiswa->npm }}</td>
-                                                    <td style="text-align: center">{{ $mahasiswa->kelas }}</td>
+                                                    <td style="text-align: center">{{ $mahasiswa->mahasiswa->no_rfid }}</td>
+                                                    <td>{{ $mahasiswa->mahasiswa->nama }}</td>
+                                                    <td style="text-align: center">{{ $mahasiswa->mahasiswa->npm }}</td>
+                                                    <td style="text-align: center">{{ $mahasiswa->mahasiswa->kelas }}</td>
                                                     {{-- <td style="text-align: center">{{ $mahasiswa->presensi->kelas_ujian->where('kelas', request('kelas'))->where('tahun', request('tahun'))->where('matkul_kode', request('matkul')) }}</td> --}}
                                                     @if ($presensi)
                                                         <td style="text-align: center">Masuk</td>

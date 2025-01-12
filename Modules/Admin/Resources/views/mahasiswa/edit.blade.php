@@ -80,13 +80,13 @@
                                                     <select class="select2 w-100" name="kelas" id="kelas" required>
                                                         @if (old('kelas', $mahasiswa->kelas) == $mahasiswa->kelas)
                                                             <option value="{{ $mahasiswa->kelas }}" selected>
-                                                                {{ $mahasiswa->kelas }} ({{ $mahasiswa->tahun_masuk }})</option>
+                                                                {{ $mahasiswa->kelas }}</option>
                                                             @foreach ($kelass as $kelas)
-                                                                <option value="{{ $kelas->kelas }}">{{ $kelas->kelas }} ({{ $kelas->tahun }})</option>
+                                                                <option value="{{ $kelas->kelas }}">{{ $kelas->kelas }}</option>
                                                             @endforeach
                                                         @else
                                                             @foreach ($kelass as $kelas)
-                                                                <option value="{{ $kelas->kelas }}">{{ $kelas->kelas }} ({{ $kelas->tahun }})</option>
+                                                                <option value="{{ $kelas->kelas }}">{{ $kelas->kelas }}</option>
                                                             @endforeach
                                                         @endif
                                                     </select>
@@ -268,12 +268,13 @@
                                                                     <select id="matkul" name="matkul_kode" class="form-select" aria-label="Default select example" required>
                                                                         <option label=""></option>
                                                                         @foreach ($matkuls as $matkul)
-                                                                            <option value="{{ $matkul->kode }}" {{ $krs->matkul_kode == $matkul->kode ? 'selected' : '' }}>{{ $matkul->nama }}</option>
+                                                                            <option value="{{ $matkul->kode }}" {{ old('matkul_kode', $krs->matkul_kode) == $matkul->kode ? 'selected' : '' }}>
+                                                                                {{ $matkul->nama }}
+                                                                            </option>
                                                                         @endforeach
                                                                     </select>
                                                                 </div>
                                                             </div>
-
                                                             <div class="col-md-2 col-12">
                                                                 <div class="mb-1">
                                                                     <label class="form-label" for="kelas_id">Kelas</label>
@@ -286,28 +287,7 @@
                                                                 </div>
                                                             </div>
 
-                                                            <div class="col-md-2 col-12">
-                                                                <div class="mb-1">
-                                                                    <label class="form-label" for="kelas_id">Kelas Ujian</label>
-                                                                    <select id="kelas_ujian" name="kelas_ujian" class="form-select" aria-label="Default select example" required>
-                                                                        <option value="">Silahkan Pilih Kelas</option>
-                                                                        <option {{ $krs->kelas_ujian == 'A' ? 'selected' : '' }}>A</option>
-                                                                        <option {{ $krs->kelas_ujian == 'B' ? 'selected' : '' }}>B</option>
-                                                                        <option {{ $krs->kelas_ujian == 'C' ? 'selected' : '' }}>C</option>
-                                                                        <option {{ $krs->kelas_ujian == 'D' ? 'selected' : '' }}>D</option>
-                                                                        <option {{ $krs->kelas_ujian == 'E' ? 'selected' : '' }}>E</option>
-                                                                        <option {{ $krs->kelas_ujian == 'F' ? 'selected' : '' }}>F</option>
-                                                                        <option {{ $krs->kelas_ujian == 'G' ? 'selected' : '' }}>G</option>
-                                                                        <option {{ $krs->kelas_ujian == 'H' ? 'selected' : '' }}>H</option>
-                                                                        <option {{ $krs->kelas_ujian == 'I' ? 'selected' : '' }}>I</option>
-                                                                        <option {{ $krs->kelas_ujian == 'J' ? 'selected' : '' }}>J</option>
-                                                                        <option {{ $krs->kelas_ujian == 'K' ? 'selected' : '' }}>K</option>
-                                                                        <option {{ $krs->kelas_ujian == 'L' ? 'selected' : '' }}>L</option>
-                                                                    </select>
-                                                                </div>
-                                                            </div>
-
-                                                            <div class="col-md-2 col-12">
+                                                            <div class="col-md-4 col-12">
                                                                 <div class="mb-1">
                                                                     <label class="form-label" for="dosen_id">Dosen</label>
                                                                     <select id="dosen_id" name="dosen_kds" class="form-select" aria-label="Default select example">
@@ -333,12 +313,6 @@
                                             @else
                                                 <div data-repeater-item>
                                                     <div class="row d-flex align-items-end">
-                                                        {{-- <div class="col-md-2 col-12">
-                                                        <div class="mb-1">
-                                                            <label class="form-label" for="npm">NPM</label>
-                                                            <input type="text" class="form-control" id="npm" aria-describedby="npm" name="mahasiswa_npm" value="{{ $mahasiswa->npm }}" readonly />
-                                                        </div>
-                                                    </div> --}}
                                                         <div class="col-md-4 col-12">
                                                             <div class="mb-1">
                                                                 <label class="form-label" for="matkul">Matakuliah</label>
@@ -363,28 +337,7 @@
                                                             </div>
                                                         </div>
 
-                                                        <div class="col-md-2 col-12">
-                                                            <div class="mb-1">
-                                                                <label class="form-label" for="kelas_id">Kelas Ujian</label>
-                                                                <select id="kelas_ujian" name="kelas_ujian" class="form-select" aria-label="Default select example" required>
-                                                                    <option value="">Silahkan Pilih Kelas</option>
-                                                                    <option>A</option>
-                                                                    <option>B</option>
-                                                                    <option>C</option>
-                                                                    <option>D</option>
-                                                                    <option>E</option>
-                                                                    <option>F</option>
-                                                                    <option>G</option>
-                                                                    <option>H</option>
-                                                                    <option>I</option>
-                                                                    <option>J</option>
-                                                                    <option>K</option>
-                                                                    <option>L</option>
-                                                                </select>
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="col-md-2 col-12">
+                                                        <div class="col-md-4 col-12">
                                                             <div class="mb-1">
                                                                 <label class="form-label" for="dosen_id">Dosen</label>
                                                                 <select id="dosen_id" name="dosen_kds" class="form-select" aria-label="Default select example">
